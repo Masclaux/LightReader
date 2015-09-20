@@ -15,7 +15,7 @@
 
         //Parse chapter detail
         public chapterParser: ChapterParser = new ChapterParser();
-        
+
         constructor()
         {
             this.mediaParser.onMediaComplete = this.onMediaComplete;

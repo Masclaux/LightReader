@@ -2,7 +2,7 @@
 {
     export interface iParser
     {
-        //resultat 
+        //resultat
         source: Source;
 
         //delegate  call when source parsing is completed
