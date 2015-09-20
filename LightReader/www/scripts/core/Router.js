@@ -77,7 +77,7 @@ var LightReader;
                 //remove the last
                 this.inHistory.pop();
                 if (this.inHistory.length >= 1) {
-                    //get new destination 
+                    //get new destination
                     var r = this.inHistory.pop();
                     this.Navigate(r.url, r.args);
                 }

@@ -6,6 +6,7 @@ var LightReader;
         (function (bakaTsuki) {
             var Parser = (function () {
                 function Parser() {
+                    this.source = new LightReader.Source();
                     //Parse Media detail
                     this.mediaParser = new bakaTsuki.MediaParser();
                     //Parse volume detail

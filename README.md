@@ -13,3 +13,14 @@ Just a test to see How cordova and typescript perform.
 ## Libs:
 
 * jquery.js => https://jquery.com/
+
+# Dev dependencies
+
+* gulp => http://gulpjs.com/
+* gulp-include-source => https://www.npmjs.com/package/gulp-include-source
+* gulp-cli => https://www.npmjs.com/package/gulp-cli
+* gulp-rename => https://www.npmjs.com/package/gulp-rename
+
+# VS plugins recommended
+
+* Code Maid ♥ =>  http://www.codemaid.net/

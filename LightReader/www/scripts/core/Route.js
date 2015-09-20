@@ -2,6 +2,9 @@ var LightReader;
 (function (LightReader) {
     var core;
     (function (core) {
+        /**
+        * Define a route historic state
+        */
         var Route = (function () {
             function Route(url, args) {
                 this.url = url;
