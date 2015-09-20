@@ -18,6 +18,6 @@
         chapterParser: iChapterParser;
 
         //Download and Parse  all required datas from the source.
-        parse(): void;
+        Parse(): void;
     }
 } 

@@ -15,14 +15,22 @@
 
         //Parse chapter detail
         public chapterParser: ChapterParser = new ChapterParser();
+        
+        constructor()
+        {
+            this.mediaParser.onMediaComplete = this.onMediaComplete;
+        }
 
         //Download and Parse  all required datas from the source.
-        public parse(): void
+        public Parse(): void
         {
-            if (this.onSourceComplete)
-            {
-                this.onSourceComplete(new Source());
-            }
+            //get media list
+            this.mediaParser.ParseMedia();
+        }
+
+        public onMediaComplete(res: MediaParser): void
+        {
+            console.info("lol" + res.mediaList);
         }
     }
 } 

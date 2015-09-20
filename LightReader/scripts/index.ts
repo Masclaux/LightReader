@@ -20,15 +20,16 @@
 
         function onDeviceReady()
         {
+            var b: LightReader.parser.bakaTsuki.Parser;
+            b = new LightReader.parser.bakaTsuki.Parser();
+
+            b.Parse();
+
             var s: Source = new Source();
             s.name = "Baka-Tsuki";
             s.description = "Light Novel commmunity";
 
             model.sources.push(s);
-
-            s = new Source();
-            s.name = "MangaPanda";
-            s.description = "Mangas commmunity";
 
             model.sources.push(s);
 

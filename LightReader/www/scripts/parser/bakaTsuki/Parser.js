@@ -13,12 +13,15 @@ var LightReader;
                     this.volumeParser = new bakaTsuki.VolumeParser();
                     //Parse chapter detail
                     this.chapterParser = new bakaTsuki.ChapterParser();
+                    this.mediaParser.onMediaComplete = this.onMediaComplete;
                 }
                 //Download and Parse  all required datas from the source.
-                Parser.prototype.parse = function () {
-                    if (this.onSourceComplete) {
-                        this.onSourceComplete(new LightReader.Source());
-                    }
+                Parser.prototype.Parse = function () {
+                    //get media list
+                    this.mediaParser.ParseMedia();
+                };
+                Parser.prototype.onMediaComplete = function (res) {
+                    console.info("lol" + res.mediaList);
                 };
                 return Parser;
             })();

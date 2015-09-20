@@ -2,7 +2,10 @@
 {
     export interface iMediaParser
     {
+        //delegate  call when medias parsing is completed
+        onMediaComplete: any;
+
         //Download and Parse the list of medias
-        parseMedia(): void;
+        ParseMedia(): void;
     }
 } 
