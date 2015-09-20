@@ -30,7 +30,7 @@
 
         public onMediaComplete(res: MediaParser): void
         {
-            console.info("lol" + res.mediaList);
+            console.info("Test" + res.mediaList);
         }
     }
 } 
