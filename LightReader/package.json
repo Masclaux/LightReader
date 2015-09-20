@@ -1,0 +1,14 @@
+{
+  "name": "LightReader",
+  "version": "1.0.0",
+  "dependencies": 
+  {
+  },
+  "devDependencies": 
+  {
+    "gulp": "^3.8.10",
+    "gulp-include-source" : "^0.0.5",
+    "gulp-cli": "^0.3.0",
+    "gulp-rename": "^1.2.2"
+  }
+}

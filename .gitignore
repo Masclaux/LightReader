@@ -1,0 +1,7 @@
+/*.suo
+/LightReader/*.user
+bin
+bld
+LightReader/merges/*
+LightReader/node_modules/*
+LightReader/plugins/*

@@ -1,0 +1,16 @@
+{
+  "compilerOptions":
+  {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "outDir": "../www/scripts/",
+    "target": "es5"
+  },
+  "formatCodeOptions":
+  {
+    "placeOpenBraceOnNewLineForFunctions": true,
+    "placeOpenBraceOnNewLineForControlBlocks": true
+  }
+}
