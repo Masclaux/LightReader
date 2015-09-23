@@ -21,7 +21,7 @@ var LightReader;
                     this.mediaParser.ParseMedia();
                 };
                 Parser.prototype.onMediaComplete = function (res) {
-                    console.info("lol" + res.mediaList);
+                    console.info("Test" + res.mediaList);
                 };
                 return Parser;
             })();
