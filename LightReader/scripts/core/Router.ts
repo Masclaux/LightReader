@@ -7,8 +7,6 @@
 
         private appContent: HTMLElement;
 
-        private xmlhttp: XMLHttpRequest;
-
         private viewPath: string;
 
         private currentPage: iPage;
@@ -32,10 +30,6 @@
             }
 
             Router.inst = this;
-
-            this.xmlhttp = new XMLHttpRequest();
-            this.xmlhttp.onloadend = this.OnRequestComplete;
-            this.xmlhttp.onerror = this.OnRequestError;
         }
 
         /**
@@ -72,17 +66,6 @@
         }
 
         /**
-        * Check if file is currently avaible
-        */
-        private FileExist(url: string): boolean
-        {
-            var http = new XMLHttpRequest();
-            http.open('HEAD', url, false);
-            http.send();
-            return http.status != 404;
-        }
-
-        /**
         * Return to precedent page
         */
         public Back(): void
@@ -104,11 +87,11 @@
         {
             //clear precedent page
             this.appContent.innerHTML = "";
-            if (this.FileExist(this.viewPath + "/" + url))
+            if (File.Exist(this.viewPath + "/" + url))
             {
                 this.inHistory.push(new Route(url, args));
-                this.xmlhttp.open("GET", this.viewPath + "/" + url, true);
-                this.xmlhttp.send();
+
+                Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);
             }
             else
             {
@@ -116,11 +99,11 @@
             }
         }
 
-        private OnRequestComplete = (ev: ProgressEvent) =>
+        private OnRequestComplete = (ev: XMLHttpRequest) =>
         {
             var route: Route = this.inHistory[this.inHistory.length - 1];
 
-            this.appContent.innerHTML = this.xmlhttp.responseText;
+            this.appContent.innerHTML = ev.responseText;
 
             this.currentPage = new this.pages[route.url];
             if (this.currentPage != null)

@@ -11,7 +11,7 @@ var LightReader;
                 this.inHistory = new Array();
                 this.OnRequestComplete = function (ev) {
                     var route = _this.inHistory[_this.inHistory.length - 1];
-                    _this.appContent.innerHTML = _this.xmlhttp.responseText;
+                    _this.appContent.innerHTML = ev.responseText;
                     _this.currentPage = new _this.pages[route.url];
                     if (_this.currentPage != null) {
                         _this.currentPage.Ready(_this.appContent, route.args);
@@ -27,9 +27,9 @@ var LightReader;
                     throw new Error("Error: Instantiation failed: Use Router.Inst() instead of new.");
                 }
                 Router.inst = this;
-                this.xmlhttp = new XMLHttpRequest();
-                this.xmlhttp.onloadend = this.OnRequestComplete;
-                this.xmlhttp.onerror = this.OnRequestError;
+                //this.xmlhttp = new XMLHttpRequest();
+                //t/his.xmlhttp.onloadend = this.OnRequestComplete;
+                //this.xmlhttp.onerror = this.OnRequestError;
             }
             //return object instance
             Router.Inst = function () {
@@ -62,15 +62,6 @@ var LightReader;
                 delete this.pages[url];
             };
             /**
-            * Check if file is currently avaible
-            */
-            Router.prototype.FileExist = function (url) {
-                var http = new XMLHttpRequest();
-                http.open('HEAD', url, false);
-                http.send();
-                return http.status != 404;
-            };
-            /**
             * Return to precedent page
             */
             Router.prototype.Back = function () {
@@ -88,10 +79,11 @@ var LightReader;
             Router.prototype.Navigate = function (url, args) {
                 //clear precedent page
                 this.appContent.innerHTML = "";
-                if (this.FileExist(this.viewPath + "/" + url)) {
+                if (core.File.Exist(this.viewPath + "/" + url)) {
                     this.inHistory.push(new core.Route(url, args));
-                    this.xmlhttp.open("GET", this.viewPath + "/" + url, true);
-                    this.xmlhttp.send();
+                    //this.xmlhttp.open("GET", this.viewPath + "/" + url, true);
+                    //this.xmlhttp.send();
+                    LightReader.Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);
                 }
                 else {
                     console.error("cannot found " + this.viewPath + "/" + url);
