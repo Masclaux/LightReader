@@ -10,9 +10,21 @@ var LightReader;
     var Http = (function () {
         function Http() {
         }
+        /**
+        * Send an HTTP request
+        * ShortCut of Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, "");
+        */
         Http.Get = function (url, onRequestComplete, onRequestError) {
             Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, "");
         };
+        /**
+        * Send an HTTP request
+        * @param url Url
+        * @param rType Request Type ( GET or POST )
+        * @param onCompletHandler callBack When Request is succefull
+        * @param onRequestError callBack When Request is on error
+        * @param args Args to send with the request
+        */
         Http.Send = function (url, rType, onCompletHandler, onRequestError, args) {
             var rTypeStr = rType == eRequestType.GET ? "GET" : "POST";
             var http = new XMLHttpRequest();

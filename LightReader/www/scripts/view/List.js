@@ -7,6 +7,7 @@ var LightReader;
                 this.router = LightReader.core.Router.Inst();
             }
             List.prototype.Ready = function (element, options) {
+                console.log("lol");
             };
             return List;
         })();
