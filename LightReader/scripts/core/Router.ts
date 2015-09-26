@@ -129,23 +129,23 @@
             {
                 //get destination ( url + args )
                 var dest: string = e.target.toString()
-                    .split(location.host)[1].replace(/^\//, ''); 
+                    .split(location.host)[1].replace(/^\//, '');
 
                 //separate url and args
                 var arrayArgs: string[] = dest.split("#");
                 if (arrayArgs.length > 0)
                 {
                     var url: string = arrayArgs.shift();//url
-                    var args: {} = this.GetArgsFromString(arrayArgs);//arg ( id : "value" ) 
+                    var args: {} = this.GetArgsFromString(arrayArgs);//arg ( id : "value" )
 
                     this.Navigate(url, args);
                 }
 
-                return false; //stop navigation      
+                return false; //stop navigation
             }
         }
 
-        private GetArgsFromString(args: string[]) : {}
+        private GetArgsFromString(args: string[]): {}
         {
             var tempsArgs: string[];
             var res = {};

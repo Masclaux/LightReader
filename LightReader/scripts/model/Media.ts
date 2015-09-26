@@ -11,6 +11,8 @@
 
         public title: string;
 
+        public illustration: Image;
+
         public synopsis: String = "test synopsis ";
 
         public volumeList: Array<Volume>;

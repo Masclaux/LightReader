@@ -19,6 +19,7 @@
         constructor()
         {
             this.mediaParser.onMediaComplete = this.onMediaComplete;
+            this.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
         }
 
         //Download and Parse  all required datas from the source.
@@ -30,9 +31,13 @@
 
         public onMediaComplete = (res: MediaParser): void =>
         {
-            console.info("Test" + res.mediaList);
-
+            this.source.novelList = res.mediaList;
             this.volumeParser.parseVolume(res.mediaList[0]);
+        }
+
+        public onVolumeListComplete = (res: VolumeParser): void =>
+        {
+            console.info("volume list parsed for : " + res.media.title);
         }
     }
 } 

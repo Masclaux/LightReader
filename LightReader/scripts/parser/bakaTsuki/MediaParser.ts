@@ -20,7 +20,7 @@
         {
             console.info("Start parsing light novel list");
 
-            var htmlDoc: DOMParser = new DOMParser();           
+            var htmlDoc: DOMParser = new DOMParser();
 
             var res: Document = htmlDoc.parseFromString(data.responseText, "text/xml");
             if (res != null)
@@ -36,7 +36,7 @@
 
                     console.log("Found : " + novel.title + " - " + novel.url);
 
-                    this.mediaList.push(novel);     
+                    this.mediaList.push(novel);
                 }
             }
 
