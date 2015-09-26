@@ -28,14 +28,14 @@ var LightReader;
                         //get destination ( url + args )
                         var dest = e.target.toString()
                             .split(location.host)[1].replace(/^\//, '');
-                        //separate ural and args
+                        //separate url and args
                         var arrayArgs = dest.split("#");
                         if (arrayArgs.length > 0) {
-                            var url = arrayArgs.shift();
-                            var args = _this.GetArgsFromString(arrayArgs);
+                            var url = arrayArgs.shift(); //url
+                            var args = _this.GetArgsFromString(arrayArgs); //arg ( id : "value" ) 
                             _this.Navigate(url, args);
                         }
-                        return false; //stop propagation
+                        return false; //stop navigation      
                     }
                 };
                 if (Router.inst) {

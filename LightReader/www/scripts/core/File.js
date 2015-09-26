@@ -1,20 +1,15 @@
 var LightReader;
-(function (LightReader)
-{
+(function (LightReader) {
     var core;
-    (function (core)
-    {
+    (function (core) {
         //File helper
-        var File = (function ()
-        {
-            function File()
-            {
+        var File = (function () {
+            function File() {
             }
             /**
             * Check if file exist on server or on file system
             */
-            File.Exist = function (url)
-            {
+            File.Exist = function (url) {
                 var http = new XMLHttpRequest();
                 http.open('HEAD', url, false);
                 http.send();
