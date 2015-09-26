@@ -2,7 +2,7 @@
 {
     export interface iVolumeParser
     {
-        //Download and Parse the list of medias
-        parseVolume(): void;
+        //Download and Parse a media
+        parseVolume(media: Media): void;
     }
 } 

@@ -28,9 +28,11 @@
             this.mediaParser.ParseMedia();
         }
 
-        public onMediaComplete(res: MediaParser): void
+        public onMediaComplete = (res: MediaParser): void =>
         {
             console.info("Test" + res.mediaList);
+
+            this.volumeParser.parseVolume(res.mediaList[0]);
         }
     }
 } 
