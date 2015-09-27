@@ -47,6 +47,8 @@
             {
                 this.viewPath = viewPath;
             }
+
+            window.onclick = this.OnUrlClick; //catch click
         }
 
         /**
@@ -119,6 +121,49 @@
         private OnRequestError = (ev: Event) =>
         {
             console.info("Error while loading ");
+        }
+
+        private OnUrlClick = (e: any) =>
+        {
+            if (e.target.localName == 'a')
+            {
+                //get destination ( url + args )
+                var dest: string = e.target.toString()
+                    .split(location.host)[1].replace(/^\//, '');
+
+                //separate url and args
+                var arrayArgs: string[] = dest.split("#");
+                if (arrayArgs.length > 0)
+                {
+                    var url: string = arrayArgs.shift();//url
+                    var args: {} = this.GetArgsFromString(arrayArgs);//arg ( id : "value" )
+
+                    this.Navigate(url, args);
+                }
+
+                return false; //stop navigation
+            }
+        }
+
+        private GetArgsFromString(args: string[]): {}
+        {
+            var tempsArgs: string[];
+            var res = {};
+
+            for (var i = 0; i < args.length; ++i)
+            {
+                tempsArgs = args[i].split(":")
+                if (tempsArgs.length == 2)
+                {
+                    res[tempsArgs[0]] = tempsArgs[1];
+                }
+                else
+                {
+                    console.error("Invalid arguments " + args[i] + " not added");
+                }
+            }
+
+            return res;
         }
     }
 }

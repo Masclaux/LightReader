@@ -13,35 +13,31 @@
             var listUrl =
                 "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(English)";
 
-            var request = $.ajax({
-                type: "GET",
-                url: listUrl,
-            });
-
-            request.done((res) => this.OnRequestComplete(res));
-            request.fail((req, er) => this.OnError(req, er));
+            Http.Get(listUrl, this.OnRequestComplete, this.OnError);
         }
 
-        private OnRequestComplete(data: any): void
+        private OnRequestComplete = (data: XMLHttpRequest): void =>
         {
             console.info("Start parsing light novel list");
 
-            var res = $.parseHTML(data);
+            var htmlDoc: DOMParser = new DOMParser();
+
+            var res: Document = htmlDoc.parseFromString(data.responseText, "text/xml");
             if (res != null)
             {
-                var table = $(res).find(".mw-content-ltr ul li");
-                $.each(table, (index, value) =>
+                var cellules: NodeList = res.querySelectorAll(".mw-content-ltr ul li a");
+                for (var i = 0; i < cellules.length; ++i)
                 {
                     var novel = new Media();
-                    var aRef: JQuery = $(value).find("a");
+                    var aRef: Node = cellules[i];
 
-                    novel.title = aRef.attr("title");
-                    novel.url = aRef.attr("href");
+                    novel.title = aRef.attributes.getNamedItem("title").value;
+                    novel.url = aRef.attributes.getNamedItem("href").value;
 
                     console.log("Found : " + novel.title + " - " + novel.url);
 
                     this.mediaList.push(novel);
-                });
+                }
             }
 
             if (this.onMediaComplete != null)
@@ -50,9 +46,9 @@
             }
         }
 
-        private OnError(xmlHttpRequest: any, textStatus: any): void
+        private OnError = (ev: Event): void =>
         {
-            console.error("Error on Parse Media " + textStatus);
+            console.error("Error on Parse Media " + ev.type);
         }
     }
 } 
