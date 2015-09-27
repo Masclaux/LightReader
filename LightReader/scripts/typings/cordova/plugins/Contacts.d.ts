@@ -110,19 +110,19 @@ interface Contact extends ContactProperties
 declare var Contact: {
     /** Constructor of Contact object */
     new (id?: string,
-    displayName?: string,
-    name?: ContactName,
-    nickname?: string,
-    phoneNumbers?: ContactField[],
-    emails?: ContactField[],
-    addresses?: ContactAddress[],
-    ims?: ContactField[],
-    organizations?: ContactOrganization[],
-    birthday?: Date,
-    note?: string,
-    photos?: ContactField[],
-    categories?: ContactField,
-    urls?: ContactField[]): Contact
+        displayName?: string,
+        name?: ContactName,
+        nickname?: string,
+        phoneNumbers?: ContactField[],
+        emails?: ContactField[],
+        addresses?: ContactAddress[],
+        ims?: ContactField[],
+        organizations?: ContactOrganization[],
+        birthday?: Date,
+        note?: string,
+        photos?: ContactField[],
+        categories?: ContactField,
+        urls?: ContactField[]): Contact
 };
 
 /** The ContactError object is returned to the user through the contactError callback function when an error occurs. */
@@ -165,11 +165,11 @@ interface ContactName
 declare var ContactName: {
     /** Constructor for ContactName object */
     new (formatted?: string,
-    familyName?: string,
-    givenName?: string,
-    middleName?: string,
-    honorificPrefix?: string,
-    honorificSuffix?: string): ContactName
+        familyName?: string,
+        givenName?: string,
+        middleName?: string,
+        honorificPrefix?: string,
+        honorificSuffix?: string): ContactName
 };
 
 /**
@@ -197,8 +197,8 @@ interface ContactField
 declare var ContactField: {
     /** Constructor for ContactField object */
     new (type?: string,
-    value?: string,
-    pref?: boolean): ContactField
+        value?: string,
+        pref?: boolean): ContactField
 };
 
 /**
@@ -228,13 +228,13 @@ interface ContactAddress
 declare var ContactAddress: {
     /** Constructor of ContactAddress object */
     new (pref?: boolean,
-    type?: string,
-    formatted?: string,
-    streetAddress?: string,
-    locality?: string,
-    region?: string,
-    postalCode?: string,
-    country?: string): ContactAddress
+        type?: string,
+        formatted?: string,
+        streetAddress?: string,
+        locality?: string,
+        region?: string,
+        postalCode?: string,
+        country?: string): ContactAddress
 };
 
 /**
@@ -258,10 +258,10 @@ interface ContactOrganization
 declare var ContactOrganization: {
     /** Constructor for ContactOrganization object */
     new (pref?: boolean,
-    type?: string,
-    name?: string,
-    department?: string,
-    title?: string): ContactOrganization
+        type?: string,
+        name?: string,
+        department?: string,
+        title?: string): ContactOrganization
 };
 
 /** Search options to filter navigator.contacts.  */
@@ -278,6 +278,6 @@ interface ContactFindOptions
 declare var ContactFindOptions: {
     /** Constructor for ContactFindOptions object */
     new (filter?: string,
-    multiple?: boolean,
-    desiredFields?: string[]): ContactFindOptions
+        multiple?: boolean,
+        desiredFields?: string[]): ContactFindOptions
 };

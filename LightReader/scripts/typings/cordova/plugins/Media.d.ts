@@ -8,10 +8,10 @@
 
 declare var Media: {
     new (
-    src: string,
-    mediaSuccess: () => void,
-    mediaError?: (error: MediaError) => any,
-    mediaStatus?: (status: number) => void): Media;
+        src: string,
+        mediaSuccess: () => void,
+        mediaError?: (error: MediaError) => any,
+        mediaStatus?: (status: number) => void): Media;
     //Media statuses
     MEDIA_NONE: number;
     MEDIA_STARTING: number;

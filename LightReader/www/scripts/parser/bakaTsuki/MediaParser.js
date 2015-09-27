@@ -13,7 +13,7 @@ var LightReader;
                         var htmlDoc = new DOMParser();
                         var res = htmlDoc.parseFromString(data.responseText, "text/xml");
                         if (res != null) {
-                            var cellules = res.querySelectorAll(".mw-content-ltr ul li a");
+                            var cellules = $(res).find(".mw-content-ltr ul li a");
                             for (var i = 0; i < cellules.length; ++i) {
                                 var novel = new LightReader.Media();
                                 var aRef = cellules[i];

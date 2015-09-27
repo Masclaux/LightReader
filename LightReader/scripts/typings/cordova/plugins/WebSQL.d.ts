@@ -52,10 +52,10 @@ interface Database
 declare var Database: {
     /** Constructor for Database object */
     new (name: string,
-    version: string,
-    displayname: string,
-    size: number,
-    creationCallback: (database: Database) => void): Database;
+        version: string,
+        displayname: string,
+        size: number,
+        creationCallback: (database: Database) => void): Database;
 };
 
 interface SqlTransaction
