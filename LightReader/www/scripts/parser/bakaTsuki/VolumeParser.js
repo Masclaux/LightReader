@@ -32,20 +32,14 @@ var LightReader;
                     LightReader.Http.Get("http://baka-tsuki.org" + media.url, this.OnRequestComplete, this.OnError);
                 };
                 /**
-                * return  synopsis from class #Story_Synopsis
-                * if not found return the content of the first <p>
+                * search  synopsis from class #Story_Synopsis
+                * if  found return the content of the first <p>
                 */
                 VolumeParser.prototype.GetSynopsis = function (doc) {
                     //get synoptis
-                    var synopsis = doc.querySelector("#Story_Synopsis");
-                    if (synopsis != null) {
-                        var synopsis = synopsis.parentNode;
-                        for (var i = 0; i < 10; i++) {
-                            if (synopsis.nodeName == "p") {
-                                return synopsis.textContent;
-                            }
-                            synopsis = synopsis.nextSibling;
-                        }
+                    var synopsis = $(doc).find("#Story_Synopsis").parent().next("p");
+                    if (synopsis.length == 1) {
+                        return synopsis.text();
                     }
                     return "";
                 };
@@ -56,16 +50,11 @@ var LightReader;
                 VolumeParser.prototype.GetIllustation = function (doc) {
                     var res = null;
                     //get first image
-                    var images = doc.getElementsByClassName("thumbinner");
-                    if (images != null && images.length > 0) {
-                        var image = images[0];
-                        var alist = image.querySelectorAll("a");
-                        if (alist != null && alist.length > 0) {
-                            var a = alist[0];
-                            res = new LightReader.Image();
-                            res.title = image.textContent;
-                            res.url = a.getAttribute("href");
-                        }
+                    var image = $(doc).find(".thumbinner").first();
+                    if (image != null && image.length == 1) {
+                        res = new LightReader.Image();
+                        res.title = image.text();
+                        res.url = $(image).find("a").attr("href");
                     }
                     return res;
                 };
@@ -80,28 +69,24 @@ var LightReader;
                     var foundH2 = false;
                     var canParse = false;
                     var firstPass = false;
-                    var synopsis = doc.querySelector("#mw-content-text");
-                    for (var i = 0; i < synopsis.childNodes.length; i++) {
-                        var currentNode = synopsis.childNodes[i];
-                        switch (currentNode.nodeName) {
-                            case 'h2':
-                                foundH2 = currentNode.querySelector("span").textContent.indexOf("by") != -1;
+                    var synopsis = $(doc).find("#mw-content-text").find('h2,h3,li,p');
+                    for (var i = 0; i < synopsis.length; i++) {
+                        var currentNode = synopsis[i];
+                        switch (currentNode.nodeName.toUpperCase()) {
+                            case 'H2':
+                                foundH2 = $(currentNode).find("span").first().text().indexOf("by") != -1;
                                 break;
-                            case 'h3':
+                            case 'H3':
                                 if (foundH2) {
-                                    currentVolumeTitle = currentNode.querySelector("span").textContent;
-                                    //Check if link full text exist if found take it
-                                    var linkList = currentNode.querySelectorAll("a");
-                                    if (linkList.length > 0) {
-                                        currentVolumeUrl = linkList[0].attributes.getNamedItem("href").value;
-                                    }
+                                    currentVolumeTitle = $(currentNode).find("span").first().text();
+                                    currentVolumeUrl = $(currentNode).find("a").attr("href");
                                     canParse = true;
                                 }
                                 break;
-                            case "dl":
+                            case "LI":
                                 if (canParse) {
                                     if (currentNovelVolume.title != currentVolumeTitle) {
-                                        //new volume 
+                                        //new volume
                                         if (firstPass && currentNovelVolume.chapterList.length > 0) {
                                             res.push(currentNovelVolume);
                                         }
@@ -111,19 +96,17 @@ var LightReader;
                                         currentNovelVolume.title = currentVolumeTitle;
                                     }
                                     //get chapter list from current volume
-                                    var chapterlist = currentNode.querySelectorAll("a");
-                                    for (var j = 0; j < chapterlist.length; j++) {
-                                        var a = chapterlist[j];
-                                        if (a.hasAttribute("href")) {
-                                            var chaper = new LightReader.Chapter();
-                                            chaper.url = a.getAttribute("href");
-                                            chaper.title = a.textContent;
-                                            currentNovelVolume.chapterList.push(chaper);
-                                        }
+                                    var charpterUrl = $(currentNode).find("a").attr("href");
+                                    var charpterTitle = $(currentNode).find("a").first().text();
+                                    if (charpterUrl != undefined) {
+                                        var chaper = new LightReader.Chapter();
+                                        chaper.url = charpterUrl;
+                                        chaper.title = charpterTitle;
+                                        currentNovelVolume.chapterList.push(chaper);
                                     }
                                 }
                                 break;
-                            case "p":
+                            case "P":
                                 canParse != canParse; // we exit volume scope start searching for another one
                                 break;
                         }

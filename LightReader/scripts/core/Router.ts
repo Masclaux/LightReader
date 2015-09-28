@@ -127,9 +127,17 @@
         {
             if (e.target.localName == 'a')
             {
-                //get destination ( url + args )
-                var dest: string = e.target.toString()
-                    .split(location.host)[1].replace(/^\//, '');
+                var dest: string = "";
+
+                //Windows mobile add www on local link ....
+                if (window.cordova && window.cordova.platformId == "windows")
+                {
+                    dest = e.target.nameProp; // workaround use windows only prop tag
+                }
+                else
+                {
+                    dest = e.target.toString().split(location.host)[1].replace(/^\//, '');
+                }
 
                 //separate url and args
                 var arrayArgs: string[] = dest.split("#");

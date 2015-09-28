@@ -21,7 +21,6 @@ var LightReader;
             s.name = "Baka-Tsuki";
             s.description = "Light Novel commmunity";
             Application.model.sources.push(s);
-            Application.model.sources.push(s);
             // Handle the Cordova pause and resume events
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);

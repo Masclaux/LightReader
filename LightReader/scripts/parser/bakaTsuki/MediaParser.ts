@@ -25,7 +25,7 @@
             var res: Document = htmlDoc.parseFromString(data.responseText, "text/xml");
             if (res != null)
             {
-                var cellules: NodeList = res.querySelectorAll(".mw-content-ltr ul li a");
+                var cellules: JQuery = $(res).find(".mw-content-ltr ul li a");
                 for (var i = 0; i < cellules.length; ++i)
                 {
                     var novel = new Media();

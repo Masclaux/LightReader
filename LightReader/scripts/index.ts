@@ -31,8 +31,6 @@
 
             model.sources.push(s);
 
-            model.sources.push(s);
-
             // Handle the Cordova pause and resume events
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);

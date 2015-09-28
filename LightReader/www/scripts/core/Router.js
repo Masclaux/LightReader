@@ -25,17 +25,22 @@ var LightReader;
                 };
                 this.OnUrlClick = function (e) {
                     if (e.target.localName == 'a') {
-                        //get destination ( url + args )
-                        var dest = e.target.toString()
-                            .split(location.host)[1].replace(/^\//, '');
+                        var dest = "";
+                        //Windows mobile add www on local link ....
+                        if (window.cordova && window.cordova.platformId == "windows") {
+                            dest = e.target.nameProp; // workaround use windows only prop tag
+                        }
+                        else {
+                            dest = e.target.toString().split(location.host)[1].replace(/^\//, '');
+                        }
                         //separate url and args
                         var arrayArgs = dest.split("#");
                         if (arrayArgs.length > 0) {
                             var url = arrayArgs.shift(); //url
-                            var args = _this.GetArgsFromString(arrayArgs); //arg ( id : "value" ) 
+                            var args = _this.GetArgsFromString(arrayArgs); //arg ( id : "value" )
                             _this.Navigate(url, args);
                         }
-                        return false; //stop navigation      
+                        return false; //stop navigation
                     }
                 };
                 if (Router.inst) {
