@@ -16,7 +16,6 @@
             {
                 this.ParseChapter(volume.chapterList[i]);
             }
-
         }
 
         //Download and parse a chapter 
@@ -34,6 +33,5 @@
         {
             console.error("Invalid html");
         }
-
     }
 } 
