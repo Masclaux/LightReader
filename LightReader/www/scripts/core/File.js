@@ -11,7 +11,7 @@ var LightReader;
             */
             File.Exist = function (url) {
                 var requestType = "HEAD";
-                //HEAD request on windows return "access is denied" so we use GET ( slowly ) 
+                //HEAD request on windows return "access is denied" so we use GET ( slowly )
                 if (window.cordova && window.cordova.platformId == "windows") {
                     requestType = "GET";
                 }

@@ -38,6 +38,7 @@
         public onVolumeListComplete = (res: VolumeParser): void =>
         {
             console.info("volume list parsed for : " + res.media.title);
+            this.chapterParser.ParseChapters(res.media.volumeList[0]);
         }
     }
 } 

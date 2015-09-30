@@ -20,6 +20,7 @@ var LightReader;
                     };
                     this.onVolumeListComplete = function (res) {
                         console.info("volume list parsed for : " + res.media.title);
+                        _this.chapterParser.ParseChapters(res.media.volumeList[0]);
                     };
                     this.mediaParser.onMediaComplete = this.onMediaComplete;
                     this.volumeParser.onVolumeListComplete = this.onVolumeListComplete;

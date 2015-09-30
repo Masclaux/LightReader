@@ -3,9 +3,6 @@ var LightReader;
     "use strict";
     var Application;
     (function (Application) {
-        //application model reference contain the list of datas sources
-        Application.model;
-        Application.router;
         function initialize() {
             document.addEventListener('deviceready', onDeviceReady, false);
             //Model initialisation
