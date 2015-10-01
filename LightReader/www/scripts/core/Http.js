@@ -23,7 +23,7 @@ var LightReader;
         * @param rType Request Type ( GET or POST )
         * @param onCompletHandler callBack When Request is succefull
         * @param onRequestError callBack When Request is on error
-        * @param returnDatas  datas who are set on call back event ( if succeed )
+        * @param returnDatas  datas who are set on "succeed" callback
         * @param args Args to send with the request
         */
         Http.Send = function (url, rType, onCompletHandler, onRequestError, returnDatas, args) {
