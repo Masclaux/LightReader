@@ -11,9 +11,8 @@ var LightReader;
                     this.OnRequestComplete = function (data, currentChapter) {
                         console.info("Start Parsing chapter " + currentChapter.title);
                         var firstPartNotFound = false;
-                        var tempParaText = "";
                         var tempWords = 0;
-                        currentChapter.pages = new Array();
+                        var page = new LightReader.TextContent();
                         var res = $.parseHTML(data.responseText);
                         if (res != null) {
                             var text = $(res).find("#mw-content-text").find('h2,h3,p,div.thumb.tright,div.thumb');
@@ -21,31 +20,30 @@ var LightReader;
                                 var value = text[i];
                                 switch (value.nodeName.toUpperCase()) {
                                     case 'H2':
-                                        tempParaText += "<h2>" + value.firstChild.textContent + "</h2>";
+                                        page.content += "<h2>" + value.firstChild.textContent + "</h2>";
                                         break;
                                     case 'H3':
                                         if (currentChapter.pages.length > 0) {
-                                            currentChapter.pages.push(tempParaText);
+                                            currentChapter.pages.push(page);
+                                            page = new LightReader.TextContent();
                                             tempWords = 0;
-                                            tempParaText = "";
                                         }
-                                        tempParaText += "<h3>" + value.firstChild.textContent + "</h3>";
+                                        page.content += "<h3>" + value.firstChild.textContent + "</h3>";
                                         break;
                                     case 'P':
-                                        tempParaText += "<P>" + value.firstChild.textContent + "</P>";
+                                        page.content += "<P>" + value.firstChild.textContent + "</P>";
                                         break;
                                     case 'DIV':
-                                        var val = _this.parseImage(value);
-                                        currentChapter.pages.push("img;;" + val);
-                                        currentChapter.images[val] = new LightReader.Image();
-                                        currentChapter.images[val].id = val;
+                                        var image = new LightReader.ImageContent();
+                                        image.url = _this.parseImage(value);
+                                        currentChapter.pages.push(image);
                                         break;
                                 }
                                 tempWords += value.firstChild.textContent.split(" ").length;
                                 if (tempWords >= 350) {
-                                    currentChapter.pages.push(tempParaText);
+                                    currentChapter.pages.push(page);
+                                    var page = new LightReader.TextContent();
                                     tempWords = 0;
-                                    tempParaText = "";
                                 }
                             }
                         }
@@ -66,6 +64,7 @@ var LightReader;
                 ChapterParser.prototype.ParseChapter = function (chapter) {
                     LightReader.Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
                 };
+                //Get image name from url.
                 ChapterParser.prototype.parseImage = function (link) {
                     var fileUrl = "";
                     if (link != null) {
@@ -88,7 +87,7 @@ var LightReader;
                             }
                         }
                     }
-                    console.info("Found Image : " + fileUrl);
+                    console.info("Found ImageContent : " + fileUrl);
                     return fileUrl;
                 };
                 return ChapterParser;

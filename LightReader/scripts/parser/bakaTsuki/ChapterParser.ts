@@ -29,11 +29,10 @@
             console.info("Start Parsing chapter " + currentChapter.title);      
 
             var firstPartNotFound:boolean = false;
-            var tempParaText:string       = "";
-            var tempWords:number          = 0; 
             
-            currentChapter.pages =  new Array<string>();
-
+            var tempWords: number = 0;
+            var page: TextContent = new TextContent();
+          
             var res = $.parseHTML(data.responseText);
             if (res != null)
             {
@@ -44,40 +43,39 @@
                     switch (value.nodeName.toUpperCase())
                     {
                         case 'H2':
-                            tempParaText += "<h2>" + value.firstChild.textContent + "</h2>";
+                            page.content += "<h2>" + value.firstChild.textContent + "</h2>";
                             break;
 
                         case 'H3':
                             if (currentChapter.pages.length > 0)
                             {
-                                currentChapter.pages.push(tempParaText);
-                                tempWords = 0;
-                                tempParaText = "";
+                                currentChapter.pages.push(page);
+                                page = new TextContent();
+
+                                tempWords = 0;                             
                             }
 
-                            tempParaText += "<h3>" + value.firstChild.textContent + "</h3>";
+                            page.content += "<h3>" + value.firstChild.textContent + "</h3>";
                             break;
 
                         case 'P':
-                            tempParaText += "<P>" + value.firstChild.textContent + "</P>";
+                            page.content  += "<P>" + value.firstChild.textContent + "</P>";
                             break;
 
                         case 'DIV':
-
-                            var val = this.parseImage(value);
-
-                            currentChapter.pages.push("img;;" + val);
-                            currentChapter.images[val] = new Image();
-                            currentChapter.images[val].id = val;
+                            var image: ImageContent = new ImageContent();
+                            image.url = this.parseImage(value);
+                            currentChapter.pages.push(image);
                             break;
                     }
 
                     tempWords += value.firstChild.textContent.split(" ").length;
                     if (tempWords >= 350)
                     {
-                        currentChapter.pages.push(tempParaText);
-                        tempWords = 0;
-                        tempParaText = "";
+                        currentChapter.pages.push(page);
+
+                        var page: TextContent = new TextContent();                                              
+                        tempWords = 0;                   
                     }
                 }
             }                  
@@ -115,7 +113,7 @@
                 }
             }
 
-            console.info("Found Image : " + fileUrl);
+            console.info("Found ImageContent : " + fileUrl);
 
             return fileUrl;
         }

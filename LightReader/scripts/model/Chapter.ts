@@ -4,15 +4,13 @@
     {
         constructor()
         {
-            this.pages = new Array<string>();
+            this.pages = new Array<iPageContent>();
         }
 
         public title: string;
 
         public url: string;
-
-        public images: { [id: string]: Image; } = {};
-
-        public pages: Array<string>;
+         
+        public pages: Array<iPageContent>;
     }
 } 

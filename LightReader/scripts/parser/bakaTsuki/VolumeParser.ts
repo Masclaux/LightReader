@@ -63,15 +63,15 @@
         * return  an illustration for the current media
         * if not found return null
         */
-        private GetIllustation(doc: Document): Image
+        private GetIllustation(doc: Document): ImageContent
         {
-            var res: Image = null;
+            var res: ImageContent = null;
 
             //get first image
             var image: JQuery = $(doc).find(".thumbinner").first();
             if (image != null && image.length == 1)
             {
-                res = new Image();
+                res = new ImageContent();
                 res.title = image.text();
                 res.url = $(image).find("a").attr("href");
             }
