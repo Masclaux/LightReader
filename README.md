@@ -13,6 +13,7 @@ Just a test to see How cordova and typescript perform.
 ## Libs:
 
 * jquery.js => https://jquery.com/
+* knockout  => http://knockoutjs.com/index.html
 
 # Dev dependencies
 
