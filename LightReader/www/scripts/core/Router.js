@@ -11,6 +11,9 @@ var LightReader;
                 this.inHistory = new Array();
                 this.OnRequestComplete = function (ev) {
                     var route = _this.inHistory[_this.inHistory.length - 1];
+                    if (_this.currentPage != undefined) {
+                        _this.currentPage.Exit(_this.appContent); //launch EXIT of previous page
+                    }
                     _this.appContent.innerHTML = ev.responseText;
                     _this.currentPage = new _this.pages[route.url];
                     if (_this.currentPage != null) {

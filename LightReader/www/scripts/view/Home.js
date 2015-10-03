@@ -6,11 +6,19 @@ var LightReader;
         var Home = (function () {
             function Home() {
                 this.router = core.Router.Inst();
-                console.log("oo");
+                this.model = LightReader.AppModel.Inst();
             }
             Home.prototype.Ready = function (element, options) {
-                //this.router.Navigate("List.html");
-                console.log("Coucou : " + options.id + " libelle " + options.libelle);
+                //data binding
+                this.sources = ko.observableArray(this.model.sources);
+                ko.applyBindings(this, element);
+            };
+            Home.prototype.Exit = function (element) {
+                //clean binding ( I now is not recommended )
+                ko.cleanNode(element);
+            };
+            Home.prototype.OnSourceSelected = function (source) {
+                console.info("lol");
             };
             return Home;
         })();

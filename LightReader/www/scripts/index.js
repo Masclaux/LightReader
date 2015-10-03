@@ -13,9 +13,13 @@ var LightReader;
         function onDeviceReady() {
             var b;
             b = new LightReader.parser.bakaTsuki.Parser();
-            b.Parse();
+            //b.Parse();
             var s = new LightReader.Source();
             s.name = "Baka-Tsuki";
+            s.description = "Light Novel commmunity";
+            Application.model.sources.push(s);
+            var s = new LightReader.Source();
+            s.name = "Baka-Tsuki 2";
             s.description = "Light Novel commmunity";
             Application.model.sources.push(s);
             // Handle the Cordova pause and resume events

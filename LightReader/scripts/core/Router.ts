@@ -90,7 +90,7 @@
             //clear precedent page
             this.appContent.innerHTML = "";
             if (File.Exist(this.viewPath + "/" + url))
-            {
+            {                
                 this.inHistory.push(new Route(url, args));
 
                 Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);
@@ -104,6 +104,11 @@
         private OnRequestComplete = (ev: XMLHttpRequest) =>
         {
             var route: Route = this.inHistory[this.inHistory.length - 1];
+
+            if (this.currentPage != undefined)
+            {
+                this.currentPage.Exit(this.appContent); //launch EXIT of previous page
+            }
 
             this.appContent.innerHTML = ev.responseText;
 

@@ -23,10 +23,17 @@
             var b: LightReader.parser.bakaTsuki.Parser;
             b = new LightReader.parser.bakaTsuki.Parser();
 
-            b.Parse();
+            //b.Parse();
 
             var s: Source = new Source();
             s.name = "Baka-Tsuki";
+            s.description = "Light Novel commmunity";
+
+            model.sources.push(s);
+
+
+            var s: Source = new Source();
+            s.name = "Baka-Tsuki 2";
             s.description = "Light Novel commmunity";
 
             model.sources.push(s);
@@ -40,9 +47,9 @@
             router.Add("Home.html", LightReader.view.Home);
             router.Add("List.html", LightReader.view.List);
 
-            router.Navigate("Home.html", { id: 1, libelle: "test" });
+            router.Navigate("Home.html", { id: 1, libelle: "test" }); 
             router.Navigate("List.html", { id: 1, libelle: "test 1" });
-            router.Navigate("Home.html", { id: 2, libelle: "test 2" });
+            router.Navigate("Home.html", { id: 2, libelle: "test 2" });         
         }
 
         function onPause() { }

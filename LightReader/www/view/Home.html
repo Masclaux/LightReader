@@ -3,4 +3,11 @@
 
     <a href="List.html#id:1#libelle:CoucouCherie" >Go to list</a>
 
+    <ul data-bind="foreach:sources">
+        <li>
+            <span data-bind="text:name"> </span>            
+            <button data-bind="click:$parent.OnSourceSelected">Sort</button>          
+        </li>
+    </ul>
+       
 </section>

@@ -6,15 +6,27 @@
     {
         private router: core.Router = core.Router.Inst();
 
-        constructor()
-        {
-            console.log("oo");
-        }
+        private model: AppModel = AppModel.Inst();
+
+        private sources: KnockoutObservableArray<Source>;
 
         public Ready(element: HTMLElement, options: any): void
-        {
-            //this.router.Navigate("List.html");
-            console.log("Coucou : " + options.id + " libelle " + options.libelle);
+        {   
+            //data binding
+            this.sources = ko.observableArray(this.model.sources);      
+                         
+            ko.applyBindings(this, element);   
         }
-    }
+
+        public Exit(element: HTMLElement): void
+        {
+            //clean binding ( I now is not recommended )
+            ko.cleanNode(element);          
+        }
+
+        public OnSourceSelected(source: Source): void
+        {
+            console.info("lol");
+        }
+    } 
 }
