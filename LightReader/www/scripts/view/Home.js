@@ -5,8 +5,13 @@ var LightReader;
         var core = LightReader.core;
         var Home = (function () {
             function Home() {
+                var _this = this;
                 this.router = core.Router.Inst();
                 this.model = LightReader.AppModel.Inst();
+                this.OnSourceSelected = function (source) {
+                    console.info("lol");
+                    _this.router.Navigate("List.html", source);
+                };
             }
             Home.prototype.Ready = function (element, options) {
                 //data binding
@@ -16,9 +21,6 @@ var LightReader;
             Home.prototype.Exit = function (element) {
                 //clean binding ( I now is not recommended )
                 ko.cleanNode(element);
-            };
-            Home.prototype.OnSourceSelected = function (source) {
-                console.info("lol");
             };
             return Home;
         })();

@@ -24,9 +24,10 @@
             ko.cleanNode(element);          
         }
 
-        public OnSourceSelected(source: Source): void
+        public OnSourceSelected = (source: Source): void =>
         {
             console.info("lol");
+            this.router.Navigate("List.html", source);
         }
     } 
 }

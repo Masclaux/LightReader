@@ -8,6 +8,7 @@
 
         public Ready(element: HTMLElement, options: any): void
         {
+            console.log("lol");
         }
 
         public Exit(element: HTMLElement): void
