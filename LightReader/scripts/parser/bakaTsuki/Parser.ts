@@ -20,6 +20,7 @@
         {
             this.mediaParser.onMediaComplete = this.onMediaComplete;
             this.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
+            this.chapterParser.onChaptersComplete = this.onChaptersComplete;
         }
 
         //Download and Parse  all required datas from the source.
@@ -39,6 +40,11 @@
         {
             console.info("volume list parsed for : " + res.media.title);
             this.chapterParser.ParseChapters(res.media.volumeList[0]);
+        }
+
+        public onChaptersComplete = (res: ChapterParser): void =>
+        {
+            console.info("volume list parsed for : " + res.Volume);           
         }
     }
 } 

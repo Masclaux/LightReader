@@ -8,6 +8,8 @@ var LightReader;
                 function ChapterParser() {
                     var _this = this;
                     this.listUrl = "http://baka-tsuki.org";
+                    this.chaptersRequest = 0;
+                    this.imagesRequest = 0;
                     this.OnRequestComplete = function (data, currentChapter) {
                         console.info("Start Parsing chapter " + currentChapter.title);
                         var firstPartNotFound = false;
@@ -34,8 +36,10 @@ var LightReader;
                                         page.content += "<P>" + value.firstChild.textContent + "</P>";
                                         break;
                                     case 'DIV':
+                                        _this.imagesRequest++;
                                         var image = new LightReader.ImageContent();
-                                        image.url = _this.parseImage(value);
+                                        image.title = bakaTsuki.ImageHelper.GetImageName(value);
+                                        bakaTsuki.ImageHelper.GetImageLink(image.title, _this.OnImageComplete, _this.OnImageError, image);
                                         currentChapter.pages.push(image);
                                         break;
                                 }
@@ -47,9 +51,23 @@ var LightReader;
                                 }
                             }
                         }
+                        _this.chaptersRequest--;
+                        _this.checkComplete();
                     };
                     this.OnError = function (ev) {
-                        console.error("Invalid html");
+                        console.error("Invalid Chapter");
+                        _this.chaptersRequest--;
+                        _this.checkComplete();
+                    };
+                    this.OnImageComplete = function (image) {
+                        console.info("Found " + image.url);
+                        _this.imagesRequest--;
+                        _this.checkComplete();
+                    };
+                    this.OnImageError = function (ev) {
+                        console.warn("Invalid image");
+                        _this.imagesRequest--;
+                        _this.checkComplete();
                     };
                 }
                 //Download and Parse  all required datas from the source.
@@ -62,33 +80,15 @@ var LightReader;
                 };
                 //Download and parse a chapter 
                 ChapterParser.prototype.ParseChapter = function (chapter) {
+                    this.chaptersRequest++;
                     LightReader.Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
                 };
-                //Get image name from url.
-                ChapterParser.prototype.parseImage = function (link) {
-                    var fileUrl = "";
-                    if (link != null) {
-                        var url = $(link).find("a.image").attr('href');
-                        if (url != null) {
-                            var splitUrl = url.split(","); // in read 
-                            if (splitUrl.length > 0) {
-                                splitUrl = splitUrl[0].split("/");
-                                for (var c in splitUrl) {
-                                    if (splitUrl[c] != "thumb") {
-                                        if (splitUrl[c].indexOf(".") != -1) {
-                                            var finalUrl = splitUrl[c].split("File:"); //get only page name
-                                            if (finalUrl.length > 0) {
-                                                fileUrl = finalUrl[1]; //right part
-                                            }
-                                            break; // yes so we quit the loop
-                                        }
-                                    }
-                                }
-                            }
+                ChapterParser.prototype.checkComplete = function () {
+                    if (this.chaptersRequest <= 0 && this.imagesRequest <= 0) {
+                        if (this.onChaptersComplete) {
+                            this.onChaptersComplete(this.Volume);
                         }
                     }
-                    console.info("Found ImageContent : " + fileUrl);
-                    return fileUrl;
                 };
                 return ChapterParser;
             })();

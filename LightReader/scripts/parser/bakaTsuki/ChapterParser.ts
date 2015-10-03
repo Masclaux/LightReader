@@ -2,9 +2,18 @@
 {
     export class ChapterParser implements iChapterParser
     {
+
+        //delegate  call when a chapter is completed
+        public onChaptersComplete: any;
+
         private listUrl: String = "http://baka-tsuki.org";
 
         public Volume: Volume;
+
+        private chaptersRequest: number = 0;
+
+        private imagesRequest: number = 0;
+
 
         //Download and Parse  all required datas from the source.
         public ParseChapters(volume: Volume): void
@@ -21,6 +30,7 @@
         //Download and parse a chapter 
         public ParseChapter(chapter: Chapter):void 
         {
+            this.chaptersRequest++;
             Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter); 
         }
 
@@ -63,8 +73,13 @@
                             break;
 
                         case 'DIV':
+
+                            this.imagesRequest++;
+
                             var image: ImageContent = new ImageContent();
-                            image.url = this.parseImage(value);
+                            image.title = ImageHelper.GetImageName(value);
+                            ImageHelper.GetImageLink(image.title, this.OnImageComplete, this.OnImageError, image); 
+
                             currentChapter.pages.push(image);
                             break;
                     }
@@ -78,50 +93,42 @@
                         tempWords = 0;                   
                     }
                 }
-            }                  
+            }  
+
+            this.chaptersRequest--;
+            this.checkComplete();                
         }
-          
-        //Get image name from url.
-        public parseImage(link): string
-        {
-            var fileUrl: string = "";
-            if (link != null)
-            {
-                var url = $(link).find("a.image").attr('href');
-                if (url != null)
-                {
-                    var splitUrl = url.split(","); // in read 
-                    if (splitUrl.length > 0)
-                    {
-                        splitUrl = splitUrl[0].split("/");
-                        for (var c in splitUrl)
-                        {
-                            if (splitUrl[c] != "thumb")
-                            {
-                                if (splitUrl[c].indexOf(".") != -1) //we found the file ? 
-                                {
-                                    var finalUrl = splitUrl[c].split("File:"); //get only page name
-                                    if (finalUrl.length > 0)
-                                    {
-                                        fileUrl = finalUrl[1];//right part
-                                    }
-                                    break; // yes so we quit the loop
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            console.info("Found ImageContent : " + fileUrl);
-
-            return fileUrl;
-        }
-
-
+       
         private OnError = (ev: Event): void =>
         {
-            console.error("Invalid html");
+            console.error("Invalid Chapter");
+            this.chaptersRequest--;
+            this.checkComplete();     
+        }
+
+        private OnImageComplete = (image: ImageContent): void =>
+        {
+            console.info("Found " + image.url);
+            this.imagesRequest--;
+            this.checkComplete();     
+        }
+
+        private OnImageError= (ev: Event): void =>
+        {
+            console.warn("Invalid image");
+            this.imagesRequest--;
+            this.checkComplete();     
+        }
+
+        private checkComplete():void
+        {
+            if (this.chaptersRequest <= 0 && this.imagesRequest <= 0)
+            {
+                if (this.onChaptersComplete)
+                {
+                    this.onChaptersComplete(this.Volume);
+                }
+            }
         }
     }
 } 
