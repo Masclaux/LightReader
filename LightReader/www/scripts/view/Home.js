@@ -9,7 +9,6 @@ var LightReader;
                 this.router = core.Router.Inst();
                 this.model = LightReader.AppModel.Inst();
                 this.OnSourceSelected = function (source) {
-                    console.info("lol");
                     _this.router.Navigate("List.html", source);
                 };
             }
@@ -19,7 +18,7 @@ var LightReader;
                 ko.applyBindings(this, element);
             };
             Home.prototype.Exit = function (element) {
-                //clean binding ( I now is not recommended )
+                //clean binding ( I know is not recommended )
                 ko.cleanNode(element);
             };
             return Home;

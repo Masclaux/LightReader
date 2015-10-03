@@ -7,10 +7,9 @@ var LightReader;
                 this.router = LightReader.core.Router.Inst();
             }
             List.prototype.Ready = function (element, options) {
-                console.log("lol");
             };
             List.prototype.Exit = function (element) {
-                //clean binding ( I now is not recommended )
+                //clean binding ( I know is not recommended )
                 ko.cleanNode(element);
             };
             return List;

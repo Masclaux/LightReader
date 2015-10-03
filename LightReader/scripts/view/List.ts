@@ -8,12 +8,11 @@
 
         public Ready(element: HTMLElement, options: any): void
         {
-            console.log("lol");
         }
 
         public Exit(element: HTMLElement): void
         {
-            //clean binding ( I now is not recommended )
+            //clean binding ( I know is not recommended )
             ko.cleanNode(element);
         }
     }

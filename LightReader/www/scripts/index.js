@@ -13,13 +13,9 @@ var LightReader;
         function onDeviceReady() {
             var b;
             b = new LightReader.parser.bakaTsuki.Parser();
-            //b.Parse();
+            b.Parse();
             var s = new LightReader.Source();
             s.name = "Baka-Tsuki";
-            s.description = "Light Novel commmunity";
-            Application.model.sources.push(s);
-            var s = new LightReader.Source();
-            s.name = "Baka-Tsuki 2";
             s.description = "Light Novel commmunity";
             Application.model.sources.push(s);
             // Handle the Cordova pause and resume events
@@ -29,8 +25,12 @@ var LightReader;
             Application.router.Init("./view");
             Application.router.Add("Home.html", LightReader.view.Home);
             Application.router.Add("List.html", LightReader.view.List);
+            Application.router.Add("Detail.html", LightReader.view.Detail);
+            Application.router.Add("Read.html", LightReader.view.Read);
             Application.router.Navigate("Home.html", { id: 1, libelle: "test" });
             Application.router.Navigate("List.html", { id: 1, libelle: "test 1" });
+            Application.router.Navigate("Detail.html", { id: 1, libelle: "test 1" });
+            Application.router.Navigate("Read.html", { id: 1, libelle: "test 1" });
             Application.router.Navigate("Home.html", { id: 2, libelle: "test 2" });
         }
         function onPause() { }
