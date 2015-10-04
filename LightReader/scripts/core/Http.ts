@@ -52,5 +52,51 @@
             http.onerror = onRequestError;
             http.send(args);
         }
+
+        /**
+        * Write a file in externalApplicationStorageDirectory + filePath
+        * @param url Url
+        * @param filePath target path (exemple "image/")
+        * @param fileName file name (exemple "test.png")
+        * @param onCompletHandler callBack When File request is succefull
+        * @param onRequestError callBack When File Request is on error
+        */
+        public static WriteFile(url: string, filePath:string, fileName:string, onRequestComplete: any, onRequestError: any): void
+        {
+            var storage: string = "";
+
+            // WP8
+            if (window.cordova && window.cordova.platformId  === "windows")
+            {
+                storage = "ms-appdata:///local/";
+            }
+            else
+            {
+                storage = cordova.file.externalApplicationStorageDirectory;
+            }
+
+            storage += filePath;
+            
+            var fileTransfer = new FileTransfer();           
+            fileTransfer.download(encodeURI(url), storage + fileName,
+
+                function (aEvt)
+                {
+                    if (onRequestComplete)
+                    {
+                        onRequestComplete(aEvt.toURL());
+                    }
+                }
+                ,
+                function (aEvt)
+                {
+                    if (onRequestError)
+                    {
+                        onRequestError(aEvt);
+                    }
+                });          
+
+        }
+
     }
 }

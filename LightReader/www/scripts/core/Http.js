@@ -43,6 +43,35 @@ var LightReader;
             http.onerror = onRequestError;
             http.send(args);
         };
+        /**
+        * Write a file in externalApplicationStorageDirectory + filePath
+        * @param url Url
+        * @param filePath target path (exemple "image/")
+        * @param fileName file name (exemple "test.png")
+        * @param onCompletHandler callBack When File request is succefull
+        * @param onRequestError callBack When File Request is on error
+        */
+        Http.WriteFile = function (url, filePath, fileName, onRequestComplete, onRequestError) {
+            var storage = "";
+            // WP8
+            if (window.cordova && window.cordova.platformId === "windows") {
+                storage = "ms-appdata:///local/";
+            }
+            else {
+                storage = cordova.file.externalApplicationStorageDirectory;
+            }
+            storage += filePath;
+            var fileTransfer = new FileTransfer();
+            fileTransfer.download(encodeURI(url), storage + fileName, function (aEvt) {
+                if (onRequestComplete) {
+                    onRequestComplete(aEvt.toURL());
+                }
+            }, function (aEvt) {
+                if (onRequestError) {
+                    onRequestError(aEvt);
+                }
+            });
+        };
         return Http;
     })();
     LightReader.Http = Http;
