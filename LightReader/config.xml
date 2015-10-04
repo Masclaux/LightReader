@@ -24,10 +24,10 @@
     <allow-intent href="itms-apps:*" />
   </platform>
   <platform name="android">
-    <icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />
-    <icon src="res/icons/android/icon-48-mdpi.png" density="mdpi" />
-    <icon src="res/icons/android/icon-72-hdpi.png" density="hdpi" />
-    <icon src="res/icons/android/icon-96-xhdpi.png" density="xhdpi" />
+    <icon src="res/icons/android/ic_launcher_ldpi.png" density="ldpi" />
+    <icon src="res/icons/android/ic_launcher_mdpi.png" density="mdpi" />
+    <icon src="res/icons/android/ic_launcher_hdpi.png" density="hdpi" />
+    <icon src="res/icons/android/ic_launcher_xhdpi.png" density="xhdpi" />
   </platform>
   <platform name="ios">
     <!-- iOS 8.0+ -->
@@ -58,21 +58,21 @@
     <icon src="res/icons/ios/icon-50-2x.png" width="100" height="100" />
   </platform>
   <platform name="windows">
-    <icon src="res/icons/windows/Square150x150Logo.scale-100.png" width="150" height="150" />
-    <icon src="res/icons/windows/Square150x150Logo.scale-240.png" width="360" height="360" />
-    <icon src="res/icons/windows/Square30x30Logo.scale-100.png" width="30" height="30" />
-    <icon src="res/icons/windows/Square310x310Logo.scale-100.png" width="310" height="310" />
-    <icon src="res/icons/windows/Square44x44Logo.scale-240.png" width="106" height="106" />
-    <icon src="res/icons/windows/Square70x70Logo.scale-100.png" width="70" height="70" />
-    <icon src="res/icons/windows/Square71x71Logo.scale-240.png" width="170" height="170" />
-    <icon src="res/icons/windows/StoreLogo.scale-100.png" width="50" height="50" />
-    <icon src="res/icons/windows/StoreLogo.scale-240.png" width="120" height="120" />
-    <icon src="res/icons/windows/Wide310x150Logo.scale-100.png" width="310" height="150" />
-    <icon src="res/icons/windows/Wide310x150Logo.scale-240.png" width="744" height="360" />
+    <icon src="res/icons/windows/ic_square150X150.scale-100.png" width="150" height="150" />
+    <icon src="res/icons/windows/ic_square150X150.scale-240.png" width="360" height="360" />
+    <icon src="res/icons/windows/ic_square30X30.scale-100.png" width="30" height="30" />
+    <icon src="res/icons/windows/ic_square310X310.scale-100.png" width="310" height="310" />
+    <icon src="res/icons/windows/ic_square44X44.scale-240.png" width="106" height="106" />
+    <icon src="res/icons/windows/ic_square70X70.scale-100.png" width="70" height="70" />
+    <icon src="res/icons/windows/ic_square71X71.scale-240.png" width="170" height="170" />
+    <icon src="res/icons/windows/ic_StoreLogo.scale-100.png" width="50" height="50" />
+    <icon src="res/icons/windows/ic_StoreLogo.scale-240.png" width="120" height="120" />
+    <icon src="res/icons/windows/ic_Wide310x150.scale-100.png" width="310" height="150" /> <!--still need to do the last 2-->
+    <icon src="res/icons/windows/ic_Wide310x150.scale-240.png" width="744" height="360" />
   </platform>
   <platform name="wp8">
-    <icon src="res/icons/wp8/ApplicationIcon.png" width="62" height="62" />
-    <icon src="res/icons/wp8/Background.png" width="173" height="173" />
+    <icon src="res/icons/wp8/ic_ApplicationIcon.png" width="62" height="62" />
+    <icon src="res/icons/wp8/ic_Background.png" width="173" height="173" />
   </platform>
   <platform name="android">
     <splash src="res/screens/android/screen-hdpi-landscape.png" density="land-hdpi" />
