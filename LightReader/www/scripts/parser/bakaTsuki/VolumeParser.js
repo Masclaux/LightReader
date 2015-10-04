@@ -52,7 +52,7 @@ var LightReader;
                     //get first image
                     var image = $(doc).find(".thumbinner").first();
                     if (image != null && image.length == 1) {
-                        res = new LightReader.Image();
+                        res = new LightReader.ImageContent();
                         res.title = image.text();
                         res.url = $(image).find("a").attr("href");
                     }

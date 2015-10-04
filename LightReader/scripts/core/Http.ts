@@ -12,11 +12,11 @@
     {
         /**
         * Send an HTTP request
-        * ShortCut of Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, "");
+        * ShortCut of Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, return data, "");
         */
-        public static Get(url: string, onRequestComplete: any, onRequestError: any): void
+        public static Get(url: string, onRequestComplete: any, onRequestError: any, returnDatas?: any ): void
         {
-            Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, "");
+            Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, returnDatas, "");
         }
 
         /**
@@ -25,9 +25,10 @@
         * @param rType Request Type ( GET or POST )
         * @param onCompletHandler callBack When Request is succefull
         * @param onRequestError callBack When Request is on error
+        * @param returnDatas  datas who are set on "succeed" callback 
         * @param args Args to send with the request
         */
-        public static Send(url: string, rType: eRequestType, onCompletHandler: any, onRequestError: any, args?: string): void
+        public static Send(url: string, rType: eRequestType, onCompletHandler: any, onRequestError: any, returnDatas?:any, args?: string): void
         {
             var rTypeStr = rType == eRequestType.GET ? "GET" : "POST";
 
@@ -38,7 +39,7 @@
                 {
                     if (http.status == 200)
                     {
-                        onCompletHandler(http);
+                        onCompletHandler(http, returnDatas);
                     }
                     else
                     {

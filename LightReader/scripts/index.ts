@@ -22,7 +22,6 @@
         {
             var b: LightReader.parser.bakaTsuki.Parser;
             b = new LightReader.parser.bakaTsuki.Parser();
-
             b.Parse();
 
             var s: Source = new Source();
@@ -39,10 +38,14 @@
             router.Init("./view");
             router.Add("Home.html", LightReader.view.Home);
             router.Add("List.html", LightReader.view.List);
+            router.Add("Detail.html", LightReader.view.Detail);
+            router.Add("Read.html", LightReader.view.Read);
 
-            router.Navigate("Home.html", { id: 1, libelle: "test" });
+            router.Navigate("Home.html", { id: 1, libelle: "test" }); 
             router.Navigate("List.html", { id: 1, libelle: "test 1" });
-            router.Navigate("Home.html", { id: 2, libelle: "test 2" });
+            router.Navigate("Detail.html", { id: 1, libelle: "test 1" });
+            router.Navigate("Read.html", { id: 1, libelle: "test 1" });
+            router.Navigate("Home.html", { id: 2, libelle: "test 2" });         
         }
 
         function onPause() { }

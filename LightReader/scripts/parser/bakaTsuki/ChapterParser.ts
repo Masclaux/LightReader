@@ -2,9 +2,133 @@
 {
     export class ChapterParser implements iChapterParser
     {
+
+        //delegate  call when a chapter is completed
+        public onChaptersComplete: any;
+
+        private listUrl: String = "http://baka-tsuki.org";
+
+        public Volume: Volume;
+
+        private chaptersRequest: number = 0;
+
+        private imagesRequest: number = 0;
+
+
         //Download and Parse  all required datas from the source.
-        public parseChapter(): void
+        public ParseChapters(volume: Volume): void
         {
+            console.info("Stating Parsing detail for " + volume.title);
+
+            this.Volume = volume;
+            for (var i = 0; i < volume.chapterList.length; i++)
+            {
+                this.ParseChapter(volume.chapterList[i]);
+            }
+        }
+
+        //Download and parse a chapter 
+        public ParseChapter(chapter: Chapter):void 
+        {
+            this.chaptersRequest++;
+            Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter); 
+        }
+
+        private OnRequestComplete = (data: XMLHttpRequest, currentChapter: Chapter): void =>
+        {
+            console.info("Start Parsing chapter " + currentChapter.title);      
+
+            var firstPartNotFound:boolean = false;
+            
+            var tempWords: number = 0;
+            var page: TextContent = new TextContent();
+          
+            var res = $.parseHTML(data.responseText);
+            if (res != null)
+            {
+                var text: JQuery = $(res).find("#mw-content-text").find('h2,h3,p,div.thumb.tright,div.thumb');
+                for (var i = 0; i < text.length; i++)
+                {
+                    var value: HTMLElement = text[i];
+                    switch (value.nodeName.toUpperCase())
+                    {
+                        case 'H2':
+                            page.content += "<h2>" + value.firstChild.textContent + "</h2>";
+                            break;
+
+                        case 'H3':
+                            if (currentChapter.pages.length > 0)
+                            {
+                                currentChapter.pages.push(page);
+                                page = new TextContent();
+
+                                tempWords = 0;                             
+                            }
+
+                            page.content += "<h3>" + value.firstChild.textContent + "</h3>";
+                            break;
+
+                        case 'P':
+                            page.content  += "<P>" + value.firstChild.textContent + "</P>";
+                            break;
+
+                        case 'DIV':
+
+                            this.imagesRequest++;
+
+                            var image: ImageContent = new ImageContent();
+                            image.title = ImageHelper.GetImageName(value);
+                            ImageHelper.GetImageLink(image.title, this.OnImageComplete, this.OnImageError, image); 
+
+                            currentChapter.pages.push(image);
+                            break;
+                    }
+
+                    tempWords += value.firstChild.textContent.split(" ").length;
+                    if (tempWords >= 350)
+                    {
+                        currentChapter.pages.push(page);
+
+                        var page: TextContent = new TextContent();                                              
+                        tempWords = 0;                   
+                    }
+                }
+            }  
+
+            this.chaptersRequest--;
+            this.checkComplete();                
+        }
+       
+        private OnError = (ev: Event): void =>
+        {
+            console.error("Invalid Chapter");
+            this.chaptersRequest--;
+            this.checkComplete();     
+        }
+
+        private OnImageComplete = (image: ImageContent): void =>
+        {
+            console.info("Found " + image.url);
+            this.imagesRequest--;
+            this.checkComplete();     
+        }
+
+        private OnImageError= (ev: Event): void =>
+        {
+            console.warn("Invalid image");
+            this.imagesRequest--;
+            this.checkComplete();     
+        }
+
+        private checkComplete():void
+        {
+            if (this.chaptersRequest <= 0 && this.imagesRequest <= 0)
+            {
+                if (this.onChaptersComplete)
+                {
+                    this.onChaptersComplete(this.Volume);
+                }
+            }
         }
     }
 } 

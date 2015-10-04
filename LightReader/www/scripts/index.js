@@ -3,9 +3,6 @@ var LightReader;
     "use strict";
     var Application;
     (function (Application) {
-        //application model reference contain the list of datas sources
-        Application.model;
-        Application.router;
         function initialize() {
             document.addEventListener('deviceready', onDeviceReady, false);
             //Model initialisation
@@ -28,8 +25,12 @@ var LightReader;
             Application.router.Init("./view");
             Application.router.Add("Home.html", LightReader.view.Home);
             Application.router.Add("List.html", LightReader.view.List);
+            Application.router.Add("Detail.html", LightReader.view.Detail);
+            Application.router.Add("Read.html", LightReader.view.Read);
             Application.router.Navigate("Home.html", { id: 1, libelle: "test" });
             Application.router.Navigate("List.html", { id: 1, libelle: "test 1" });
+            Application.router.Navigate("Detail.html", { id: 1, libelle: "test 1" });
+            Application.router.Navigate("Read.html", { id: 1, libelle: "test 1" });
             Application.router.Navigate("Home.html", { id: 2, libelle: "test 2" });
         }
         function onPause() { }

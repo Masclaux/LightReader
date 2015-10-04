@@ -20,9 +20,14 @@ var LightReader;
                     };
                     this.onVolumeListComplete = function (res) {
                         console.info("volume list parsed for : " + res.media.title);
+                        _this.chapterParser.ParseChapters(res.media.volumeList[0]);
+                    };
+                    this.onChaptersComplete = function (res) {
+                        console.info("volume list parsed for : " + res.Volume);
                     };
                     this.mediaParser.onMediaComplete = this.onMediaComplete;
                     this.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
+                    this.chapterParser.onChaptersComplete = this.onChaptersComplete;
                 }
                 //Download and Parse  all required datas from the source.
                 Parser.prototype.Parse = function () {

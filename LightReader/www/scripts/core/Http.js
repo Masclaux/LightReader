@@ -12,10 +12,10 @@ var LightReader;
         }
         /**
         * Send an HTTP request
-        * ShortCut of Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, "");
+        * ShortCut of Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, return data, "");
         */
-        Http.Get = function (url, onRequestComplete, onRequestError) {
-            Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, "");
+        Http.Get = function (url, onRequestComplete, onRequestError, returnDatas) {
+            Http.Send(url, eRequestType.GET, onRequestComplete, onRequestError, returnDatas, "");
         };
         /**
         * Send an HTTP request
@@ -23,15 +23,16 @@ var LightReader;
         * @param rType Request Type ( GET or POST )
         * @param onCompletHandler callBack When Request is succefull
         * @param onRequestError callBack When Request is on error
+        * @param returnDatas  datas who are set on "succeed" callback
         * @param args Args to send with the request
         */
-        Http.Send = function (url, rType, onCompletHandler, onRequestError, args) {
+        Http.Send = function (url, rType, onCompletHandler, onRequestError, returnDatas, args) {
             var rTypeStr = rType == eRequestType.GET ? "GET" : "POST";
             var http = new XMLHttpRequest();
             http.onreadystatechange = function (aEvt) {
                 if (http.readyState == 4) {
                     if (http.status == 200) {
-                        onCompletHandler(http);
+                        onCompletHandler(http, returnDatas);
                     }
                     else {
                         onRequestError(http);

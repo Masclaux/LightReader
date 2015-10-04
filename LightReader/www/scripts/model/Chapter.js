@@ -2,7 +2,6 @@ var LightReader;
 (function (LightReader) {
     var Chapter = (function () {
         function Chapter() {
-            this.images = {};
             this.pages = new Array();
         }
         return Chapter;

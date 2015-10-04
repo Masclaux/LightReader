@@ -8,11 +8,12 @@ Just a test to see How cordova and typescript perform.
 ## Development requirements:
 
 * Visual studio 2015 (cordova app )
-* Typescript 1.5
+* Typescript 1.6.x
 
 ## Libs:
 
 * jquery.js => https://jquery.com/
+* knockout  => http://knockoutjs.com/index.html
 
 # Dev dependencies
 

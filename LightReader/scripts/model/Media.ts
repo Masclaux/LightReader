@@ -11,7 +11,7 @@
 
         public title: string;
 
-        public illustration: Image;
+        public illustration: ImageContent;
 
         public synopsis: String = "test synopsis ";
 
