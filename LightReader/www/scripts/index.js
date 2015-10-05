@@ -30,7 +30,7 @@ var LightReader;
             Application.router.Navigate("Home.html", { id: 2, libelle: "test 2" });
             var assetURL = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg";
             var fileName = "Absolute_Duo_Volume_1_Cover.jpg";
-            LightReader.Http.WriteFile(assetURL, "images/bakatuski/", fileName, sucess, fail);
+            LightReader.File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
         }
         function sucess(url) {
             console.info(url);

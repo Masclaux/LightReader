@@ -47,7 +47,7 @@
             var assetURL: string = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg"
             var fileName: string = "Absolute_Duo_Volume_1_Cover.jpg"
 
-            Http.WriteFile(assetURL, "images/bakatuski/", fileName, sucess, fail);    
+            File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);             
         }        
 
         function sucess(url: string): void

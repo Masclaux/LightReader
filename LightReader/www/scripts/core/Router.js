@@ -100,7 +100,7 @@ var LightReader;
             Router.prototype.Navigate = function (url, args) {
                 //clear precedent page
                 this.appContent.innerHTML = "";
-                if (core.File.Exist(this.viewPath + "/" + url)) {
+                if (LightReader.File.Exist(this.viewPath + "/" + url)) {
                     this.inHistory.push(new core.Route(url, args));
                     LightReader.Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);
                 }
