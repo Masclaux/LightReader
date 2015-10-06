@@ -13,7 +13,7 @@ var LightReader;
         function onDeviceReady() {
             var b;
             b = new LightReader.parser.bakaTsuki.Parser();
-            b.Parse();
+            // b.Parse();
             var s = new LightReader.Source();
             s.name = "Baka-Tsuki";
             s.description = "Light Novel commmunity";
@@ -27,11 +27,16 @@ var LightReader;
             Application.router.Add("List.html", LightReader.view.List);
             Application.router.Add("Detail.html", LightReader.view.Detail);
             Application.router.Add("Read.html", LightReader.view.Read);
-            Application.router.Navigate("Home.html", { id: 1, libelle: "test" });
-            Application.router.Navigate("List.html", { id: 1, libelle: "test 1" });
-            Application.router.Navigate("Detail.html", { id: 1, libelle: "test 1" });
-            Application.router.Navigate("Read.html", { id: 1, libelle: "test 1" });
             Application.router.Navigate("Home.html", { id: 2, libelle: "test 2" });
+            var assetURL = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg";
+            var fileName = "Absolute_Duo_Volume_1_Cover.jpg";
+            LightReader.File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
+        }
+        function sucess(url) {
+            console.info(url);
+        }
+        function fail(error) {
+            console.error(error.exception);
         }
         function onPause() { }
         function onResume() { }

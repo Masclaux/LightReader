@@ -51,6 +51,6 @@
             http.open(rTypeStr, url, true);
             http.onerror = onRequestError;
             http.send(args);
-        }
+        }       
     }
 }
