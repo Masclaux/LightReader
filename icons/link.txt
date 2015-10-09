@@ -8,3 +8,4 @@ http://makeappicon.com/download/72cce575cbd64489badf103ab32c7b82
 
 windows generator
 
+http://blogs.msdn.com/cfs-file.ashx/__key/communityserver-components-postattachments/00-10-41-89-97/WindowsStoreAppLogoMaker.zip
