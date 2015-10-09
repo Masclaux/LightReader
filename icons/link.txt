@@ -1,0 +1,11 @@
+Icon generator
+
+http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html#foreground.type=text&foreground.space.trim=1&foreground.space.pad=0.1&foreground.text.text=%E8%BB%BD&foreground.text.font=Roboto&foreColor=fff%2C85&crop=0&backgroundShape=square&backColor=2c2c2c%2C100&effects=none
+
+Ios generator 
+
+http://makeappicon.com/download/72cce575cbd64489badf103ab32c7b82
+
+windows generator
+
+http://blogs.msdn.com/cfs-file.ashx/__key/communityserver-components-postattachments/00-10-41-89-97/WindowsStoreAppLogoMaker.zip
