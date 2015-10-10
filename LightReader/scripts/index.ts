@@ -20,6 +20,12 @@
 
         function onDeviceReady()
         {
+            //Some properties are not set on windows mobile this class fix that
+            if (window.cordova.platformId === "windows")
+            {
+                new FakeCordovaWindows();
+            }
+
             var b: LightReader.parser.bakaTsuki.Parser;
             b = new LightReader.parser.bakaTsuki.Parser();
             // b.Parse();
@@ -47,6 +53,9 @@
             var fileName: string = "Absolute_Duo_Volume_1_Cover.jpg"
 
             File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
+
+
+            model.InitDataBase();
         }
 
         function sucess(url: string): void

@@ -44,16 +44,11 @@
             }
 
             var system = window.cordova.platformId;
-            var storage: string = "";
+            var storage: string = storage = cordova.file.externalApplicationStorageDirectory;
 
             // WP8
-            if (system === "windows")
+            if (system !== "windows")
             {
-                storage = "ms-appdata:///local/";
-            }
-            else if (system === "android")
-            {
-                storage = cordova.file.externalApplicationStorageDirectory;
                 storage += filePath;
             }
 

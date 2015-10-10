@@ -11,6 +11,9 @@ var LightReader;
         }
         Application.initialize = initialize;
         function onDeviceReady() {
+            if (window.cordova.platformId === "windows") {
+                new LightReader.FakeCordovaWindows();
+            }
             var b;
             b = new LightReader.parser.bakaTsuki.Parser();
             // b.Parse();
@@ -27,14 +30,14 @@ var LightReader;
             Application.router.Add("List.html", LightReader.view.List);
             Application.router.Add("Detail.html", LightReader.view.Detail);
             Application.router.Add("Read.html", LightReader.view.Read);
-            //router.Navigate("Home.html", { id: 2, libelle: "test 2" });    
+            Application.router.Navigate("Home.html", { id: 2, libelle: "test 2" });
             var assetURL = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg";
             var fileName = "Absolute_Duo_Volume_1_Cover.jpg";
             LightReader.File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
+            Application.model.InitDataBase();
         }
         function sucess(url) {
             console.info(url);
-            $('<img src="' + url + '" alt="Smiley face">').insertAfter("#appContent");
         }
         function fail(error) {
             console.error(error.exception);

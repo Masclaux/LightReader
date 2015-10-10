@@ -35,13 +35,9 @@ var LightReader;
                 return;
             }
             var system = window.cordova.platformId;
-            var storage = "";
+            var storage = storage = cordova.file.externalApplicationStorageDirectory;
             // WP8
-            if (system === "windows") {
-                storage = "ms-appdata:///local/";
-            }
-            else if (system === "android") {
-                storage = cordova.file.externalApplicationStorageDirectory;
+            if (system !== "windows") {
                 storage += filePath;
             }
             var fileTransfer = new FileTransfer();
