@@ -44,7 +44,7 @@
 
         public onChaptersComplete = (res: ChapterParser): void =>
         {
-            console.info("volume list parsed for : " + res.Volume);           
+            console.info("volume list parsed for : " + res.Volume);
         }
     }
 } 

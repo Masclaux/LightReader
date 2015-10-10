@@ -6,7 +6,7 @@
     {
         private router: core.Router = core.Router.Inst();
 
-        private model: AppModel = AppModel.Inst(); 
+        private model: AppModel = AppModel.Inst();
 
         public Ready(element: HTMLElement, options: any): void
         {
