@@ -54,7 +54,6 @@
 
             File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
 
-
             model.InitDataBase();
         }
 

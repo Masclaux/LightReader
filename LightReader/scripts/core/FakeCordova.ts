@@ -10,25 +10,25 @@
         constructor()
         {
             var file =
-            {
-                applicationDirectory: "ms-appdata:///local/",
-                applicationStorageDirectory: "ms-appdata:///local/",
-                dataDirectory: "ms-appdata:///local/",
-                cacheDirectory: "ms-appdata:///local/",
-                externalApplicationStorageDirectory: "ms-appdata:///local/",
-                externalDataDirectory: "ms-appdata:///local/",
-                externalCacheDirectory: "ms-appdata:///local/",
-                externalRootDirectory: "ms-appdata:///local/",
-                tempDirectory: "ms-appdata:///local/",
-                syncedDataDirectory: "ms-appdata:///local/",
-                documentsDirectory: "ms-appdata:///local/",
-                sharedDirectory: "ms-appdata:///local/",
-            };
+                {
+                    applicationDirectory: "ms-appdata:///local/",
+                    applicationStorageDirectory: "ms-appdata:///local/",
+                    dataDirectory: "ms-appdata:///local/",
+                    cacheDirectory: "ms-appdata:///local/",
+                    externalApplicationStorageDirectory: "ms-appdata:///local/",
+                    externalDataDirectory: "ms-appdata:///local/",
+                    externalCacheDirectory: "ms-appdata:///local/",
+                    externalRootDirectory: "ms-appdata:///local/",
+                    tempDirectory: "ms-appdata:///local/",
+                    syncedDataDirectory: "ms-appdata:///local/",
+                    documentsDirectory: "ms-appdata:///local/",
+                    sharedDirectory: "ms-appdata:///local/",
+                };
 
             if (cordova.file == undefined)
             {
                 cordova.file = file;
             }
-        }       
+        }
     }
 }

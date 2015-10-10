@@ -10,13 +10,13 @@
  * @author Joe Minichino <joe.minichino@gmail.com>
  */
 
-
 /** Loki: The main database class
  * @constructor
  * @param {string} filename - name of the file to be saved to
  * @param {object} options - config object
  */
-interface Loki extends LokiEventEmitter {
+interface Loki extends LokiEventEmitter
+{
     filename: string;
     collections: LokiCollection<any>[];
     databaseVersion: number;
@@ -97,7 +97,6 @@ interface Loki extends LokiEventEmitter {
      */
     close(callback?: (...args: any[]) => void): void;
 
-
     /**-------------------------+
     | Changes API               |
     +--------------------------*/
@@ -157,15 +156,14 @@ interface Loki extends LokiEventEmitter {
 
     /** autosaveDisable - stop the autosave interval timer. */
     autosaveDisable(): void;
-
 }
-
 
 /** LokiEventEmitter is a minimalist version of EventEmitter. It enables any
  * constructor that inherits EventEmitter to emit events and trigger
  * listeners that have been added to the event through the on(event, callback) method
  */
-interface LokiEventEmitter {
+interface LokiEventEmitter
+{
     /** @prop Events property is a hashmap, with each property being an array of callbacks */
     events: {} //{ [id: string]: ((...args) => void)[] };
 
@@ -194,9 +192,6 @@ interface LokiEventEmitter {
     removeListener(eventName: string, listener: (...args: any[]) => void): void;
 }
 
-
-
-
 /*------------------+
 | PERSISTENCE       |
 -------------------*/
@@ -206,7 +201,8 @@ interface LokiEventEmitter {
  * localStorage   for use in browser environment
  * defined as helper classes here so its easy and clean to use
  */
-interface LokiFsAdapter {
+interface LokiFsAdapter
+{
     //fs; // require('fs');
 
     /** loadDatabase() - Load data from file, will throw an error if the file does not exist
@@ -223,12 +219,9 @@ interface LokiFsAdapter {
     saveDatabase(dbname: string, dbstring: string, callback: (error: any) => void): void;
 }
 
-
-
-
 /** constructor for local storage */
-interface LokiLocalStorageAdapter {
-
+interface LokiLocalStorageAdapter
+{
     /** loadDatabase() - Load data from localstorage
      * @param {string} dbname - the name of the database to load
      * @param {function} callback - the callback to handle the result
@@ -243,9 +236,6 @@ interface LokiLocalStorageAdapter {
     saveDatabase(dbname: string, dbstring: string, callback: (error: Error) => void): void;
 }
 
-
-
-
 /** Resultset class allowing chainable queries.  Intended to be instanced internally.
  *     Collection.find(), Collection.where(), and Collection.chain() instantiate this.
  *   Example:
@@ -258,7 +248,8 @@ interface LokiLocalStorageAdapter {
  * @param {function} queryFunc - Optional javascript filter function to initialize resultset with.
  * @param {bool} firstOnly - Optional boolean used by collection.findOne().
  */
-interface LokiResultset<E> {
+interface LokiResultset<E>
+{
     collection: LokiCollection<E>;
     searchIsChained: boolean;
     filteredrows: string[]; // technically number[] (e.g. = Object.keys(this.collection.data))
@@ -407,15 +398,11 @@ interface LokiResultset<E> {
      * @param {function} (optional) mapFun - A function that receives each matching pair and maps them into output objects - function(left,right){return joinedObject}
      * @returns {Resultset} A resultset with data in the format [{left: leftObj, right: rightObj}]
      */
-    eqJoin<T, U>(joinData: T[]| LokiResultset<T>, leftJoinKey: string | ((obj: T) => string), rightJoinKey: string | ((obj: E) => string)): LokiResultset<{ left: E; right: T; }>;
-    eqJoin<T, U>(joinData: T[]| LokiResultset<T>, leftJoinKey: string | ((obj: T) => string), rightJoinKey: string | ((obj: E) => string), mapFun?: (a: E, b: T) => U): LokiResultset<U>;
+    eqJoin<T, U>(joinData: T[] | LokiResultset<T>, leftJoinKey: string | ((obj: T) => string), rightJoinKey: string | ((obj: E) => string)): LokiResultset<{ left: E; right: T; }>;
+    eqJoin<T, U>(joinData: T[] | LokiResultset<T>, leftJoinKey: string | ((obj: T) => string), rightJoinKey: string | ((obj: E) => string), mapFun?: (a: E, b: T) => U): LokiResultset<U>;
 
     map<U>(mapFun: (currentValue: E, index: number, array: E[]) => U): LokiResultset<U>;
-
 }
-
-
-
 
 /** DynamicView class is a versatile 'live' view class which can have filters and sorts applied.
  *     Collection.addDynamicView(name) instantiates this DynamicView object and notifies it
@@ -429,7 +416,8 @@ interface LokiResultset<E> {
  * @param {string} name - The name of this dynamic view
  * @param {boolean} persistent - (Optional) If true, the results will be copied into an internal array for read efficiency or binding to.
  */
-interface LokiDynamicView<E> extends LokiEventEmitter {
+interface LokiDynamicView<E> extends LokiEventEmitter
+{
     name: string;
     collection: LokiCollection<E>;
     persistent: boolean;
@@ -545,18 +533,15 @@ interface LokiDynamicView<E> extends LokiEventEmitter {
      * @returns The output of your reduceFunction
      */
     mapReduce<T, U>(mapFunction: (value: E, index: number, array: E[]) => T, reduceFunction: (array: T[]) => U): U;
-
 }
-
-
-
 
 /** Collection class that handles documents of same type
  * @param {stirng} collection name
  * @param {array} array of property names to be indicized
  * @param {object} configuration object
  */
-interface LokiCollection<E> extends LokiEventEmitter {
+interface LokiCollection<E> extends LokiEventEmitter
+{
     // the name of the collection
     name: string;
     // the data held by the collection
@@ -608,7 +593,6 @@ interface LokiCollection<E> extends LokiEventEmitter {
     findObject(template: any): E;
 
     findObjects(template: any): E[];
-
 
     /*----------------------------+
     | INDEXING                    |
@@ -664,8 +648,7 @@ interface LokiCollection<E> extends LokiEventEmitter {
     removeDataOnly(): void;
 
     /** delete wrapped */
-    remove(doc: E | E[]| number | number[]): E;
-
+    remove(doc: E | E[] | number | number[]): E;
 
     /*---------------------+
     | Finding methods     |
@@ -674,7 +657,7 @@ interface LokiCollection<E> extends LokiEventEmitter {
     /** Get by Id - faster than other methods because of the searching algorithm */
     get(id: number | string): E;
     //get(id: number | string, returnPosition: true): [E, number];
-    get(id: number | string, returnPosition: boolean): E |[E, number];
+    get(id: number | string, returnPosition: boolean): E | [E, number];
 
     by(field: string): (value: any) => E;
     by(field: string, value?: string): E;
@@ -698,7 +681,6 @@ interface LokiCollection<E> extends LokiEventEmitter {
      */
     findOneUnindexed(prop: string, value: any): E;
 
-
     /** Transaction methods */
 
     /** start the transation */
@@ -720,9 +702,8 @@ interface LokiCollection<E> extends LokiEventEmitter {
     mapReduce<T, U>(mapFunction: (value: E, index: number, array: E[]) => T, reduceFunction: (previousValue: U, currentValue: T, index: number, array: T[]) => U): U;
 
     /** eqJoin - Join two collections on specified properties */
-    eqJoin<T, U>(joinData: T[]| LokiResultset<T>, leftJoinProp: string | ((obj: T) => string), rightJoinProp: string | ((obj: E) => string)): LokiResultset<{ left: E; right: T; }>;
-    eqJoin<T, U>(joinData: T[]| LokiResultset<T>, leftJoinProp: string | ((obj: T) => string), rightJoinProp: string | ((obj: E) => string), mapFun?: (a: E, b: T) => U): LokiResultset<U>;
-
+    eqJoin<T, U>(joinData: T[] | LokiResultset<T>, leftJoinProp: string | ((obj: T) => string), rightJoinProp: string | ((obj: E) => string)): LokiResultset<{ left: E; right: T; }>;
+    eqJoin<T, U>(joinData: T[] | LokiResultset<T>, leftJoinProp: string | ((obj: T) => string), rightJoinProp: string | ((obj: E) => string), mapFun?: (a: E, b: T) => U): LokiResultset<U>;
 
     /* ------ STAGING API -------- */
     /** stages: a map of uniquely identified 'stages', which hold copies of objects to be
@@ -767,52 +748,50 @@ interface LokiCollection<E> extends LokiEventEmitter {
     median(field: string): number;
 }
 
-
 /*
 interface Utils {
     copyProperties(src, dest): void;
 }
-    
+
 // Sort helper that support null and undefined
 function ltHelper(prop1, prop2, equal?: boolean): boolean;
-    
+
 function gtHelper(prop1, prop2, equal?: boolean): boolean;
-    
+
 function sortHelper(prop1, prop2, desc?: boolean): number;
-    
+
 function containsCheckFn<T>(a: T[], b): (curr: T) => boolean;
-    
+
 function containsCheckFn(a: string, b): (curr: string) => boolean;
-    
+
 function containsCheckFn<T>(a: T, b): (curr: string) => boolean;
-    
+
 function clone<T>(data: T, method?: string): T;
-    
+
 function localStorageAvailable(): boolean;
 */
-
 
 /** General utils, including statistical functions */
 /*
 function isDeepProperty(field: string): boolean;
-    
+
 function parseBase10(num: number | string): number;
-    
+
 function isNotUndefined(obj: any): boolean;
-    
+
 function add(a: number, b: number): number;
-    
+
 function sub(a: number, b: number): number;
-    
+
 function median(values: number[]): number;
-    
+
 function average(array: number[]): number;
-    
+
 function standardDeviation(values: number[]): number;
 */
 
-
-interface LokiOps {
+interface LokiOps
+{
     // comparison operators
     $eq: (a: any, b: any) => boolean;
     $gt: (a: any, b: any) => boolean;
@@ -822,31 +801,29 @@ interface LokiOps {
     $ne: (a: any, b: any) => boolean;
     $regex: (a: string, b: RegExp) => boolean;
     $in: (a: any, b: { indexOf: (value: any) => number }) => boolean;
-    $containsAny: (a: any, b: any[]| any) => boolean;
-    $contains: (a: any, b: any[]| any) => boolean;
+    $containsAny: (a: any, b: any[] | any) => boolean;
+    $contains: (a: any, b: any[] | any) => boolean;
 }
 
 //declare var operators: LokiOps;
 
-
-interface LokiDeepProperty {
+interface LokiDeepProperty
+{
     (obj: any, property: string, isDeep?: boolean): any;
 }
 
-
-interface LokiBinarySearch<T> {
+interface LokiBinarySearch<T>
+{
     (array: T[], item: T, fun: (a: T, b: T) => number): { found: boolean; index: number; };
 }
 
-
-interface LokiBSonSort<T> {
+interface LokiBSonSort<T>
+{
     (fun: (a: T, b: T) => number): (array: T[], item: T) => { found: boolean; index: number; };
 }
 
-
-
-
-interface LokiKeyValueStore<K, V> {
+interface LokiKeyValueStore<K, V>
+{
     keys: K[];
     values: V[];
 
@@ -857,10 +834,8 @@ interface LokiKeyValueStore<K, V> {
     get(key: K): V;
 }
 
-
-
-
-interface LokiUniqueIndex<E> {
+interface LokiUniqueIndex<E>
+{
     field: string;
     keyMap: { [id: string]: E };
     lokiMap: { [id: number]: any }; // 'field' map
@@ -880,16 +855,14 @@ interface LokiUniqueIndex<E> {
     clear(): void;
 }
 
-
-
-
-interface LokiExactIndex<E> {
+interface LokiExactIndex<E>
+{
     index: { [id: string]: E[] };
     field: string;
 
     new <E>(exactField: string): LokiExactIndex<E>;
 
-    // add the value you want returned to the key in the index 
+    // add the value you want returned to the key in the index
     set(key: string, val: E): void;
 
     // remove the value from the index, if the value was the last one, remove the key
@@ -902,9 +875,8 @@ interface LokiExactIndex<E> {
     clear(key?: any): void;
 }
 
-
-
-interface LokiSortedIndex<K, V> {
+interface LokiSortedIndex<K, V>
+{
     keys: K[];
     values: V[];
 
@@ -915,7 +887,7 @@ interface LokiSortedIndex<K, V> {
     bs(): LokiBSonSort<K>;
     // and allow override of the default sort
     setSort(fun: (a: K, b: K) => number): void;
-    // add the value you want returned  to the key in the index  
+    // add the value you want returned  to the key in the index
     set(key: K, value: V): void;
     // get all values which have a key == the given key
     get(key: K): V | V[];
@@ -934,14 +906,14 @@ interface LokiSortedIndex<K, V> {
     clear(key?: any): void;
 }
 
-
-interface LokiPersistenceInterface {
+interface LokiPersistenceInterface
+{
     loadDatabase: (fileName: string, func: (dbString: string) => void) => void;
     saveDatabase: (fileName: string, content: string, func: () => void) => void;
 }
 
-
-interface LokiConfigureOptions {
+interface LokiConfigureOptions
+{
     env?: string/*'NODEJS', 'BROWSER', 'CORDOVA'*/;
     persistenceMethod?: string/*'fs', 'localStorage'*/;
     adapter?: LokiPersistenceInterface;
@@ -951,19 +923,19 @@ interface LokiConfigureOptions {
     autosaveInterval?: number;
 }
 
-
-interface LokiQuery {
+interface LokiQuery
+{
 }
 
-
-interface LokiCollectionChange {
+interface LokiCollectionChange
+{
     name: string;
     operation: string/*'I', 'U', 'R'*/;
     obj: any
 }
 
-
-interface LokiCollectionOptions {
+interface LokiCollectionOptions
+{
     transactional?: boolean;
     clone?: boolean;
     asyncListeners?: boolean;
@@ -971,11 +943,9 @@ interface LokiCollectionOptions {
     indices?: string | string[];
 }
 
-
-
-
 /* ==== loki-indexed-adapter.js ==== */
-interface LokiIndexedAdapter {
+interface LokiIndexedAdapter
+{
     app: string;
     catalog: LokiCatalog; // TODO type
 
@@ -1030,15 +1000,14 @@ interface LokiIndexedAdapter {
      * @param {function} callback - (Optional) callback to accept result array.
      */
     getCatalogSummary(callback: (entries: { app: string; key: string; size: number; }) => void): void;
-
 }
-
 
 /** LokiCatalog - underlying App/Key/Value catalog persistence
  *   This non-interface class implements the actual persistence.
  *   Used by the IndexedAdapter class.
  */
-interface LokiCatalog {
+interface LokiCatalog
+{
     db: IDBDatabase;
 
     new (callback: (cat: LokiCatalog) => void): LokiCatalog;
@@ -1057,14 +1026,12 @@ interface LokiCatalog {
 
     // Hide 'cursoring' and return array of { id: id, key: key }
     getAllKeys(callback: (data: any[]) => void): void;
-
 }
 /* ==== END loki-indexed-adapter.js ==== */
 
-
-
 /* ==== loki-crypted-file-adapter.js ==== */
-interface LokiCryptedFileAdapterEncryptResult {
+interface LokiCryptedFileAdapterEncryptResult
+{
     cipher: string;
     keyDerivation: string;
     keyLength: number;
@@ -1074,8 +1041,8 @@ interface LokiCryptedFileAdapterEncryptResult {
     value: string;
 }
 
-
-interface LokiCryptedFileAdapter {
+interface LokiCryptedFileAdapter
+{
     secret: string;
 
     /** The constructor is automatically called on `require` , see examples below
@@ -1096,7 +1063,7 @@ interface LokiCryptedFileAdapter {
      var db = new loki('test.crypted', { adapter: cryptedFileAdapter }); //you can use any name, not just '*.crypted'
      db.loadDatabase(function(result) {
          e.log('done');
-         
+
      *
      * @param {string} dbname - the name of the database to retrieve.
      * @param {function} callback - callback should accept string param containing serialized db string.
@@ -1113,12 +1080,12 @@ interface LokiCryptedFileAdapter {
          coll = db.addCollection('testColl');
      l.insert({test: 'val'});
      saveDatabase();  // could pass callback if needed for async complete
- 	
+
          ample
      // if you have the krypt module installed you can use:
      pt --decrypt test.crypted --secret mySecret
      to view the contents of the database
- 	
+
      * saveDatabase() - Saves a serialized db to the catalog.
      *
      * @param {string} dbname - the name to give the serialized database within the catalog.
@@ -1126,12 +1093,8 @@ interface LokiCryptedFileAdapter {
      * @param {function} callback - (Optional) callback passed obj.success with true or false
      */
     saveDatabase(dbname: string, dbstring: string, callback?: (err?: any | LokiCryptedFileAdapterEncryptResult) => void): void;
-
 }
 /* ==== END loki-crypted-file-adapter.js ==== */
-
-
-
 
 /* ==== loki-angular.js ==== */
 /* introduces a angular module named lokijs that returns the 'lokijs' module
@@ -1143,9 +1106,6 @@ interface LokiCryptedFileAdapter {
 */
 /* ==== END loki-angular.js ==== */
 
-
-
-
 /* ==== jquery-sync-adapter.js ==== */
 /** this adapter assumes an object options is passed,
  * containing the following properties:
@@ -1153,7 +1113,8 @@ interface LokiCryptedFileAdapter {
  * save: { url: the url to save to, dataType [optional]: json|xml|etc., type [optional]: POST|GET|PUT}
  * load: { url: the url to load from, dataType [optional]: json|xml| etc., type [optional]: POST|GET|PUT }
  */
-interface JquerySyncAdapter {
+interface JquerySyncAdapter
+{
     options: {
         ajaxLib: {
             ajax(options: any): any;
@@ -1170,19 +1131,14 @@ interface JquerySyncAdapter {
     saveDatabase(name: any, data: any, callback?: (data: any, textStatus: string, jqXHR: XMLHttpRequest/*JQueryXHR*/) => any): void;
 
     loadDatabase(name: any, callback?: (data: any, textStatus: string, jqXHR: XMLHttpRequest/*JQueryXHR*/) => any): void;
-
 }
 /* ==== END jquery-sync-adapter.js ==== */
-
-
-
 
 declare var LokiConstructor: {
     new (filename: string, options?: LokiConfigureOptions): Loki;
     Collection: LokiCollection<any>;
     KeyValueStore: LokiKeyValueStore<any, any>;
 }
-
 
 declare module "lokijs" {
     export = LokiConstructor;
