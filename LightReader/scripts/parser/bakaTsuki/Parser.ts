@@ -24,7 +24,7 @@
         }
 
         //Download and Parse  all required datas from the source.
-        public Parse(): void
+        public Parse(returnDatas?: any): void
         {
             //get media list
             this.mediaParser.ParseMedia();
@@ -32,14 +32,12 @@
 
         public onMediaComplete = (res: MediaParser): void =>
         {
-            this.source.novelList = res.mediaList;
-            this.volumeParser.parseVolume(res.mediaList[0]);
+            this.onSourceComplete(res.mediaList);
         }
 
         public onVolumeListComplete = (res: VolumeParser): void =>
         {
             console.info("volume list parsed for : " + res.media.title);
-            this.chapterParser.ParseChapters(res.media.volumeList[0]);
         }
 
         public onChaptersComplete = (res: ChapterParser): void =>
