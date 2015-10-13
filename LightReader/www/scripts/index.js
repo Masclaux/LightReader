@@ -10,7 +10,7 @@ var LightReader;
             Application.router = LightReader.core.Router.Inst();
             //temp set baka-tsuki parser
             Application.model.parsers.push(new LightReader.parser.bakaTsuki.Parser());
-            //temp set baka-tsuki source       
+            //temp set baka-tsuki source
             var s = new LightReader.Source();
             s.url = "https://www.baka-tsuki.org/";
             s.name = "Baka-Tsuki";

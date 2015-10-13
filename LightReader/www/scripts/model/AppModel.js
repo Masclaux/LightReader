@@ -28,7 +28,14 @@ var LightReader;
         };
         //Start dataBase loading and call onDataBaseReady when completed
         AppModel.prototype.InitDataBase = function () {
-            var adapter = new LokiCordovaFSAdapter({ "prefix": "loki" });
+            //Detecting ripple and disable phonegab storage
+            var adapter = null;
+            if (!LightReader.Util.IsRipple()) {
+                adapter = new LokiCordovaFSAdapter({ "prefix": "loki" });
+            }
+            else {
+                console.warn("Ripple detected do not use Cordova adapter");
+            }
             this.dataBase = new loki(this.databaseName, {
                 autosave: true,
                 autosaveInterval: 1000,
@@ -47,7 +54,7 @@ var LightReader;
                 }
             }
         };
-        //Verify if database contain sources 
+        //Verify if database contain sources
         AppModel.prototype.Exist = function () {
             if (this.dataBase != null) {
                 return this.internalSource != null && this.sources.length > 0;

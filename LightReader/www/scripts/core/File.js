@@ -28,8 +28,7 @@ var LightReader;
        */
         File.Write = function (url, filePath, fileName, onRequestComplete, onRequestError) {
             //Detecting ripple and simulate onRequestComplete
-            var parent = window.parent;
-            if (parent.ripple) {
+            if (LightReader.Util.IsRipple()) {
                 console.warn("File.Write not supported on ripple return onRequestComplete with url param as result");
                 onRequestComplete(url);
                 return;

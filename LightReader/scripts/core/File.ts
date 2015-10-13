@@ -34,8 +34,7 @@
         public static Write(url: string, filePath: string, fileName: string, onRequestComplete: any, onRequestError: any): void
         {
             //Detecting ripple and simulate onRequestComplete
-            var parent: any = window.parent;
-            if (parent.ripple)
+            if ( Util.IsRipple() )
             {
                 console.warn("File.Write not supported on ripple return onRequestComplete with url param as result");
                 onRequestComplete(url);
