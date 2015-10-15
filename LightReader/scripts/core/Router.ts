@@ -90,7 +90,7 @@
             //clear precedent page
             this.appContent.innerHTML = "";
             if (File.Exist(this.viewPath + "/" + url))
-            {                
+            {
                 this.inHistory.push(new Route(url, args));
 
                 Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);

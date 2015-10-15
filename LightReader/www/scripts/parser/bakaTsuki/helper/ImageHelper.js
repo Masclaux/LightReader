@@ -19,7 +19,7 @@ var LightReader;
                     if (link != null) {
                         var url = $(link).find("a.image").attr('href');
                         if (url != null) {
-                            var splitUrl = url.split(","); // in read 
+                            var splitUrl = url.split(","); // in read
                             if (splitUrl.length > 0) {
                                 splitUrl = splitUrl[0].split("/");
                                 for (var c in splitUrl) {

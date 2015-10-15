@@ -14,8 +14,12 @@ Just a test to see How cordova and typescript perform.
 
 * jquery.js => https://jquery.com/
 * knockout  => http://knockoutjs.com/index.html
+* Lokijs    => http://lokijs.org
+* loki-cordova-fs-adapter ( with a little modification ) =>  https://github.com/cosmith/loki-cordova-fs-adapter
 
-# Dev dependencies
+## Cordova plugins :
+
+# Dev dependencies :
 
 * gulp => http://gulpjs.com/
 * gulp-include-source => https://www.npmjs.com/package/gulp-include-source

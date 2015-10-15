@@ -10,7 +10,7 @@
         public title: string;
 
         public url: string;
-         
+
         public pages: Array<iPageContent>;
     }
 } 

@@ -2,7 +2,6 @@
 {
     export class ChapterParser implements iChapterParser
     {
-
         //delegate  call when a chapter is completed
         public onChaptersComplete: any;
 
@@ -13,7 +12,6 @@
         private chaptersRequest: number = 0;
 
         private imagesRequest: number = 0;
-
 
         //Download and Parse  all required datas from the source.
         public ParseChapters(volume: Volume): void
@@ -27,22 +25,22 @@
             }
         }
 
-        //Download and parse a chapter 
-        public ParseChapter(chapter: Chapter):void 
+        //Download and parse a chapter
+        public ParseChapter(chapter: Chapter): void
         {
             this.chaptersRequest++;
-            Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter); 
+            Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
         }
 
         private OnRequestComplete = (data: XMLHttpRequest, currentChapter: Chapter): void =>
         {
-            console.info("Start Parsing chapter " + currentChapter.title);      
+            console.info("Start Parsing chapter " + currentChapter.title);
 
-            var firstPartNotFound:boolean = false;
-            
+            var firstPartNotFound: boolean = false;
+
             var tempWords: number = 0;
             var page: TextContent = new TextContent();
-          
+
             var res = $.parseHTML(data.responseText);
             if (res != null)
             {
@@ -62,14 +60,14 @@
                                 currentChapter.pages.push(page);
                                 page = new TextContent();
 
-                                tempWords = 0;                             
+                                tempWords = 0;
                             }
 
                             page.content += "<h3>" + value.firstChild.textContent + "</h3>";
                             break;
 
                         case 'P':
-                            page.content  += "<P>" + value.firstChild.textContent + "</P>";
+                            page.content += "<P>" + value.firstChild.textContent + "</P>";
                             break;
 
                         case 'DIV':
@@ -78,7 +76,7 @@
 
                             var image: ImageContent = new ImageContent();
                             image.title = ImageHelper.GetImageName(value);
-                            ImageHelper.GetImageLink(image.title, this.OnImageComplete, this.OnImageError, image); 
+                            ImageHelper.GetImageLink(image.title, this.OnImageComplete, this.OnImageError, image);
 
                             currentChapter.pages.push(image);
                             break;
@@ -89,38 +87,38 @@
                     {
                         currentChapter.pages.push(page);
 
-                        var page: TextContent = new TextContent();                                              
-                        tempWords = 0;                   
+                        var page: TextContent = new TextContent();
+                        tempWords = 0;
                     }
                 }
-            }  
+            }
 
             this.chaptersRequest--;
-            this.checkComplete();                
+            this.checkComplete();
         }
-       
+
         private OnError = (ev: Event): void =>
         {
             console.error("Invalid Chapter");
             this.chaptersRequest--;
-            this.checkComplete();     
+            this.checkComplete();
         }
 
         private OnImageComplete = (image: ImageContent): void =>
         {
             console.info("Found " + image.url);
             this.imagesRequest--;
-            this.checkComplete();     
+            this.checkComplete();
         }
 
-        private OnImageError= (ev: Event): void =>
+        private OnImageError = (ev: Event): void =>
         {
             console.warn("Invalid image");
             this.imagesRequest--;
-            this.checkComplete();     
+            this.checkComplete();
         }
 
-        private checkComplete():void
+        private checkComplete(): void
         {
             if (this.chaptersRequest <= 0 && this.imagesRequest <= 0)
             {

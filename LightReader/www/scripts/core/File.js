@@ -28,25 +28,25 @@ var LightReader;
        */
         File.Write = function (url, filePath, fileName, onRequestComplete, onRequestError) {
             //Detecting ripple and simulate onRequestComplete
-            var parent = window.parent;
-            if (parent.ripple) {
+            if (LightReader.Util.IsRipple()) {
                 console.warn("File.Write not supported on ripple return onRequestComplete with url param as result");
                 onRequestComplete(url);
                 return;
             }
             var system = window.cordova.platformId;
-            var storage = "";
+            var storage = storage = cordova.file.externalApplicationStorageDirectory;
             // WP8
-            if (system === "windows") {
-                storage = "ms-appdata:///local/";
+            if (system !== "windows") {
+                storage += filePath;
             }
-            else if (system === "android") {
-                storage = cordova.file.externalApplicationStorageDirectory;
-            }
-            storage += filePath;
             var fileTransfer = new FileTransfer();
             fileTransfer.download(encodeURI(url), storage + fileName, function (aEvt) {
-                if (onRequestComplete) {
+                if (system === "windows") {
+                    File.Move(aEvt, fileName, storage, filePath, function (aEvt) {
+                        onRequestComplete(aEvt.toURL());
+                    }, onRequestError);
+                }
+                else {
                     onRequestComplete(aEvt.toURL());
                 }
             }, function (aEvt) {
@@ -54,6 +54,55 @@ var LightReader;
                     onRequestError(aEvt);
                 }
             });
+        };
+        /**
+        * Move a file
+        * @param fileName file name (exemple "test.png")
+        * @param filePath target path (exemple "image/")
+        * @param newFilePath target path (exemple "image/")
+        * @param onCompletHandler callBack When File request is succefull
+        * @param onRequestError callBack When File Request is on error
+        */
+        File.Move = function (file, fileName, filePath, newFilePath, onRequestComplete, onRequestError) {
+            window.requestFileSystem(window.PERSISTENT, 0, function (aEvt) {
+                //windows can't create Nested directory we need to make it  recursive
+                File.CreateDirectory(aEvt, newFilePath, function (newFilePath) {
+                    file.moveTo(newFilePath, fileName, onRequestComplete, onRequestError);
+                }, function (aEvt) {
+                    onRequestError(aEvt);
+                });
+            }, function (aEvt) { onRequestError(aEvt); });
+        };
+        /**
+        * Create directory with support of nested directory
+        * Code from stack overflow => http://stackoverflow.com/questions/10961000/nested-directory-creator-phonegap
+        * @param fs instance of FilesSystem
+        * @param path directory target
+        * @param onRequestComplete Callback if succeed
+        * @param onRequestError CallBack if error detected
+        */
+        File.CreateDirectory = function (fs, path, onRequestComplete, onRequestError) {
+            var dirs = path.split("/").reverse();
+            dirs = dirs.filter(function (v) { return v !== ''; }); //remove empty value
+            var root = fs.root;
+            var createDir = function (dir) {
+                root.getDirectory(dir, {
+                    create: true,
+                    exclusive: false
+                }, successCB, onRequestComplete);
+            };
+            var successCB = function (entry) {
+                console.info("Dir created " + entry.fullPath);
+                root = entry;
+                if (dirs.length > 0) {
+                    createDir(dirs.pop());
+                }
+                else {
+                    console.log("All dir created");
+                    onRequestComplete(entry);
+                }
+            };
+            createDir(dirs.pop());
         };
         return File;
     })();

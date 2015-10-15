@@ -67,7 +67,8 @@
     <icon src="res/icons/windows/ic_square71X71.scale-240.png" width="170" height="170" />
     <icon src="res/icons/windows/ic_StoreLogo.scale-100.png" width="50" height="50" />
     <icon src="res/icons/windows/ic_StoreLogo.scale-240.png" width="120" height="120" />
-    <icon src="res/icons/windows/ic_Wide310x150.scale-100.png" width="310" height="150" /> <!--still need to do the last 2-->
+    <icon src="res/icons/windows/ic_Wide310x150.scale-100.png" width="310" height="150" />
+    <!--still need to do the last 2-->
     <icon src="res/icons/windows/ic_Wide310x150.scale-240.png" width="744" height="360" />
   </platform>
   <platform name="wp8">
@@ -109,7 +110,7 @@
   <vs:plugin name="cordova-plugin-file-transfer" version="1.3.0" />
   <vs:plugin name="cordova-plugin-file" version="3.0.0" />
   <vs:platformSpecificValues>
-    <vs:platformSpecificWidget platformName="windows" version="0.0.0.1" id="LightReader">
+    <vs:platformSpecificWidget platformName="windows" version="0.0.0.2" id="LightReader">
       <vs:name>LightReader</vs:name>
     </vs:platformSpecificWidget>
   </vs:platformSpecificValues>

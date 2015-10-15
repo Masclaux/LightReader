@@ -7,6 +7,10 @@ var LightReader;
                 this.router = LightReader.core.Router.Inst();
             }
             List.prototype.Ready = function (element, options) {
+                this.source = options;
+                //data binding
+                this.mediaList = ko.observableArray(this.source.novelList);
+                ko.applyBindings(this, element);
             };
             List.prototype.Exit = function (element) {
                 //clean binding ( I know is not recommended )

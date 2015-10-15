@@ -78,7 +78,7 @@ var LightReader;
                         this.ParseChapter(volume.chapterList[i]);
                     }
                 };
-                //Download and parse a chapter 
+                //Download and parse a chapter
                 ChapterParser.prototype.ParseChapter = function (chapter) {
                     this.chaptersRequest++;
                     LightReader.Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
