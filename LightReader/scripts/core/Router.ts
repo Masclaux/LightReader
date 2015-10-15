@@ -139,9 +139,9 @@
                 {
                     dest = e.target.nameProp; // workaround use windows only prop tag
                 }
-                else
+                else 
                 {
-                    dest = e.target.toString().split(location.host)[1].replace(/^\//, '');
+                    dest = e.target.getAttribute("href"); //maybe work on windows TODO try it and supress workaround
                 }
 
                 //separate url and args

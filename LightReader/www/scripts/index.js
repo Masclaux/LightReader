@@ -61,6 +61,8 @@ var LightReader;
         }
     })(Application = LightReader.Application || (LightReader.Application = {}));
     window.onload = function () {
+        //FastClick initialisation
+        FastClick.attach(document.body);
         Application.initialize();
     };
 })(LightReader || (LightReader = {}));

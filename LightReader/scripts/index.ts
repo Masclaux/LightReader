@@ -64,7 +64,7 @@
             model.Load();
             if (model.Exist())
             {
-                router.Navigate("Home.html");
+                router.Navigate("Home.html");                
             }
             else
             {
@@ -94,6 +94,9 @@
 
     window.onload = function ()
     {
+        //FastClick initialisation
+        FastClick.attach(document.body);
+
         Application.initialize();
     }
 }
