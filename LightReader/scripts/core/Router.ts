@@ -132,18 +132,8 @@
         {
             if (e.target.localName == 'a')
             {
-                var dest: string = "";
-
-                //Windows mobile add www on local link ....
-                if (window.cordova && window.cordova.platformId == "windows")
-                {
-                    dest = e.target.nameProp; // workaround use windows only prop tag
-                }
-                else 
-                {
-                    dest = e.target.getAttribute("href"); //maybe work on windows TODO try it and supress workaround
-                }
-
+                var dest: string = e.target.getAttribute("href");
+                
                 //separate url and args
                 var arrayArgs: string[] = dest.split("#");
                 if (arrayArgs.length > 0)
