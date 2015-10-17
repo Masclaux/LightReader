@@ -5,6 +5,7 @@
     export class Load implements LightReader.core.iPage
     {
         public static SOURCE_LIST: string = "souce_list_update";
+        public static MEDIA: string = "media_list_update";
 
         private router: core.Router = core.Router.Inst();
 
@@ -18,6 +19,9 @@
             {
                 case Load.SOURCE_LIST:
                     this.LoadList(options.id)
+                    break;
+                case Load.MEDIA:
+                    this.LoadMedia(options.datas)
                     break;
             }
         }
@@ -46,6 +50,21 @@
             this.model.Save();
 
             this.router.Navigate("Home.html");
+        }
+
+        private LoadMedia(media: Media): void
+        {
+            console.info("Load media and volume list"); 
+            
+            var sources: LightReader.parser.iParser = this.model.parsers[0];
+            sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
+            sources.volumeParser.parseVolume(media);                     
+        }
+
+        private onVolumeListComplete = (media: LightReader.parser.iVolumeParser): void =>
+        {
+            media.media.lastUpdate = new Date();
+            this.router.Navigate("Detail.html", { media: media.media });
         }
     }
 }

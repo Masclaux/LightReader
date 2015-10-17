@@ -19,8 +19,31 @@ var LightReader;
                             console.error("Invalid html");
                         }
                         if (_this.onVolumeListComplete) {
-                            _this.onVolumeListComplete(_this);
+                            if (_this.media.illustration == null) {
+                                _this.onVolumeListComplete(_this);
+                            }
+                            else {
+                                console.info("Download illustration");
+                                //get only File:...
+                                var finalUrl = _this.media.illustration.url.split("File:"); //get only page name
+                                if (finalUrl.length > 0) {
+                                    bakaTsuki.ImageHelper.GetImageLink(finalUrl[1], _this.OnLinkComplete, _this.OnImageError, _this.media.illustration);
+                                }
+                            }
                         }
+                    };
+                    this.OnLinkComplete = function (image) {
+                        bakaTsuki.ImageHelper.DownloadImage(image, _this.OnImageComplete, _this.OnError);
+                    };
+                    this.OnImageComplete = function (image) {
+                        console.info("Found " + image);
+                        _this.media.illustration.localUrl = image;
+                        _this.media.illustration.isLocal = true;
+                        _this.onVolumeListComplete(_this);
+                    };
+                    this.OnImageError = function (error) {
+                        console.error(error.exception);
+                        _this.onVolumeListComplete(_this);
                     };
                     this.OnError = function (ev) {
                         console.error("Invalid html");

@@ -1,3 +1,25 @@
 ﻿<section>
-    <h1>Detail</h1>
+   
+    <h1 data-bind="text:title"></h1>
+    <span data-bind="text:url"> </span>
+    <br />
+    <span data-bind="text:lastUpdate"> </span>
+    <br />
+
+    <img data-bind="attr:{ src:illustration }" />
+    
+    <br />
+    
+    <p>
+        <span data-bind="text:synopsis"> </span>
+    </p>
+
+    <ul data-bind="foreach:volumeList">
+        <li>
+            <span data-bind="text:title"> </span>
+            <button data-bind="click:$parent.OnMediaSelected">Read</button>
+        </li>
+    </ul>
+ 
+
 </section>

@@ -6,6 +6,7 @@
 
         private source: Source;
 
+        private title: KnockoutObservable<String>;
         private mediaList: KnockoutObservableArray<Media>;
 
         constructor() { }
@@ -16,6 +17,7 @@
 
             //data binding
             this.mediaList = ko.observableArray(this.source.novelList);
+            this.title = ko.observable<String>(this.source.name);
 
             ko.applyBindings(this, element);
         }
@@ -24,6 +26,18 @@
         {
             //clean binding ( I know is not recommended )
             ko.cleanNode(element);
+        }
+
+        public OnMediaSelected = (media: Media): void =>
+        {
+            if (media.lastUpdate == null || media.volumeList.length == 0)
+            {
+                this.router.Navigate("Load.html", { command: LightReader.view.Load.MEDIA, datas: media });
+            }
+            else
+            {
+                this.router.Navigate("Detail.html", media);
+            }
         }
     }
 }

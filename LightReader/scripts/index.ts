@@ -60,7 +60,7 @@
         }
 
         function OnDataBaseReady()
-        {
+        {            
             model.Load();
             if (model.Exist())
             {
@@ -74,7 +74,7 @@
 
         function sucess(url: string): void
         {
-            console.info(url);
+            console.info(url);            
         }
 
         function fail(error: FileTransferError): void

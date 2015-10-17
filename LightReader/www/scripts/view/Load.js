@@ -14,12 +14,19 @@ var LightReader;
                     _this.model.Save();
                     _this.router.Navigate("Home.html");
                 };
+                this.onVolumeListComplete = function (media) {
+                    media.media.lastUpdate = new Date();
+                    _this.router.Navigate("Detail.html", { media: media.media });
+                };
             }
             Load.prototype.Ready = function (element, options) {
                 ko.applyBindings(this, element);
                 switch (options.command) {
                     case Load.SOURCE_LIST:
                         this.LoadList(options.id);
+                        break;
+                    case Load.MEDIA:
+                        this.LoadMedia(options.datas);
                         break;
                 }
             };
@@ -35,7 +42,14 @@ var LightReader;
                     sources[i].Parse();
                 }
             };
+            Load.prototype.LoadMedia = function (media) {
+                console.info("Load media and volume list");
+                var sources = this.model.parsers[0];
+                sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
+                sources.volumeParser.parseVolume(media);
+            };
             Load.SOURCE_LIST = "souce_list_update";
+            Load.MEDIA = "media_list_update";
             return Load;
         })();
         view.Load = Load;

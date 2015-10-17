@@ -2,9 +2,12 @@
 
     <h1>List</h1>
 
+    <span data-bind="text:title"> </span>
+
     <ul data-bind="foreach:mediaList">
         <li>
-            <span data-bind="text:title"> </span>            
+            <span data-bind="text:title"> </span>
+            <button data-bind="click:$parent.OnMediaSelected">Detail</button>
         </li>
     </ul>
 
