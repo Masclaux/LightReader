@@ -13,10 +13,14 @@
 
         private imagesRequest: number = 0;
 
+        private imagesStack: Object;
+
         //Download and Parse  all required datas from the source.
         public ParseChapters(volume: Volume): void
         {
             console.info("Stating Parsing detail for " + volume.title);
+
+            this.imagesStack = {};
 
             this.Volume = volume;
             for (var i = 0; i < volume.chapterList.length; i++)
@@ -76,9 +80,18 @@
 
                             var image: ImageContent = new ImageContent();
                             image.title = ImageHelper.GetImageName(value);
-                            ImageHelper.GetImageLink(image.title, this.OnImageComplete, this.OnImageError, image);
 
+                            var filename = image.title.replace(/^.*[\\\/]/, '');
+
+                            if (this.imagesStack[image.title] == null)
+                            {
+                                this.imagesStack[image.title] = new Array<ImageContent>();
+                            }
+
+                            this.imagesStack[image.title].push(image);
                             currentChapter.pages.push(image);
+
+                            ImageHelper.GetImageLink(image.title, this.OnImageComplete, this.OnImageError, image);
                             break;
                     }
 
@@ -106,28 +119,41 @@
 
         private OnImageComplete = (image: ImageContent): void =>
         {
-            console.warn("Found try to download it " + image.url);
-            ImageHelper.DownloadImage(image, this.OnImageDownloaded, this.OnImageError);         
+            console.info("Found try to download it " + image.url);
+            ImageHelper.DownloadImage(image, this.OnImageDownloaded, this.OnImageError);
         }
 
         private OnImageDownloaded = (image: string): void =>
         {
-            console.warn("Image downloaded " + image);
-            
-            this.imagesRequest--;
+            console.info("Image downloaded " + image);
+            if (this.imagesStack)
+            {
+                //get image name
+                var filename = image.replace(/^.*[\\\/]/, '');
+                for (var i: number = 0; i < this.imagesStack[filename].length; i++)
+                {
+                    this.imagesStack[filename][i].localUrl = image;
+                    this.imagesStack[filename][i].isLocal = true;
+
+                    this.imagesRequest--;
+                }
+
+                this.imagesStack[filename] = [];
+            }
+
             this.checkComplete();
         }
 
         private OnImageError = (ev: Event): void =>
         {
             console.warn("Invalid image");
+
             this.imagesRequest--;
             this.checkComplete();
         }
 
         private checkComplete(): void
         {
-            console.warn(this.chaptersRequest + " " + this.imagesRequest);
             if (this.chaptersRequest <= 0 && this.imagesRequest <= 0)
             {
                 if (this.onChaptersComplete)

@@ -39,8 +39,13 @@ var LightReader;
                                         _this.imagesRequest++;
                                         var image = new LightReader.ImageContent();
                                         image.title = bakaTsuki.ImageHelper.GetImageName(value);
-                                        bakaTsuki.ImageHelper.GetImageLink(image.title, _this.OnImageComplete, _this.OnImageError, image);
+                                        var filename = image.title.replace(/^.*[\\\/]/, '');
+                                        if (_this.imagesStack[image.title] == null) {
+                                            _this.imagesStack[image.title] = new Array();
+                                        }
+                                        _this.imagesStack[image.title].push(image);
                                         currentChapter.pages.push(image);
+                                        bakaTsuki.ImageHelper.GetImageLink(image.title, _this.OnImageComplete, _this.OnImageError, image);
                                         break;
                                 }
                                 tempWords += value.firstChild.textContent.split(" ").length;
@@ -60,12 +65,21 @@ var LightReader;
                         _this.checkComplete();
                     };
                     this.OnImageComplete = function (image) {
-                        console.warn("Found try to download it " + image.url);
+                        console.info("Found try to download it " + image.url);
                         bakaTsuki.ImageHelper.DownloadImage(image, _this.OnImageDownloaded, _this.OnImageError);
                     };
                     this.OnImageDownloaded = function (image) {
-                        console.warn("Image downloaded " + image);
-                        _this.imagesRequest--;
+                        console.info("Image downloaded " + image);
+                        if (_this.imagesStack) {
+                            //get image name 
+                            var filename = image.replace(/^.*[\\\/]/, '');
+                            for (var i = 0; i < _this.imagesStack[filename].length; i++) {
+                                _this.imagesStack[filename][i].localUrl = image;
+                                _this.imagesStack[filename][i].isLocal = true;
+                                _this.imagesRequest--;
+                            }
+                            _this.imagesStack[filename] = [];
+                        }
                         _this.checkComplete();
                     };
                     this.OnImageError = function (ev) {
@@ -77,6 +91,7 @@ var LightReader;
                 //Download and Parse  all required datas from the source.
                 ChapterParser.prototype.ParseChapters = function (volume) {
                     console.info("Stating Parsing detail for " + volume.title);
+                    this.imagesStack = {};
                     this.Volume = volume;
                     for (var i = 0; i < volume.chapterList.length; i++) {
                         this.ParseChapter(volume.chapterList[i]);
@@ -88,7 +103,6 @@ var LightReader;
                     LightReader.Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
                 };
                 ChapterParser.prototype.checkComplete = function () {
-                    console.warn(this.chaptersRequest + " " + this.imagesRequest);
                     if (this.chaptersRequest <= 0 && this.imagesRequest <= 0) {
                         if (this.onChaptersComplete) {
                             this.onChaptersComplete(this);

@@ -18,6 +18,5 @@
         public volumeList: Array<Volume>;
 
         public lastUpdate: Date;
-
     }
 }

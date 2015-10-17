@@ -47,7 +47,7 @@
                     if (finalUrl.length > 0)
                     {
                         ImageHelper.GetImageLink(finalUrl[1], this.OnLinkComplete, this.OnImageError, this.media.illustration);
-                    }                   
+                    }
                 }
             }
         }
@@ -64,15 +64,15 @@
             this.media.illustration.localUrl = image;
             this.media.illustration.isLocal = true;
 
-            this.onVolumeListComplete(this);         
+            this.onVolumeListComplete(this);
         }
-        
+
         private OnImageError = (error: FileTransferError): void =>
         {
             console.error(error.exception);
             this.onVolumeListComplete(this);
         }
-         
+
         private OnError = (ev: Event): void =>
         {
             console.error("Invalid html");

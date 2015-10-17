@@ -20,7 +20,6 @@
 
         private volumeList: KnockoutObservableArray<Volume>;
 
-
         public Ready(element: HTMLElement, options: any): void
         {
             this.media = options.media;
@@ -34,7 +33,7 @@
 
             this.volumeList = ko.observableArray(this.media.volumeList);
 
-            ko.applyBindings(this, element);            
+            ko.applyBindings(this, element);
         }
 
         public Exit(element: HTMLElement): void

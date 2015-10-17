@@ -55,11 +55,11 @@
         }
 
         function OnDataBaseReady()
-        {            
+        {
             model.Load();
             if (model.Exist())
             {
-                router.Navigate("Home.html");                
+                router.Navigate("Home.html");
             }
             else
             {
@@ -69,7 +69,7 @@
 
         function sucess(url: string): void
         {
-            console.info(url);            
+            console.info(url);
         }
 
         function fail(error: FileTransferError): void

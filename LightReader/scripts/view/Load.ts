@@ -8,7 +8,6 @@
         public static MEDIA: string = "media_list_update";
         public static VOLUME: string = "volume_list_update";
 
-
         private router: core.Router = core.Router.Inst();
 
         private model: AppModel = AppModel.Inst();
@@ -59,11 +58,11 @@
 
         private LoadMedia(media: Media): void
         {
-            console.info("Load media and volume list"); 
-            
+            console.info("Load media and volume list");
+
             var sources: LightReader.parser.iParser = this.model.parsers[0];
             sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
-            sources.volumeParser.parseVolume(media);                     
+            sources.volumeParser.parseVolume(media);
         }
 
         private onVolumeListComplete = (media: LightReader.parser.iVolumeParser): void =>

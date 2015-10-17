@@ -2,8 +2,8 @@
 {
     export interface iChapterParser
     {
-         //delegate  call when a chapter is completed
-        onChaptersComplete: any;        
+        //delegate  call when a chapter is completed
+        onChaptersComplete: any;
 
         Volume: Volume;
 

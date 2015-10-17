@@ -44,7 +44,6 @@
         //Start dataBase loading and call onDataBaseReady when completed
         public InitDataBase(): void
         {
-
             //Detecting ripple and disable phonegab storage
             var adapter = null;
             if (!Util.IsRipple())
@@ -55,7 +54,7 @@
             {
                 console.warn("Ripple detected do not use Cordova adapter");
             }
-                       
+
             this.dataBase = new loki(this.databaseName,
                 {
                     autosave: true,

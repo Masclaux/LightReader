@@ -133,7 +133,7 @@
             if (e.target.localName == 'a')
             {
                 var dest: string = e.target.getAttribute("href");
-                
+
                 //separate url and args
                 var arrayArgs: string[] = dest.split("#");
                 if (arrayArgs.length > 0)
