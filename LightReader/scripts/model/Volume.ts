@@ -16,5 +16,7 @@
         public currentPage: Number;
 
         public lastPos: Number;
+
+        public lastUpdate: Date;
     }
 }

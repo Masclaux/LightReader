@@ -42,5 +42,17 @@
             //clean binding ( I know is not recommended )
             ko.cleanNode(element);
         }
+
+        public OnVolumeSelected = (volume: Volume): void =>
+        {
+            if (volume.lastUpdate == null || volume.chapterList.length == 0)
+            {
+                this.router.Navigate("Load.html", { command: LightReader.view.Load.VOLUME, datas: volume });
+            }
+            else
+            {
+                this.router.Navigate("Read.html", volume);
+            }
+        }
     }
 }

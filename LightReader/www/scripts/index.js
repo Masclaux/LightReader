@@ -34,9 +34,6 @@ var LightReader;
             Application.router.Add("Detail.html", LightReader.view.Detail);
             Application.router.Add("Read.html", LightReader.view.Read);
             Application.router.Add("Load.html", LightReader.view.Load);
-            var assetURL = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg";
-            var fileName = "Absolute_Duo_Volume_1_Cover.jpg";
-            LightReader.File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
             Application.model.InitDataBase();
         }
         function OnDataBaseReady() {

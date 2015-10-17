@@ -6,10 +6,12 @@
     {
         private router: core.Router = core.Router.Inst();
 
-        private model: AppModel = AppModel.Inst();
+        private volume: Volume;
 
         public Ready(element: HTMLElement, options: any): void
         {
+            this.volume = options;
+
             ko.applyBindings(this, element);
         }
 

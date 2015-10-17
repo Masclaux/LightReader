@@ -18,6 +18,10 @@ var LightReader;
                     media.media.lastUpdate = new Date();
                     _this.router.Navigate("Detail.html", { media: media.media });
                 };
+                this.onVolumeComplete = function (media) {
+                    media.Volume.lastUpdate = new Date();
+                    _this.router.Navigate("Read.html", { media: media.Volume });
+                };
             }
             Load.prototype.Ready = function (element, options) {
                 ko.applyBindings(this, element);
@@ -27,6 +31,9 @@ var LightReader;
                         break;
                     case Load.MEDIA:
                         this.LoadMedia(options.datas);
+                        break;
+                    case Load.VOLUME:
+                        this.LoadVolume(options.datas);
                         break;
                 }
             };
@@ -48,8 +55,15 @@ var LightReader;
                 sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
                 sources.volumeParser.parseVolume(media);
             };
+            Load.prototype.LoadVolume = function (volume) {
+                console.info("Load volume");
+                var sources = this.model.parsers[0];
+                sources.chapterParser.onChaptersComplete = this.onVolumeComplete;
+                sources.chapterParser.ParseChapters(volume);
+            };
             Load.SOURCE_LIST = "souce_list_update";
             Load.MEDIA = "media_list_update";
+            Load.VOLUME = "volume_list_update";
             return Load;
         })();
         view.Load = Load;

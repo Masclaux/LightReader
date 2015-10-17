@@ -92,13 +92,12 @@ var LightReader;
                 }, successCB, onRequestComplete);
             };
             var successCB = function (entry) {
-                console.info("Dir created " + entry.fullPath);
                 root = entry;
                 if (dirs.length > 0) {
                     createDir(dirs.pop());
                 }
                 else {
-                    console.log("All dir created");
+                    console.info("Dir created " + entry.fullPath);
                     onRequestComplete(entry);
                 }
             };

@@ -5,7 +5,16 @@ var LightReader;
         var core = LightReader.core;
         var Detail = (function () {
             function Detail() {
+                var _this = this;
                 this.router = core.Router.Inst();
+                this.OnVolumeSelected = function (volume) {
+                    if (volume.lastUpdate == null || volume.chapterList.length == 0) {
+                        _this.router.Navigate("Load.html", { command: LightReader.view.Load.VOLUME, datas: volume });
+                    }
+                    else {
+                        _this.router.Navigate("Read.html", volume);
+                    }
+                };
             }
             Detail.prototype.Ready = function (element, options) {
                 this.media = options.media;

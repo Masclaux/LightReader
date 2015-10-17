@@ -106,7 +106,14 @@
 
         private OnImageComplete = (image: ImageContent): void =>
         {
-            console.info("Found " + image.url);
+            console.warn("Found try to download it " + image.url);
+            ImageHelper.DownloadImage(image, this.OnImageDownloaded, this.OnImageError);         
+        }
+
+        private OnImageDownloaded = (image: string): void =>
+        {
+            console.warn("Image downloaded " + image);
+            
             this.imagesRequest--;
             this.checkComplete();
         }
@@ -120,11 +127,12 @@
 
         private checkComplete(): void
         {
+            console.warn(this.chaptersRequest + " " + this.imagesRequest);
             if (this.chaptersRequest <= 0 && this.imagesRequest <= 0)
             {
                 if (this.onChaptersComplete)
                 {
-                    this.onChaptersComplete(this.Volume);
+                    this.onChaptersComplete(this);
                 }
             }
         }

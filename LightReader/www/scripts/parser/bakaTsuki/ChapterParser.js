@@ -60,7 +60,11 @@ var LightReader;
                         _this.checkComplete();
                     };
                     this.OnImageComplete = function (image) {
-                        console.info("Found " + image.url);
+                        console.warn("Found try to download it " + image.url);
+                        bakaTsuki.ImageHelper.DownloadImage(image, _this.OnImageDownloaded, _this.OnImageError);
+                    };
+                    this.OnImageDownloaded = function (image) {
+                        console.warn("Image downloaded " + image);
                         _this.imagesRequest--;
                         _this.checkComplete();
                     };
@@ -84,9 +88,10 @@ var LightReader;
                     LightReader.Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
                 };
                 ChapterParser.prototype.checkComplete = function () {
+                    console.warn(this.chaptersRequest + " " + this.imagesRequest);
                     if (this.chaptersRequest <= 0 && this.imagesRequest <= 0) {
                         if (this.onChaptersComplete) {
-                            this.onChaptersComplete(this.Volume);
+                            this.onChaptersComplete(this);
                         }
                     }
                 };

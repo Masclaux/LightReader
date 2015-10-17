@@ -20,7 +20,7 @@
             var filename: string = dirs.pop();//get filname
             
             path = dirs.toString().replace(',', '/');
-           
+                      
             File.Write(datas.url, "images/bakatuski/" + path + "/", filename, onSuccess, onError);
         }             
 

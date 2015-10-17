@@ -136,8 +136,7 @@
             };
 
             var successCB = function (entry: DirectoryEntry)
-            {
-                console.info("Dir created " + entry.fullPath);
+            {              
                 root = entry;
                 if (dirs.length > 0)
                 {
@@ -145,7 +144,7 @@
                 }
                 else
                 {
-                    console.log("All dir created");
+                    console.info("Dir created " + entry.fullPath);
                     onRequestComplete(entry);
                 }
             };

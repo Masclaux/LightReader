@@ -6,9 +6,9 @@ var LightReader;
         var Read = (function () {
             function Read() {
                 this.router = core.Router.Inst();
-                this.model = LightReader.AppModel.Inst();
             }
             Read.prototype.Ready = function (element, options) {
+                this.volume = options;
                 ko.applyBindings(this, element);
             };
             Read.prototype.Exit = function (element) {

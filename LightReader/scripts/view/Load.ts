@@ -6,6 +6,8 @@
     {
         public static SOURCE_LIST: string = "souce_list_update";
         public static MEDIA: string = "media_list_update";
+        public static VOLUME: string = "volume_list_update";
+
 
         private router: core.Router = core.Router.Inst();
 
@@ -22,6 +24,9 @@
                     break;
                 case Load.MEDIA:
                     this.LoadMedia(options.datas)
+                    break;
+                case Load.VOLUME:
+                    this.LoadVolume(options.datas)
                     break;
             }
         }
@@ -65,6 +70,21 @@
         {
             media.media.lastUpdate = new Date();
             this.router.Navigate("Detail.html", { media: media.media });
+        }
+
+        private LoadVolume(volume: Volume): void
+        {
+            console.info("Load volume");
+
+            var sources: LightReader.parser.iParser = this.model.parsers[0];
+            sources.chapterParser.onChaptersComplete = this.onVolumeComplete;
+            sources.chapterParser.ParseChapters(volume);
+        }
+
+        private onVolumeComplete = (media: LightReader.parser.iChapterParser): void =>
+        {
+            media.Volume.lastUpdate = new Date();
+            this.router.Navigate("Read.html", { media: media.Volume });
         }
     }
 }
