@@ -8,7 +8,8 @@ var LightReader;
                 var _this = this;
                 this.router = core.Router.Inst();
                 this.model = LightReader.AppModel.Inst();
-                this.OnSourceSelected = function (source) {
+                this.OnSourceSelected = function (source, id) {
+                    _this.model.currrentSource = id;
                     _this.router.Navigate("List.html", source);
                 };
             }

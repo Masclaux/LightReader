@@ -22,11 +22,15 @@
 
         public Ready(element: HTMLElement, options: any): void
         {
+            //restore get method ( lost in database javascript is definitly not Object oriented)
+            options.media.illustration.Get = ImageContent.prototype.Get;
+
             this.media = options.media;
 
             this.title = ko.observable<String>(this.media.title);
             this.url = ko.observable<String>(this.media.url);
             this.synopsis = ko.observable<String>(this.media.synopsis);
+                        
             this.illustration = ko.observable<String>(this.media.illustration.Get());
             this.lastUpdate = ko.observable<String>(this.media.lastUpdate.toString());
             this.title = ko.observable<String>(this.media.title);

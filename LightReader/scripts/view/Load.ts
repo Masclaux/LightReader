@@ -50,6 +50,8 @@
 
         private OnSourceComplete = (media: Array<Media>, index: number = 0): void =>
         {
+            var app: AppModel = this.model;
+
             this.model.sources[index].novelList = media;
             this.model.Save();
 
@@ -60,14 +62,17 @@
         {
             console.info("Load media and volume list");
 
-            var sources: LightReader.parser.iParser = this.model.parsers[0];
+            var sources: LightReader.parser.iParser = this.model.parsers[this.model.currrentSource];
             sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
             sources.volumeParser.parseVolume(media);
+
         }
 
         private onVolumeListComplete = (media: LightReader.parser.iVolumeParser): void =>
-        {
+        {   
             media.media.lastUpdate = new Date();
+
+            this.model.Save();
             this.router.Navigate("Detail.html", { media: media.media });
         }
 
@@ -75,7 +80,7 @@
         {
             console.info("Load volume");
 
-            var sources: LightReader.parser.iParser = this.model.parsers[0];
+            var sources: LightReader.parser.iParser = this.model.parsers[this.model.currrentSource];
             sources.chapterParser.onChaptersComplete = this.onVolumeComplete;
             sources.chapterParser.ParseChapters(volume);
         }
@@ -83,6 +88,8 @@
         private onVolumeComplete = (media: LightReader.parser.iChapterParser): void =>
         {
             media.Volume.lastUpdate = new Date();
+
+            this.model.Save();
             this.router.Navigate("Read.html", { media: media.Volume });
         }
     }

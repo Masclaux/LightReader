@@ -11,7 +11,11 @@
 
         private databaseName: string = "sourcesDatas.json";
 
+        //app dataBase
         public dataBase: Loki;
+
+        //index of current source
+        public currrentSource: number;        
 
         //List of parsers
         public parsers: Array<LightReader.parser.iParser> = new Array<LightReader.parser.iParser>();
@@ -21,7 +25,7 @@
 
         //loki database of sources
         private internalSource: LokiCollection<Source>;
-
+        
         //
         public onDataBaseReady: any;
 

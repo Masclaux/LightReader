@@ -10,16 +10,19 @@ var LightReader;
                 this.model = LightReader.AppModel.Inst();
                 this.OnSourceComplete = function (media, index) {
                     if (index === void 0) { index = 0; }
+                    var app = _this.model;
                     _this.model.sources[index].novelList = media;
                     _this.model.Save();
                     _this.router.Navigate("Home.html");
                 };
                 this.onVolumeListComplete = function (media) {
                     media.media.lastUpdate = new Date();
+                    _this.model.Save();
                     _this.router.Navigate("Detail.html", { media: media.media });
                 };
                 this.onVolumeComplete = function (media) {
                     media.Volume.lastUpdate = new Date();
+                    _this.model.Save();
                     _this.router.Navigate("Read.html", { media: media.Volume });
                 };
             }
@@ -51,13 +54,13 @@ var LightReader;
             };
             Load.prototype.LoadMedia = function (media) {
                 console.info("Load media and volume list");
-                var sources = this.model.parsers[0];
+                var sources = this.model.parsers[this.model.currrentSource];
                 sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
                 sources.volumeParser.parseVolume(media);
             };
             Load.prototype.LoadVolume = function (volume) {
                 console.info("Load volume");
-                var sources = this.model.parsers[0];
+                var sources = this.model.parsers[this.model.currrentSource];
                 sources.chapterParser.onChaptersComplete = this.onVolumeComplete;
                 sources.chapterParser.ParseChapters(volume);
             };

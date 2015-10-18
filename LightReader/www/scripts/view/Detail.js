@@ -17,6 +17,8 @@ var LightReader;
                 };
             }
             Detail.prototype.Ready = function (element, options) {
+                //restore get method ( lost in database javascript is definitly not Object oriented)
+                options.media.illustration.Get = LightReader.ImageContent.prototype.Get;
                 this.media = options.media;
                 this.title = ko.observable(this.media.title);
                 this.url = ko.observable(this.media.url);

@@ -24,8 +24,9 @@
             ko.cleanNode(element);
         }
 
-        public OnSourceSelected = (source: Source): void =>
+        public OnSourceSelected = (source: Source, id: number): void =>
         {
+            this.model.currrentSource = id;
             this.router.Navigate("List.html", source);
         }
     }

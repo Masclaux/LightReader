@@ -71,7 +71,7 @@ var LightReader;
                     this.OnImageDownloaded = function (image) {
                         console.info("Image downloaded " + image);
                         if (_this.imagesStack) {
-                            //get image name 
+                            //get image name
                             var filename = image.replace(/^.*[\\\/]/, '');
                             for (var i = 0; i < _this.imagesStack[filename].length; i++) {
                                 _this.imagesStack[filename][i].localUrl = image;

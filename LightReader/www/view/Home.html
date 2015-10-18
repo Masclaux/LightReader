@@ -5,7 +5,7 @@
     <ul data-bind="foreach:sources">
         <li>
             <span data-bind="text:name"> </span>            
-            <button data-bind="click:$parent.OnSourceSelected">List</button>          
+            <button data-bind="click :function(){ $parent.OnSourceSelected( $data, $index() );}">List</button>     
         </li>
     </ul>
    

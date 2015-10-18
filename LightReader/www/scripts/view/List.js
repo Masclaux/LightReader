@@ -11,7 +11,7 @@ var LightReader;
                         _this.router.Navigate("Load.html", { command: LightReader.view.Load.MEDIA, datas: media });
                     }
                     else {
-                        _this.router.Navigate("Detail.html", media);
+                        _this.router.Navigate("Detail.html", { media: media });
                     }
                 };
             }

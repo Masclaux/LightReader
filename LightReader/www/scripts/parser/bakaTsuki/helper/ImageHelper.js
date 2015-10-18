@@ -12,7 +12,7 @@ var LightReader;
                 ImageHelper.DownloadImage = function (datas, onSuccess, onError) {
                     console.info("Download image " + datas.title);
                     //get file path
-                    var path = datas.url.replace(this.IMAGE_URL, ""); //remove url 
+                    var path = datas.url.replace(this.IMAGE_URL, ""); //remove url
                     var dirs = path.split("/");
                     var filename = dirs.pop(); //get filname
                     path = dirs.toString().replace(',', '/');

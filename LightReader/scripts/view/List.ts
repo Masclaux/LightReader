@@ -36,7 +36,7 @@
             }
             else
             {
-                this.router.Navigate("Detail.html", media);
+                this.router.Navigate("Detail.html", { media: media });
             }
         }
     }
