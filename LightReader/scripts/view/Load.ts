@@ -14,7 +14,6 @@
 
         public Ready(element: HTMLElement, options: any): void
         {
-            ko.applyBindings(this, element);
 
             switch (options.command)
             {
@@ -32,8 +31,6 @@
 
         public Exit(element: HTMLElement): void
         {
-            //clean binding ( I know is not recommended )
-            ko.cleanNode(element);
         }
 
         private LoadList(id: number): void

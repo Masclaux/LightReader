@@ -27,7 +27,6 @@ var LightReader;
                 };
             }
             Load.prototype.Ready = function (element, options) {
-                ko.applyBindings(this, element);
                 switch (options.command) {
                     case Load.SOURCE_LIST:
                         this.LoadList(options.id);
@@ -41,8 +40,6 @@ var LightReader;
                 }
             };
             Load.prototype.Exit = function (element) {
-                //clean binding ( I know is not recommended )
-                ko.cleanNode(element);
             };
             Load.prototype.LoadList = function (id) {
                 console.info("Load media list for all sources");

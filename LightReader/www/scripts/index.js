@@ -1,6 +1,5 @@
 var LightReader;
 (function (LightReader) {
-    "use strict";
     var Application;
     (function (Application) {
         function initialize() {
@@ -60,6 +59,8 @@ var LightReader;
     window.onload = function () {
         //FastClick initialisation
         FastClick.attach(document.body);
+        //set rivets instance
+        Rivets = window.rivets;
         Application.initialize();
     };
 })(LightReader || (LightReader = {}));

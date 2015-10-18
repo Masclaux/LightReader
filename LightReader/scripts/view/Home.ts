@@ -1,5 +1,5 @@
 ﻿module LightReader.view
-{
+{   
     import core = LightReader.core;
 
     export class Home implements LightReader.core.iPage
@@ -8,26 +8,19 @@
 
         private model: AppModel = AppModel.Inst();
 
-        private sources: KnockoutObservableArray<Source>;
-
         public Ready(element: HTMLElement, options: any): void
         {
-            //data binding
-            this.sources = ko.observableArray(this.model.sources);
-
-            ko.applyBindings(this, element);
+            Rivets.bind(element, this);
         }
 
         public Exit(element: HTMLElement): void
         {
-            //clean binding ( I know is not recommended )
-            ko.cleanNode(element);
         }
 
-        public OnSourceSelected = (source: Source, id: number): void =>
+        public OnSourceSelected = (event: Event, datas: any): void =>
         {
-            this.model.currrentSource = id;
-            this.router.Navigate("List.html", source);
+            this.model.currrentSource = datas.index;
+            this.router.Navigate("List.html", datas.source);
         }
     }
 }

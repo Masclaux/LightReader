@@ -9,11 +9,8 @@ var LightReader;
             }
             Read.prototype.Ready = function (element, options) {
                 this.volume = options;
-                ko.applyBindings(this, element);
             };
             Read.prototype.Exit = function (element) {
-                //clean binding ( I know is not recommended )
-                ko.cleanNode(element);
             };
             return Read;
         })();

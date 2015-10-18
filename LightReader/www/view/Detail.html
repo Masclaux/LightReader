@@ -1,25 +1,18 @@
 ﻿<section>
    
-    <h1 data-bind="text:title"></h1>
-    <span data-bind="text:url"> </span>
-    <br />
-    <span data-bind="text:lastUpdate"> </span>
-    <br />
-
-    <img data-bind="attr:{ src:illustration }" />
+    <h1>{ media.title }</h1>
+    <p>{ media.url }</p>
+    <p>{ media.lastUpdate }</p>
     
-    <br />
+    <img rv-src="media.illustration.Get" />
     
-    <p>
-        <span data-bind="text:synopsis"> </span>
-    </p>
+    <p>{ media.synopsis }</p>
 
-    <ul data-bind="foreach:volumeList">
-        <li>
-            <span data-bind="text:title"> </span>
-            <button data-bind="click:$parent.OnVolumeSelected">Read</button>
+    <ul>
+        <li rv-each-volume="media.volumeList">
+            <span rv-text="volume.title"> </span>
+            <button rv-on-click="OnVolumeSelected">Read</button>
         </li>
     </ul>
- 
 
 </section>

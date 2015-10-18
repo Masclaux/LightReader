@@ -8,19 +8,15 @@ var LightReader;
                 var _this = this;
                 this.router = core.Router.Inst();
                 this.model = LightReader.AppModel.Inst();
-                this.OnSourceSelected = function (source, id) {
-                    _this.model.currrentSource = id;
-                    _this.router.Navigate("List.html", source);
+                this.OnSourceSelected = function (event, datas) {
+                    _this.model.currrentSource = datas.index;
+                    _this.router.Navigate("List.html", datas.source);
                 };
             }
             Home.prototype.Ready = function (element, options) {
-                //data binding
-                this.sources = ko.observableArray(this.model.sources);
-                ko.applyBindings(this, element);
+                Rivets.bind(element, this);
             };
             Home.prototype.Exit = function (element) {
-                //clean binding ( I know is not recommended )
-                ko.cleanNode(element);
             };
             return Home;
         })();

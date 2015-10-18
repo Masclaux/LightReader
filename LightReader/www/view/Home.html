@@ -1,11 +1,11 @@
 ﻿<section>
 
     <h1>Home</h1>
-        
-    <ul data-bind="foreach:sources">
-        <li>
-            <span data-bind="text:name"> </span>            
-            <button data-bind="click :function(){ $parent.OnSourceSelected( $data, $index() );}">List</button>     
+    
+    <ul>
+        <li rv-each-source="model.sources">
+            <span rv-text="source.name"> </span>            
+            <button rv-on-click="OnSourceSelected" >List</button> 
         </li>
     </ul>
    

@@ -1,7 +1,5 @@
 ﻿module LightReader
 {
-    "use strict";
-
     export module Application
     {
         //application model reference contain the list of datas sources
@@ -38,7 +36,7 @@
             {
                 new FakeCordovaWindows();
             }
-
+            
             // Handle the Cordova pause and resume events
             document.addEventListener('pause', onPause, false);
             document.addEventListener('resume', onResume, false);
@@ -91,6 +89,9 @@
     {
         //FastClick initialisation
         FastClick.attach(document.body);
+
+        //set rivets instance
+        Rivets = (<any>window).rivets;
 
         Application.initialize();
     }
