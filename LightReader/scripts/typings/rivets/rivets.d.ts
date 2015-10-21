@@ -3,7 +3,8 @@
 // Definitions by: Trevor Baron <https://github.com/TrevorDev>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-interface FinchStatic {
+interface FinchStatic
+{
     configure(options?: {
         /**
          * Attribute prefix in templates
@@ -25,8 +26,8 @@ interface FinchStatic {
          * Augment the event handler of the on-* binder
          */
         handler?: Function;
-    }):void;
-    bind(element:any, template:any):void;
+    }): void;
+    bind(element: any, template: any): void;
 }
 
 declare var Rivets: FinchStatic;

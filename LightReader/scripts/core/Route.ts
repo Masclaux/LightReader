@@ -9,10 +9,13 @@
 
         public args: any;
 
-        constructor(url: string, args: any)
+        public inHistory: any;
+
+        constructor(url: string, args: any, inHistory: boolean = true)
         {
             this.url = url;
             this.args = args;
+            this.inHistory = inHistory;
         }
     }
 }

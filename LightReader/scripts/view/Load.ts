@@ -14,7 +14,6 @@
 
         public Ready(element: HTMLElement, options: any): void
         {
-
             switch (options.command)
             {
                 case Load.SOURCE_LIST:
@@ -62,11 +61,10 @@
             var sources: LightReader.parser.iParser = this.model.parsers[this.model.currrentSource];
             sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
             sources.volumeParser.parseVolume(media);
-
         }
 
         private onVolumeListComplete = (media: LightReader.parser.iVolumeParser): void =>
-        {   
+        {
             media.media.lastUpdate = new Date();
 
             this.model.Save();

@@ -10,11 +10,11 @@
 
         public Ready(element: HTMLElement, options: any): void
         {
-            this.volume = options;            
+            this.volume = options;
         }
 
         public Exit(element: HTMLElement): void
-        {            
+        {
         }
     }
 }

@@ -6,7 +6,7 @@
     {
         private router: core.Router = core.Router.Inst();
 
-        private media: Media;      
+        private media: Media;
 
         public Ready(element: HTMLElement, options: any): void
         {
@@ -26,7 +26,7 @@
             var volume: Volume = this.media.volumeList[datas.index]
             if (volume.lastUpdate == null || volume.chapterList.length == 0)
             {
-                this.router.Navigate("Load.html", { command: LightReader.view.Load.VOLUME, datas: volume });
+                this.router.Navigate("Load.html", { command: LightReader.view.Load.VOLUME, datas: volume }, false);
             }
             else
             {

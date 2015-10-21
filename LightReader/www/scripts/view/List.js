@@ -9,7 +9,7 @@ var LightReader;
                 this.OnMediaSelected = function (event, datas) {
                     var media = _this.source.novelList[datas.index];
                     if (media.lastUpdate == null || media.volumeList.length == 0) {
-                        _this.router.Navigate("Load.html", { command: LightReader.view.Load.MEDIA, datas: media });
+                        _this.router.Navigate("Load.html", { command: LightReader.view.Load.MEDIA, datas: media }, false);
                     }
                     else {
                         _this.router.Navigate("Detail.html", { media: media });

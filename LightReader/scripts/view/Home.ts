@@ -1,5 +1,5 @@
 ﻿module LightReader.view
-{   
+{
     import core = LightReader.core;
 
     export class Home implements LightReader.core.iPage

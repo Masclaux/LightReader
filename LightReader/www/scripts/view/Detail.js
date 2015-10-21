@@ -10,7 +10,7 @@ var LightReader;
                 this.OnVolumeSelected = function (event, datas) {
                     var volume = _this.media.volumeList[datas.index];
                     if (volume.lastUpdate == null || volume.chapterList.length == 0) {
-                        _this.router.Navigate("Load.html", { command: LightReader.view.Load.VOLUME, datas: volume });
+                        _this.router.Navigate("Load.html", { command: LightReader.view.Load.VOLUME, datas: volume }, false);
                     }
                     else {
                         _this.router.Navigate("Read.html", volume);

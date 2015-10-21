@@ -23,7 +23,7 @@
             var media: Media = this.source.novelList[datas.index];
             if (media.lastUpdate == null || media.volumeList.length == 0)
             {
-                this.router.Navigate("Load.html", { command: LightReader.view.Load.MEDIA, datas: media });
+                this.router.Navigate("Load.html", { command: LightReader.view.Load.MEDIA, datas: media }, false);
             }
             else
             {
