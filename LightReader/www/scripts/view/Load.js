@@ -23,7 +23,7 @@ var LightReader;
                 this.onVolumeComplete = function (media) {
                     media.Volume.lastUpdate = new Date();
                     _this.model.Save();
-                    _this.router.Navigate("Read.html", { media: media.Volume });
+                    _this.router.Navigate("Read.html", media.Volume);
                 };
             }
             Load.prototype.Ready = function (element, options) {

@@ -85,7 +85,7 @@
             media.Volume.lastUpdate = new Date();
 
             this.model.Save();
-            this.router.Navigate("Read.html", { media: media.Volume });
+            this.router.Navigate("Read.html", media.Volume);
         }
     }
 }

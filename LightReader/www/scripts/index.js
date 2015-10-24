@@ -33,21 +33,18 @@ var LightReader;
             Application.router.Add("Detail.html", LightReader.view.Detail);
             Application.router.Add("Read.html", LightReader.view.Read);
             Application.router.Add("Load.html", LightReader.view.Load);
-            Application.router.Add("debug/Reader.html", LightReader.view.Reader);
+            // router.Add("debug/Reader.html", LightReader.view.Reader);
             Application.model.InitDataBase();
         }
         function OnDataBaseReady() {
-            Application.router.Navigate("debug/Reader.html");
-            /*
-                        model.Load();
-                        if (model.Exist())
-                        {
-                            router.Navigate("Home.html");
-                        }
-                        else
-                        {
-                            router.Navigate("Load.html", { command: LightReader.view.Load.SOURCE_LIST });
-                        }*/
+            //router.Navigate("debug/Reader.html");
+            Application.model.Load();
+            if (Application.model.Exist()) {
+                Application.router.Navigate("Home.html");
+            }
+            else {
+                Application.router.Navigate("Load.html", { command: LightReader.view.Load.SOURCE_LIST });
+            }
         }
         function sucess(url) {
             console.info(url);

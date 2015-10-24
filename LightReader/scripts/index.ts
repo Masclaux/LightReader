@@ -48,24 +48,24 @@
             router.Add("Detail.html", LightReader.view.Detail);
             router.Add("Read.html", LightReader.view.Read);
             router.Add("Load.html", LightReader.view.Load);
-            router.Add("debug/Reader.html", LightReader.view.Reader);
+            // router.Add("debug/Reader.html", LightReader.view.Reader);
 
             model.InitDataBase();
         }
 
         function OnDataBaseReady()
         {
-            router.Navigate("debug/Reader.html");
-            /*
-                        model.Load();
-                        if (model.Exist())
-                        {
-                            router.Navigate("Home.html");
-                        }
-                        else
-                        {
-                            router.Navigate("Load.html", { command: LightReader.view.Load.SOURCE_LIST });
-                        }*/
+            //router.Navigate("debug/Reader.html");
+
+            model.Load();
+            if (model.Exist())
+            {
+                router.Navigate("Home.html");
+            }
+            else
+            {
+                router.Navigate("Load.html", { command: LightReader.view.Load.SOURCE_LIST });
+            }
         }
 
         function sucess(url: string): void

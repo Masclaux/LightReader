@@ -3,13 +3,11 @@
     <h1>{ source.name }</h1>
 
     <p>{ source.description }</p>
-  
+
     <ul>
         <li rv-each-media="source.novelList">
             <span rv-text="media.title"> </span>
             <button rv-on-click="OnMediaSelected">List</button>
         </li>
     </ul>
-  
 </section>
-
