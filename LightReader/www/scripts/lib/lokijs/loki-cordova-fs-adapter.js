@@ -94,7 +94,6 @@ var LokiCordovaFSAdapter = (function () {
             }
         },
         _createBlob: {
-
             // adapted from http://stackoverflow.com/questions/15293694/blob-constructor-browser-compatibility
 
             value: function _createBlob(data, datatype) {
@@ -124,4 +123,3 @@ var LokiCordovaFSAdapter = (function () {
 
     return LokiCordovaFSAdapter;
 })();
-

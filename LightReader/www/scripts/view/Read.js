@@ -37,6 +37,8 @@ var LightReader;
                 this.volume = options;
                 this.chapter = this.volume.chapterList[this.currentChapter];
                 this.swiper = new Swiper('.swiper-container', {
+                    'observer': true,
+                    'observeParents': true,
                     'onTransitionEnd': this.OnNewSlide,
                 });
                 this.hammer = new Hammer(element);

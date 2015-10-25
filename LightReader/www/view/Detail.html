@@ -1,17 +1,32 @@
 ﻿<section>
 
-    <h1>{ media.title }</h1>
-    <p>{ media.url }</p>
-    <p>{ media.lastUpdate }</p>
+    <ion-header-bar class="bar bar-header bar-dark">
+        <h1 class="title">Light Reader</h1>
+        <button class="button icon ion-navicon"></button>
+    </ion-header-bar>
+    <ion-scroll-content class="has-header  overflow-scroll">
+        <div class="list card">
+            <div class="item">
+                <h2>{ media.title }</h2>
+            </div>
+            <div class="item item-body">
+                <center>
+                    <img class="full-image" rv-src="media.illustration.Get" style='height:50%;width:50%' />
+                </center>
+                <p>{ media.synopsis }</p>
+                <p>
+                    { media.lastUpdate }
+                </p>
+            </div>
+        </div>
 
-    <img rv-src="media.illustration.Get" />
+        <div class="list">
 
-    <p>{ media.synopsis }</p>
-
-    <ul>
-        <li rv-each-volume="media.volumeList">
-            <span rv-text="volume.title"> </span>
-            <button rv-on-click="OnVolumeSelected">Read</button>
-        </li>
-    </ul>
+            <a class="item item-icon-right" rv-on-touchend="OnVolumeSelected" rv-on-click="OnVolumeSelected" rv-each-volume="media.volumeList">
+                <h2 rv-text="volume.title"></h2>
+                <p>{ volume.lastUpdate }</p>
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+        </div>
+    </ion-scroll-content>
 </section>

@@ -20,6 +20,10 @@ Just a test to see How cordova and typescript perform.
 * swiper => http://www.idangero.us/swiper/
 * hammerjs => http://hammerjs.github.io
 
+## UI :
+
+* ionic framework (only css)=> http://ionicframework.com
+
 ## Cordova plugins :
 
 # Dev dependencies :

@@ -32,12 +32,14 @@ var LightReader;
                 this.OnUrlClick = function (e) {
                     if (e.target.localName == 'a') {
                         var dest = e.target.getAttribute("href");
-                        //separate url and args
-                        var arrayArgs = dest.split("#");
-                        if (arrayArgs.length > 0) {
-                            var url = arrayArgs.shift(); //url
-                            var args = _this.GetArgsFromString(arrayArgs); //arg ( id : "value" )
-                            _this.Navigate(url, args);
+                        if (dest != null) {
+                            //separate url and args
+                            var arrayArgs = dest.split("#");
+                            if (arrayArgs.length > 0) {
+                                var url = arrayArgs.shift(); //url
+                                var args = _this.GetArgsFromString(arrayArgs); //arg ( id : "value" )
+                                _this.Navigate(url, args);
+                            }
                         }
                         return false; //stop navigation
                     }

@@ -136,15 +136,17 @@
             if (e.target.localName == 'a')
             {
                 var dest: string = e.target.getAttribute("href");
-
-                //separate url and args
-                var arrayArgs: string[] = dest.split("#");
-                if (arrayArgs.length > 0)
+                if (dest != null) //href attribute
                 {
-                    var url: string = arrayArgs.shift();//url
-                    var args: {} = this.GetArgsFromString(arrayArgs);//arg ( id : "value" )
+                    //separate url and args
+                    var arrayArgs: string[] = dest.split("#");
+                    if (arrayArgs.length > 0)
+                    {
+                        var url: string = arrayArgs.shift();//url
+                        var args: {} = this.GetArgsFromString(arrayArgs);//arg ( id : "value" )
 
-                    this.Navigate(url, args);
+                        this.Navigate(url, args);
+                    }
                 }
 
                 return false; //stop navigation

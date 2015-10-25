@@ -37,6 +37,8 @@ module LightReader.view
 
             this.swiper = new Swiper('.swiper-container',
                 {
+                    'observer': true,
+                    'observeParents': true,
                     'onTransitionEnd': this.OnNewSlide,
                 });
 

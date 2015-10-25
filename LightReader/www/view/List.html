@@ -1,13 +1,31 @@
 ﻿<section>
 
-    <h1>{ source.name }</h1>
+    <ion-header-bar class="bar bar-header bar-dark">
+        <h1 class="title">Light Reader</h1>
+        <button class="button icon ion-navicon"></button>
+    </ion-header-bar>
+    <ion-scroll-content class="has-header  overflow-scroll">
+        <div class="list card">
 
-    <p>{ source.description }</p>
+            <div class="item">
+                <h2>{ source.name }</h2>
+            </div>
 
-    <ul>
-        <li rv-each-media="source.novelList">
-            <span rv-text="media.title"> </span>
-            <button rv-on-click="OnMediaSelected">List</button>
-        </li>
-    </ul>
+            <div class="item item-body">
+                <center>
+                    <img class="full-image" src="http://33.media.tumblr.com/tumblr_mdjz9u9l8F1qm2pt6.png" style='height:50%;width:50%' />
+                </center>
+                <p>{ source.description }</p>
+            </div>
+        </div>
+
+        <div class="list">
+
+            <a class="item item-icon-right" rv-on-click="OnMediaSelected" rv-on-touchend="OnMediaSelected" rv-each-media="source.novelList">
+                <h2 rv-text="media.title"></h2>
+                <p>{ media.lastUpdate }</p>
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+        </div>
+    </ion-scroll-content>
 </section>

@@ -53,7 +53,7 @@ var LightReader;
             Reader.prototype.pageTo = function (start, end) {
                 console.info("Show page " + start + " to " + end);
                 if (start >= 0) {
-                    //check if end is beyond 
+                    //check if end is beyond
                     if (this.chapter.pages.length <= end) {
                         this.pageTo(this.chapter.pages.length - 3, this.chapter.pages.length - 1);
                         this.swiper.slideTo(2, 0, false); //set last

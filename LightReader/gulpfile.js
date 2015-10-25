@@ -3,12 +3,11 @@ var gulp = require("gulp");
 var rename = require("gulp-rename");
 var includeSources = require('gulp-include-source');
 
-
 //include model javascript files
 gulp.task("auto_include", function ()
 {
     return gulp.src('./www/index.tpl.html')
     .pipe(rename('index.html'))
     .pipe(includeSources())
-    .pipe(gulp.dest('./www/'));    
+    .pipe(gulp.dest('./www/'));
 });
