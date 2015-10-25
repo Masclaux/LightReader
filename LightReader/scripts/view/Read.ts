@@ -35,7 +35,10 @@ module LightReader.view
             this.volume = options;
             this.chapter = this.volume.chapterList[this.currentChapter];
 
-            this.swiper = new Swiper('.swiper-container');
+            this.swiper = new Swiper('.swiper-container',
+                {
+                    'onTransitionEnd': this.OnNewSlide,
+                });
 
             this.hammer = new Hammer(element);
             this.hammer.add(new Hammer.Pinch());

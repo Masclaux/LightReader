@@ -36,7 +36,9 @@ var LightReader;
             Read.prototype.Ready = function (element, options) {
                 this.volume = options;
                 this.chapter = this.volume.chapterList[this.currentChapter];
-                this.swiper = new Swiper('.swiper-container');
+                this.swiper = new Swiper('.swiper-container', {
+                    'onTransitionEnd': this.OnNewSlide,
+                });
                 this.hammer = new Hammer(element);
                 this.hammer.add(new Hammer.Pinch());
                 this.hammer.on('pinch', this.OnPinch);
@@ -49,7 +51,7 @@ var LightReader;
             Read.prototype.pageTo = function (start, end) {
                 console.info("Show page " + start + " to " + end);
                 if (start >= 0) {
-                    //check if end is beyond 
+                    //check if end is beyond
                     if (this.chapter.pages.length <= end) {
                         this.pageTo(this.chapter.pages.length - 3, this.chapter.pages.length - 1);
                         this.swiper.slideTo(2, 0, false); //set last
