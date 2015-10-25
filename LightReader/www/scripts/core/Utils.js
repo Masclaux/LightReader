@@ -1,6 +1,6 @@
 var LightReader;
 (function (LightReader) {
-    //collection of useful methods   
+    //collection of useful methods
     var Util = (function () {
         function Util() {
         }

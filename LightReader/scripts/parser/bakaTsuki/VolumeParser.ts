@@ -34,8 +34,43 @@
 
             if (this.onVolumeListComplete)
             {
-                this.onVolumeListComplete(this);
+                if (this.media.illustration == null)
+                {
+                    this.onVolumeListComplete(this);
+                }
+                else
+                {
+                    console.info("Download illustration");
+
+                    //get only File:...
+                    var finalUrl = this.media.illustration.url.split("File:"); //get only page name
+                    if (finalUrl.length > 0)
+                    {
+                        ImageHelper.GetImageLink(finalUrl[1], this.OnLinkComplete, this.OnImageError, this.media.illustration);
+                    }
+                }
             }
+        }
+
+        private OnLinkComplete = (image: ImageContent): void =>
+        {
+            ImageHelper.DownloadImage(image, this.OnImageComplete, this.OnError);
+        }
+
+        private OnImageComplete = (image: string): void =>
+        {
+            console.info("Found " + image);
+
+            this.media.illustration.localUrl = image;
+            this.media.illustration.isLocal = true;
+
+            this.onVolumeListComplete(this);
+        }
+
+        private OnImageError = (error: FileTransferError): void =>
+        {
+            console.error(error.exception);
+            this.onVolumeListComplete(this);
         }
 
         private OnError = (ev: Event): void =>

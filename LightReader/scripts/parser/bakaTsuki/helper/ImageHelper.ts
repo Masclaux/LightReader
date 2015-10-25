@@ -6,6 +6,24 @@
         public static IMAGE_QUERY: string =
         "http://www.baka-tsuki.org/project/api.php?action=query&prop=imageinfo&iiprop=url&format=json&titles=File:";
 
+        public static IMAGE_URL: string =
+        "http://www.baka-tsuki.org/project/images/";
+
+        //return url from filename
+        public static DownloadImage(datas: ImageContent, onSuccess: any, onError: any): void
+        {
+            console.info("Download image " + datas.title);
+
+            //get file path
+            var path = datas.url.replace(this.IMAGE_URL, "");//remove url
+            var dirs: string[] = path.split("/");
+            var filename: string = dirs.pop();//get filname
+
+            path = dirs.toString().replace(',', '/');
+
+            File.Write(datas.url, "images/bakatuski/" + path + "/", filename, onSuccess, onError);
+        }
+
         //return url from filename
         public static GetImageLink(fileName: string, onSuccess: any, onError: any, datas: ImageContent): void
         {

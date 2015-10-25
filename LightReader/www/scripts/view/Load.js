@@ -10,22 +10,36 @@ var LightReader;
                 this.model = LightReader.AppModel.Inst();
                 this.OnSourceComplete = function (media, index) {
                     if (index === void 0) { index = 0; }
+                    var app = _this.model;
                     _this.model.sources[index].novelList = media;
                     _this.model.Save();
                     _this.router.Navigate("Home.html");
                 };
+                this.onVolumeListComplete = function (media) {
+                    media.media.lastUpdate = new Date();
+                    _this.model.Save();
+                    _this.router.Navigate("Detail.html", { media: media.media });
+                };
+                this.onVolumeComplete = function (media) {
+                    media.Volume.lastUpdate = new Date();
+                    _this.model.Save();
+                    _this.router.Navigate("Read.html", media.Volume);
+                };
             }
             Load.prototype.Ready = function (element, options) {
-                ko.applyBindings(this, element);
                 switch (options.command) {
                     case Load.SOURCE_LIST:
                         this.LoadList(options.id);
                         break;
+                    case Load.MEDIA:
+                        this.LoadMedia(options.datas);
+                        break;
+                    case Load.VOLUME:
+                        this.LoadVolume(options.datas);
+                        break;
                 }
             };
             Load.prototype.Exit = function (element) {
-                //clean binding ( I know is not recommended )
-                ko.cleanNode(element);
             };
             Load.prototype.LoadList = function (id) {
                 console.info("Load media list for all sources");
@@ -35,7 +49,21 @@ var LightReader;
                     sources[i].Parse();
                 }
             };
+            Load.prototype.LoadMedia = function (media) {
+                console.info("Load media and volume list");
+                var sources = this.model.parsers[this.model.currrentSource];
+                sources.volumeParser.onVolumeListComplete = this.onVolumeListComplete;
+                sources.volumeParser.parseVolume(media);
+            };
+            Load.prototype.LoadVolume = function (volume) {
+                console.info("Load volume");
+                var sources = this.model.parsers[this.model.currrentSource];
+                sources.chapterParser.onChaptersComplete = this.onVolumeComplete;
+                sources.chapterParser.ParseChapters(volume);
+            };
             Load.SOURCE_LIST = "souce_list_update";
+            Load.MEDIA = "media_list_update";
+            Load.VOLUME = "volume_list_update";
             return Load;
         })();
         view.Load = Load;

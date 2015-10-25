@@ -13,9 +13,12 @@ Just a test to see How cordova and typescript perform.
 ## Libs:
 
 * jquery.js => https://jquery.com/
-* knockout  => http://knockoutjs.com/index.html
+* rivetsjs  => http://rivetsjs.com
+* Fastclick =>  https://github.com/ftlabs/fastclick
 * Lokijs    => http://lokijs.org
 * loki-cordova-fs-adapter ( with a little modification ) =>  https://github.com/cosmith/loki-cordova-fs-adapter
+* swiper => http://www.idangero.us/swiper/
+* hammerjs => http://hammerjs.github.io
 
 ## Cordova plugins :
 

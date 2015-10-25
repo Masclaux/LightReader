@@ -1,7 +1,5 @@
 ﻿module LightReader
 {
-    "use strict";
-
     export module Application
     {
         //application model reference contain the list of datas sources
@@ -50,17 +48,15 @@
             router.Add("Detail.html", LightReader.view.Detail);
             router.Add("Read.html", LightReader.view.Read);
             router.Add("Load.html", LightReader.view.Load);
-
-            var assetURL: string = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg"
-            var fileName: string = "Absolute_Duo_Volume_1_Cover.jpg"
-
-            File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
+            // router.Add("debug/Reader.html", LightReader.view.Reader);
 
             model.InitDataBase();
         }
 
         function OnDataBaseReady()
         {
+            //router.Navigate("debug/Reader.html");
+
             model.Load();
             if (model.Exist())
             {
@@ -94,6 +90,12 @@
 
     window.onload = function ()
     {
+        //FastClick initialisation
+        FastClick.attach(document.body);
+
+        //set rivets instance
+        Rivets = (<any>window).rivets;
+
         Application.initialize();
     }
 }

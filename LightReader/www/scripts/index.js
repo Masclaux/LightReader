@@ -1,6 +1,5 @@
 var LightReader;
 (function (LightReader) {
-    "use strict";
     var Application;
     (function (Application) {
         function initialize() {
@@ -34,12 +33,11 @@ var LightReader;
             Application.router.Add("Detail.html", LightReader.view.Detail);
             Application.router.Add("Read.html", LightReader.view.Read);
             Application.router.Add("Load.html", LightReader.view.Load);
-            var assetURL = "https://www.baka-tsuki.org/project/images/1/17/Absolute_Duo_Volume_1_Cover.jpg";
-            var fileName = "Absolute_Duo_Volume_1_Cover.jpg";
-            LightReader.File.Write(assetURL, "images/bakatuski/", fileName, sucess, fail);
+            // router.Add("debug/Reader.html", LightReader.view.Reader);
             Application.model.InitDataBase();
         }
         function OnDataBaseReady() {
+            //router.Navigate("debug/Reader.html");
             Application.model.Load();
             if (Application.model.Exist()) {
                 Application.router.Navigate("Home.html");
@@ -61,6 +59,10 @@ var LightReader;
         }
     })(Application = LightReader.Application || (LightReader.Application = {}));
     window.onload = function () {
+        //FastClick initialisation
+        FastClick.attach(document.body);
+        //set rivets instance
+        Rivets = window.rivets;
         Application.initialize();
     };
 })(LightReader || (LightReader = {}));

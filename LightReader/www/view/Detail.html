@@ -1,3 +1,17 @@
 ﻿<section>
-    <h1>Detail</h1>
+
+    <h1>{ media.title }</h1>
+    <p>{ media.url }</p>
+    <p>{ media.lastUpdate }</p>
+
+    <img rv-src="media.illustration.Get" />
+
+    <p>{ media.synopsis }</p>
+
+    <ul>
+        <li rv-each-volume="media.volumeList">
+            <span rv-text="volume.title"> </span>
+            <button rv-on-click="OnVolumeSelected">Read</button>
+        </li>
+    </ul>
 </section>

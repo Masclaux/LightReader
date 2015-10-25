@@ -6,9 +6,11 @@ var LightReader;
         * Define a route historic state
         */
         var Route = (function () {
-            function Route(url, args) {
+            function Route(url, args, inHistory) {
+                if (inHistory === void 0) { inHistory = true; }
                 this.url = url;
                 this.args = args;
+                this.inHistory = inHistory;
             }
             return Route;
         })();

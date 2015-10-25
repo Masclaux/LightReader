@@ -16,5 +16,7 @@
         public synopsis: String = "test synopsis ";
 
         public volumeList: Array<Volume>;
+
+        public lastUpdate: Date;
     }
 }

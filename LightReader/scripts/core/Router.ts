@@ -85,14 +85,13 @@
         /**
         * Navigate to a page
         */
-        public Navigate(url: string, args?: any): void
+        public Navigate(url: string, args?: any, inHistory?: boolean): void
         {
             //clear precedent page
             this.appContent.innerHTML = "";
             if (File.Exist(this.viewPath + "/" + url))
             {
-                this.inHistory.push(new Route(url, args));
-
+                this.inHistory.push(new Route(url, args, inHistory == null || inHistory == true));
                 Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);
             }
             else
@@ -104,6 +103,10 @@
         private OnRequestComplete = (ev: XMLHttpRequest) =>
         {
             var route: Route = this.inHistory[this.inHistory.length - 1];
+            if (route.inHistory == false)
+            {
+                this.inHistory.pop(); //not need in history ( probably transition pages)
+            }
 
             if (this.currentPage != undefined)
             {
@@ -132,17 +135,7 @@
         {
             if (e.target.localName == 'a')
             {
-                var dest: string = "";
-
-                //Windows mobile add www on local link ....
-                if (window.cordova && window.cordova.platformId == "windows")
-                {
-                    dest = e.target.nameProp; // workaround use windows only prop tag
-                }
-                else
-                {
-                    dest = e.target.toString().split(location.host)[1].replace(/^\//, '');
-                }
+                var dest: string = e.target.getAttribute("href");
 
                 //separate url and args
                 var arrayArgs: string[] = dest.split("#");

@@ -11,6 +11,10 @@
 
     <!-- LightReader references -->
     <link href="./css/index.css" rel="stylesheet" />
+
+    <!-- LightReader references -->
+    <link href="./scripts/lib/swiper-3.1.7/css/swiper.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -21,10 +25,13 @@
     <!--auto include model via gulp-->
 
     <!-- lib dependency -->
-    <script src="./scripts/lib/jquery/jquery-2.1.4.min.js"></script>
-<script src="./scripts/lib/knockout/knockout-3.3.0.js"></script>
+    <script src="./scripts/lib/fastclick/fastclick.js"></script>
+<script src="./scripts/lib/hammer/hammer.min.js"></script>
+<script src="./scripts/lib/jquery/jquery-2.1.4.min.js"></script>
 <script src="./scripts/lib/lokijs/loki-cordova-fs-adapter.js"></script>
 <script src="./scripts/lib/lokijs/lokijs.min.js"></script>
+<script src="./scripts/lib/rivets/rivets.bundled.min.js"></script>
+<script src="./scripts/lib/swiper-3.1.7/js/swiper.jquery.min.js"></script>
 
     <!-- App class -->
 
@@ -41,6 +48,7 @@
 <script src="./scripts/view/List.js"></script>
 <script src="./scripts/view/Load.js"></script>
 <script src="./scripts/view/Read.js"></script>
+<script src="./scripts/view/debug/reader.js"></script>
 
     <script src="./scripts/model/AppModel.js"></script>
 <script src="./scripts/model/Chapter.js"></script>

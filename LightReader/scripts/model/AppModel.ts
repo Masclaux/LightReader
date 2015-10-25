@@ -11,7 +11,11 @@
 
         private databaseName: string = "sourcesDatas.json";
 
+        //app dataBase
         public dataBase: Loki;
+
+        //index of current source
+        public currrentSource: number;
 
         //List of parsers
         public parsers: Array<LightReader.parser.iParser> = new Array<LightReader.parser.iParser>();
@@ -44,7 +48,6 @@
         //Start dataBase loading and call onDataBaseReady when completed
         public InitDataBase(): void
         {
-
             //Detecting ripple and disable phonegab storage
             var adapter = null;
             if (!Util.IsRipple())
@@ -55,7 +58,7 @@
             {
                 console.warn("Ripple detected do not use Cordova adapter");
             }
-                       
+
             this.dataBase = new loki(this.databaseName,
                 {
                     autosave: true,

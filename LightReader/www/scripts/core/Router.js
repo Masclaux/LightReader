@@ -11,6 +11,9 @@ var LightReader;
                 this.inHistory = new Array();
                 this.OnRequestComplete = function (ev) {
                     var route = _this.inHistory[_this.inHistory.length - 1];
+                    if (route.inHistory == false) {
+                        _this.inHistory.pop(); //not need in history ( probably transition pages)
+                    }
                     if (_this.currentPage != undefined) {
                         _this.currentPage.Exit(_this.appContent); //launch EXIT of previous page
                     }
@@ -28,14 +31,7 @@ var LightReader;
                 };
                 this.OnUrlClick = function (e) {
                     if (e.target.localName == 'a') {
-                        var dest = "";
-                        //Windows mobile add www on local link ....
-                        if (window.cordova && window.cordova.platformId == "windows") {
-                            dest = e.target.nameProp; // workaround use windows only prop tag
-                        }
-                        else {
-                            dest = e.target.toString().split(location.host)[1].replace(/^\//, '');
-                        }
+                        var dest = e.target.getAttribute("href");
                         //separate url and args
                         var arrayArgs = dest.split("#");
                         if (arrayArgs.length > 0) {
@@ -97,11 +93,11 @@ var LightReader;
             /**
             * Navigate to a page
             */
-            Router.prototype.Navigate = function (url, args) {
+            Router.prototype.Navigate = function (url, args, inHistory) {
                 //clear precedent page
                 this.appContent.innerHTML = "";
                 if (LightReader.File.Exist(this.viewPath + "/" + url)) {
-                    this.inHistory.push(new core.Route(url, args));
+                    this.inHistory.push(new core.Route(url, args, inHistory == null || inHistory == true));
                     LightReader.Http.Get(this.viewPath + "/" + url, this.OnRequestComplete, this.OnRequestError);
                 }
                 else {

@@ -34,7 +34,7 @@
         public static Write(url: string, filePath: string, fileName: string, onRequestComplete: any, onRequestError: any): void
         {
             //Detecting ripple and simulate onRequestComplete
-            if ( Util.IsRipple() )
+            if (Util.IsRipple())
             {
                 console.warn("File.Write not supported on ripple return onRequestComplete with url param as result");
                 onRequestComplete(url);
@@ -137,7 +137,6 @@
 
             var successCB = function (entry: DirectoryEntry)
             {
-                console.info("Dir created " + entry.fullPath);
                 root = entry;
                 if (dirs.length > 0)
                 {
@@ -145,7 +144,7 @@
                 }
                 else
                 {
-                    console.log("All dir created");
+                    console.info("Dir created " + entry.fullPath);
                     onRequestComplete(entry);
                 }
             };
