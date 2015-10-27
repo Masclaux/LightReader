@@ -5,14 +5,6 @@ var LightReader;
         function ImageContent() {
             this.isLocal = false;
         }
-        ImageContent.prototype.Get = function () {
-            if (this.isLocal) {
-                return this.localUrl;
-            }
-            else {
-                return this.url;
-            }
-        };
         return ImageContent;
     })();
     LightReader.ImageContent = ImageContent;

@@ -8,11 +8,13 @@
 
         private media: Media;
 
+        private illustration: string;
+
         public Ready(element: HTMLElement, options: any): void
         {
             //restore get method ( lost in database javascript is definitly not Object oriented)
-            options.media.illustration.Get = ImageContent.prototype.Get;
             this.media = options.media;
+            this.illustration = ModelHelper.Get(this.media.illustration);
 
             Rivets.bind(element, this);
         }

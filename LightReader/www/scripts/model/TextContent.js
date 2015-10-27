@@ -5,9 +5,6 @@ var LightReader;
         function TextContent() {
             this.content = "";
         }
-        TextContent.prototype.Get = function () {
-            return this.content;
-        };
         return TextContent;
     })();
     LightReader.TextContent = TextContent;

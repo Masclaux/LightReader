@@ -19,8 +19,8 @@ var LightReader;
             }
             Detail.prototype.Ready = function (element, options) {
                 //restore get method ( lost in database javascript is definitly not Object oriented)
-                options.media.illustration.Get = LightReader.ImageContent.prototype.Get;
                 this.media = options.media;
+                this.illustration = LightReader.ModelHelper.Get(this.media.illustration);
                 Rivets.bind(element, this);
             };
             Detail.prototype.Exit = function (element) {

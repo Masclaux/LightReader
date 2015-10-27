@@ -81,16 +81,14 @@ module LightReader.view
                     var content: any = this.chapter.pages[i];
                     if (content.url != null)
                     {
-                        this.chapter.pages[i].Get = ImageContent.prototype.Get;
                         this.pages[slide].innerHTML =
                         "<zoomable>" +
-                        "<img src='" + this.chapter.pages[i].Get() + "' style='width:100%'/>" +
+                        "<img src='" + ModelHelper.Get(this.chapter.pages[i]) + "' style='width:100%'/>" +
                         "</zoomable>";
                     }
                     else
                     {
-                        this.chapter.pages[i].Get = TextContent.prototype.Get;
-                        this.pages[slide].innerHTML = this.chapter.pages[i].Get();
+                        this.pages[slide].innerHTML = ModelHelper.Get(this.chapter.pages[i]);
                     }
 
                     slide++;

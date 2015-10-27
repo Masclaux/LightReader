@@ -63,15 +63,13 @@ var LightReader;
                     for (var i = start; i <= end; i++) {
                         var content = this.chapter.pages[i];
                         if (content.url != null) {
-                            this.chapter.pages[i].Get = LightReader.ImageContent.prototype.Get;
                             this.pages[slide].innerHTML =
                                 "<zoomable>" +
-                                    "<img src='" + this.chapter.pages[i].Get() + "' style='width:100%'/>" +
+                                    "<img src='" + LightReader.ModelHelper.Get(this.chapter.pages[i]) + "' style='width:100%'/>" +
                                     "</zoomable>";
                         }
                         else {
-                            this.chapter.pages[i].Get = LightReader.TextContent.prototype.Get;
-                            this.pages[slide].innerHTML = this.chapter.pages[i].Get();
+                            this.pages[slide].innerHTML = LightReader.ModelHelper.Get(this.chapter.pages[i]);
                         }
                         slide++;
                     }

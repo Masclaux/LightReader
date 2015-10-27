@@ -10,17 +10,5 @@
         public localUrl: string;
 
         public isLocal: boolean = false;
-
-        public Get(): string
-        {
-            if (this.isLocal)
-            {
-                return this.localUrl;
-            }
-            else
-            {
-                return this.url;
-            }
-        }
     }
 } 
