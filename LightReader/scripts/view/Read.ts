@@ -34,6 +34,8 @@ module LightReader.view
         {
             this.volume = options;
             this.chapter = this.volume.chapterList[this.currentChapter];
+ 
+            Rivets.bind(element, this);
 
             this.swiper = new Swiper('.swiper-container',
                 {
@@ -48,7 +50,7 @@ module LightReader.view
 
             this.pages = $(".swiper-slide");
             this.pageTo(0, 2);
-            this.swiper.slideTo(0, 0, false); //set first
+            this.swiper.slideTo(0, 0, false); //set first            
         }
 
         public Exit(element: HTMLElement): void
@@ -58,7 +60,7 @@ module LightReader.view
         public PinchToZoom = (x: number, y: number, scaling: number, image: JQuery): void =>
         {
             image.css({ 'height': this.swiper.height * scaling });
-            image.css({ 'width': '100%' });
+            image.css({ 'width': this.swiper.width * scaling  });
         }
 
         public pageTo(start: number, end: number)
@@ -67,7 +69,7 @@ module LightReader.view
             if (start >= 0)
             {
                 //check if end is beyond
-                if (this.chapter.pages.length <= end)
+                if (this.chapter.pages.length <= end && this.chapter.pages.length >= 3)// yeah chapter below 2 page exist
                 {
                     this.pageTo(this.chapter.pages.length - 3, this.chapter.pages.length - 1);
                     this.swiper.slideTo(2, 0, false); //set last
@@ -79,16 +81,23 @@ module LightReader.view
                 for (var i = start; i <= end; i++)
                 {
                     var content: any = this.chapter.pages[i];
-                    if (content.url != null)
+                    if (content != null) // chapter less than 3 pages
                     {
-                        this.pages[slide].innerHTML =
-                        "<zoomable>" +
-                        "<img src='" + ModelHelper.Get(this.chapter.pages[i]) + "' style='width:100%'/>" +
-                        "</zoomable>";
+                        if (content.url != null)
+                        {
+                            this.pages[slide].innerHTML =
+                            "<zoomable>" +
+                            "<img src='" + ModelHelper.Get(this.chapter.pages[i]) + "' style='width:100%'/>" +
+                            "</zoomable>";
+                        }
+                        else
+                        {
+                            this.pages[slide].innerHTML = ModelHelper.Get(this.chapter.pages[i]);
+                        }
                     }
                     else
                     {
-                        this.pages[slide].innerHTML = ModelHelper.Get(this.chapter.pages[i]);
+                        this.pages[slide].innerHTML = "<p></p>";
                     }
 
                     slide++;
@@ -129,6 +138,30 @@ module LightReader.view
             if (image.length > 0)
             {
                 this.PinchToZoom(event.deltaX, event.deltaY, event.scale, image);
+            }
+        }
+
+        public OnPreviousClick = (event: Event, datas: any): void =>
+        {            
+            if (this.currentChapter > 0 )
+            {
+                this.currentChapter--;
+                this.chapter = this.volume.chapterList[this.currentChapter];
+
+                this.pageTo(this.chapter.pages.length - 3, this.chapter.pages.length - 1);
+                this.swiper.slideTo(2, 0, false); //set last 
+            }                 
+        }
+
+        public OnNextClick = (event: Event, datas: any): void =>
+        {
+            if (this.currentChapter + 1 < this.volume.chapterList.length)
+            {
+                this.currentChapter++;
+                this.chapter = this.volume.chapterList[this.currentChapter];
+
+                this.pageTo(0, 2);
+                this.swiper.slideTo(0, 0, false); //set first  
             }
         }
     }
