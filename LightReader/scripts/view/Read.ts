@@ -34,7 +34,7 @@ module LightReader.view
         {
             this.volume = options;
             this.chapter = this.volume.chapterList[this.currentChapter];
- 
+
             Rivets.bind(element, this);
 
             this.swiper = new Swiper('.swiper-container',
@@ -48,9 +48,9 @@ module LightReader.view
             this.hammer.add(new Hammer.Pinch());
             this.hammer.on('pinch', this.OnPinch);
 
-            this.pages = $(".swiper-slide");
+            this.pages = $("swiper-content");
             this.pageTo(0, 2);
-            this.swiper.slideTo(0, 0, false); //set first            
+            this.swiper.slideTo(0, 0, false); //set first
         }
 
         public Exit(element: HTMLElement): void
@@ -60,7 +60,7 @@ module LightReader.view
         public PinchToZoom = (x: number, y: number, scaling: number, image: JQuery): void =>
         {
             image.css({ 'height': this.swiper.height * scaling });
-            image.css({ 'width': this.swiper.width * scaling  });
+            image.css({ 'width': this.swiper.width * scaling });
         }
 
         public pageTo(start: number, end: number)
@@ -142,15 +142,15 @@ module LightReader.view
         }
 
         public OnPreviousClick = (event: Event, datas: any): void =>
-        {            
-            if (this.currentChapter > 0 )
+        {
+            if (this.currentChapter > 0)
             {
                 this.currentChapter--;
                 this.chapter = this.volume.chapterList[this.currentChapter];
 
                 this.pageTo(this.chapter.pages.length - 3, this.chapter.pages.length - 1);
-                this.swiper.slideTo(2, 0, false); //set last 
-            }                 
+                this.swiper.slideTo(2, 0, false); //set last
+            }
         }
 
         public OnNextClick = (event: Event, datas: any): void =>
@@ -161,7 +161,7 @@ module LightReader.view
                 this.chapter = this.volume.chapterList[this.currentChapter];
 
                 this.pageTo(0, 2);
-                this.swiper.slideTo(0, 0, false); //set first  
+                this.swiper.slideTo(0, 0, false); //set first
             }
         }
     }

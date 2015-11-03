@@ -1,15 +1,16 @@
 ﻿<section>
 
-    <ion-header-bar class="bar bar-header bar-dark">
-        <button class="button button-icon icon ion-navicon"></button>
-        <div class="h1 title">{ chapter.title }</div>
+    <div data-tap-disabled="true">
+        <ion-header-bar class="bar bar-header bar-dark">
+            <button class="button button-icon icon ion-navicon"></button>
+            <div class="h1 title">{ chapter.title }</div>
 
-        <div class="buttons">
-            <button class="button button-icon icon ion-arrow-left-b"  rv-on-touchend="OnPreviousClick" rv-on-click="OnPreviousClick"></button>
-            <button class="button button-icon icon ion-arrow-right-b" rv-on-touchend="OnNextClick" rv-on-click="OnNextClick"></button>
-        </div>
-
-    </ion-header-bar>
+            <div class="buttons">
+                <button class="button button-icon icon ion-arrow-left-b" rv-on-touchend="OnPreviousClick" rv-on-click="OnPreviousClick"></button>
+                <button class="button button-icon icon ion-arrow-right-b" rv-on-touchend="OnNextClick" rv-on-click="OnNextClick"></button>
+            </div>
+        </ion-header-bar>
+    </div>
 
     <ion-scroll-content class="has-header  overflow-scroll">
 
@@ -18,9 +19,9 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class="swiper-slide">1</div>
-                <div class="swiper-slide">2</div>
-                <div class="swiper-slide">3</div>
+                <div class="swiper-slide"><swiper-content>1</swiper-content></div>
+                <div class="swiper-slide"><swiper-content>2</swiper-content></div>
+                <div class="swiper-slide"><swiper-content>3</swiper-content></div>
             </div>
         </div>
     </ion-scroll-content>

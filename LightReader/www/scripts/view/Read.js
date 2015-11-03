@@ -25,6 +25,10 @@ var LightReader;
                             _this.pageTo(_this.currentPage - 3, _this.currentPage - 1);
                         }
                     }
+                    console.info(swiper.height);
+                    var activeSlide = swiper.slides[swiper.activeIndex];
+                    activeSlide.height = window.outerHeight + 'px';
+                    console.info(swiper.height);
                 };
                 this.OnPinch = function (event) {
                     var image = $(".swiper-slide-active zoomable img");
@@ -61,7 +65,7 @@ var LightReader;
                 this.hammer = new Hammer(element);
                 this.hammer.add(new Hammer.Pinch());
                 this.hammer.on('pinch', this.OnPinch);
-                this.pages = $(".swiper-slide");
+                this.pages = $("swiper-content");
                 this.pageTo(0, 2);
                 this.swiper.slideTo(0, 0, false); //set first            
             };

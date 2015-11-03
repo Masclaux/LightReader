@@ -26,6 +26,9 @@ Just a test to see How cordova and typescript perform.
 
 ## Cordova plugins :
 
+* File Transfert
+* File
+
 # Dev dependencies :
 
 * gulp => http://gulpjs.com/
