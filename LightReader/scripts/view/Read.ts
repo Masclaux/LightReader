@@ -21,9 +21,9 @@ module LightReader.view
         //curent chapter index
         private currentChapter: number = 0;
 
-        //list of swiper slide
+        //list of swiper content
         private pages: JQuery;
-
+   
         //reference of swiper lib
         private swiper: any;
 
@@ -48,7 +48,8 @@ module LightReader.view
             this.hammer.add(new Hammer.Pinch());
             this.hammer.on('pinch', this.OnPinch);
 
-            this.pages = $("swiper-content");
+            this.pages  = $("swiper-content");
+
             this.pageTo(0, 2);
             this.swiper.slideTo(0, 0, false); //set first
         }
@@ -99,7 +100,8 @@ module LightReader.view
                     {
                         this.pages[slide].innerHTML = "<p></p>";
                     }
-
+                                      
+                    this.pages[slide].style.height = window.innerHeight + 'px';                    
                     slide++;
                 }
 

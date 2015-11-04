@@ -25,10 +25,6 @@ var LightReader;
                             _this.pageTo(_this.currentPage - 3, _this.currentPage - 1);
                         }
                     }
-                    console.info(swiper.height);
-                    var activeSlide = swiper.slides[swiper.activeIndex];
-                    activeSlide.height = window.outerHeight + 'px';
-                    console.info(swiper.height);
                 };
                 this.OnPinch = function (event) {
                     var image = $(".swiper-slide-active zoomable img");
@@ -41,7 +37,7 @@ var LightReader;
                         _this.currentChapter--;
                         _this.chapter = _this.volume.chapterList[_this.currentChapter];
                         _this.pageTo(_this.chapter.pages.length - 3, _this.chapter.pages.length - 1);
-                        _this.swiper.slideTo(2, 0, false); //set last 
+                        _this.swiper.slideTo(2, 0, false); //set last
                     }
                 };
                 this.OnNextClick = function (event, datas) {
@@ -49,7 +45,7 @@ var LightReader;
                         _this.currentChapter++;
                         _this.chapter = _this.volume.chapterList[_this.currentChapter];
                         _this.pageTo(0, 2);
-                        _this.swiper.slideTo(0, 0, false); //set first  
+                        _this.swiper.slideTo(0, 0, false); //set first
                     }
                 };
             }
@@ -67,7 +63,7 @@ var LightReader;
                 this.hammer.on('pinch', this.OnPinch);
                 this.pages = $("swiper-content");
                 this.pageTo(0, 2);
-                this.swiper.slideTo(0, 0, false); //set first            
+                this.swiper.slideTo(0, 0, false); //set first
             };
             Read.prototype.Exit = function (element) {
             };
@@ -97,6 +93,7 @@ var LightReader;
                         else {
                             this.pages[slide].innerHTML = "<p></p>";
                         }
+                        this.pages[slide].style.height = window.innerHeight + 'px';
                         slide++;
                     }
                     this.currentPage = end;
