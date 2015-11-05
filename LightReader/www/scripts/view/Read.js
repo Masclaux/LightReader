@@ -55,10 +55,12 @@ var LightReader;
                 Rivets.bind(element, this);
                 this.swiper = new Swiper('.swiper-container', {
                     'observer': true,
-                    'observeParents': true,
+                    'observeParents': false,
                     'onTransitionEnd': this.OnNewSlide,
                 });
-                this.hammer = new Hammer(element);
+                this.hammer = new Hammer(element, {
+                    touchAction: 'pan-y'
+                });
                 this.hammer.add(new Hammer.Pinch());
                 this.hammer.on('pinch', this.OnPinch);
                 this.pages = $("swiper-content");
@@ -66,6 +68,7 @@ var LightReader;
                 this.swiper.slideTo(0, 0, false); //set first
             };
             Read.prototype.Exit = function (element) {
+                this.hammer.destroy();
             };
             Read.prototype.pageTo = function (start, end) {
                 console.info("Show page " + start + " to " + end);

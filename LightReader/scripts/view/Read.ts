@@ -31,20 +31,23 @@ module LightReader.view
         private hammer: HammerManager;
 
         public Ready(element: HTMLElement, options: any): void
-        {
+        {            
             this.volume = options;
             this.chapter = this.volume.chapterList[this.currentChapter];
 
             Rivets.bind(element, this);
-
             this.swiper = new Swiper('.swiper-container',
                 {
                     'observer': true,
-                    'observeParents': true,
+                    'observeParents': false,
                     'onTransitionEnd': this.OnNewSlide,
                 });
+                       
 
-            this.hammer = new Hammer(element);
+            this.hammer = new Hammer(element,{
+                touchAction: 'pan-y'
+            });
+
             this.hammer.add(new Hammer.Pinch());
             this.hammer.on('pinch', this.OnPinch);
 
@@ -56,6 +59,7 @@ module LightReader.view
 
         public Exit(element: HTMLElement): void
         {
+            this.hammer.destroy(); 
         }
 
         public PinchToZoom = (x: number, y: number, scaling: number, image: JQuery): void =>
