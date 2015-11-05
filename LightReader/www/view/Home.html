@@ -1,11 +1,12 @@
 ﻿<section>
+    <div data-tap-disabled="true">
+        <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Light Reader</h1>
+            <button class="button icon ion-navicon"></button>
+        </ion-header-bar>
+    </div>
 
-    <ion-header-bar class="bar bar-header bar-dark">
-        <h1 class="title">Light Reader</h1>
-        <button class="button icon ion-navicon"></button>
-    </ion-header-bar>
-
-    <ion-scroll-content class="has-header  overflow-scroll">
+    <ion-scroll-content class="has-header  overflow-scroll" overflow-scroll="true">
         <div class="list ion-content" rv-each-source="model.sources">
 
             <a class="item item-thumbnail-left item-icon-right" rv-on-touchend="OnSourceSelected" rv-on-click="OnSourceSelected">

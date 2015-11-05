@@ -12,8 +12,8 @@ var LightReader;
                 //curent chapter index
                 this.currentChapter = 0;
                 this.PinchToZoom = function (x, y, scaling, image) {
-                    image.css({ 'height': _this.swiper.height * scaling });
-                    image.css({ 'width': _this.swiper.width * scaling });
+                    image.css({ 'height': image.innerHeight() * scaling });
+                    image.css({ 'width': image.innerWidth() * scaling });
                 };
                 this.OnNewSlide = function (swiper) {
                     if (swiper.activeIndex != swiper.previousIndex

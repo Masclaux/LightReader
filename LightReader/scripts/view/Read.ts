@@ -23,7 +23,7 @@ module LightReader.view
 
         //list of swiper content
         private pages: JQuery;
-   
+
         //reference of swiper lib
         private swiper: any;
 
@@ -31,7 +31,7 @@ module LightReader.view
         private hammer: HammerManager;
 
         public Ready(element: HTMLElement, options: any): void
-        {            
+        {
             this.volume = options;
             this.chapter = this.volume.chapterList[this.currentChapter];
 
@@ -42,16 +42,15 @@ module LightReader.view
                     'observeParents': false,
                     'onTransitionEnd': this.OnNewSlide,
                 });
-                       
 
-            this.hammer = new Hammer(element,{
+            this.hammer = new Hammer(element, {
                 touchAction: 'pan-y'
             });
 
             this.hammer.add(new Hammer.Pinch());
             this.hammer.on('pinch', this.OnPinch);
 
-            this.pages  = $("swiper-content");
+            this.pages = $("swiper-content");
 
             this.pageTo(0, 2);
             this.swiper.slideTo(0, 0, false); //set first
@@ -59,13 +58,13 @@ module LightReader.view
 
         public Exit(element: HTMLElement): void
         {
-            this.hammer.destroy(); 
+            this.hammer.destroy();
         }
 
         public PinchToZoom = (x: number, y: number, scaling: number, image: JQuery): void =>
         {
-            image.css({ 'height': this.swiper.height * scaling });
-            image.css({ 'width': this.swiper.width * scaling });
+            image.css({ 'height': image.innerHeight() * scaling });
+            image.css({ 'width': image.innerWidth() * scaling });
         }
 
         public pageTo(start: number, end: number)
@@ -104,8 +103,8 @@ module LightReader.view
                     {
                         this.pages[slide].innerHTML = "<p></p>";
                     }
-                                      
-                    this.pages[slide].style.height = window.innerHeight + 'px';                    
+
+                    this.pages[slide].style.height = window.innerHeight + 'px';
                     slide++;
                 }
 
