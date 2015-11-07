@@ -20,6 +20,6 @@
         public OnBack = (event: Event, datas: any): void =>
         {
             this.router.Back();
-        }  
+        }
     }
 }

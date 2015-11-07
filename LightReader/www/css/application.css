@@ -148,3 +148,22 @@ div#content {
 
 body.menu-active div#content { left: 284px; border-radius: 7px 0 0 7px; }
 body.menu-active div#content .menu-trigger { left: 294px; }
+
+
+/***/
+
+
+.pop-div {
+    font-size: 13px;
+    margin-top: 100px;
+}
+.pop-title {
+    display: none;
+    color: blue;
+    font-size: 15px;
+}
+.pop-content {
+    display: none;
+    color: red;
+    font-size: 10px;
+}

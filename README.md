@@ -13,6 +13,7 @@ Just a test to see How cordova and typescript perform.
 ## Libs:
 
 * jquery.js => https://jquery.com/
+* webui-popover => https://github.com/sandywalker/webui-popover
 * rivetsjs  => http://rivetsjs.com
 * Fastclick =>  https://github.com/ftlabs/fastclick
 * Lokijs    => http://lokijs.org

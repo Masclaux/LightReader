@@ -80,6 +80,8 @@ var LightReader;
             }
         };
         AppModel.inst = new AppModel();
+        //dropdown menu content
+        AppModel.menuContent = '<a class="item" href="Options.html" ><i class="icon ion-android-settings"></i> Options</a>';
         return AppModel;
     })();
     LightReader.AppModel = AppModel;

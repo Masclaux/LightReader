@@ -15,6 +15,8 @@ var LightReader;
             }
             Home.prototype.Ready = function (element, options) {
                 Rivets.bind(element, this);
+                var menu = $('#menu');
+                menu.webuiPopover({ title: 'Menu', width: '300', content: LightReader.AppModel.menuContent, placement: 'bottom-left' });
             };
             Home.prototype.Exit = function (element) {
             };

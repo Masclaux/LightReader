@@ -11,6 +11,9 @@
         public Ready(element: HTMLElement, options: any): void
         {
             Rivets.bind(element, this);
+
+            var menu: any = $('#menu');
+            menu.webuiPopover({ title: 'Menu', width: '300', content: AppModel.menuContent, placement: 'bottom-left' });
         }
 
         public Exit(element: HTMLElement): void

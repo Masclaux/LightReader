@@ -25,6 +25,8 @@ var LightReader;
                 this.media = options.media;
                 this.illustration = LightReader.ModelHelper.Get(this.media.illustration);
                 Rivets.bind(element, this);
+                var menu = $('#menu');
+                menu.webuiPopover({ title: 'Menu', width: '300', content: LightReader.AppModel.menuContent, placement: 'bottom-left' });
             };
             Detail.prototype.Exit = function (element) {
             };
