@@ -59,6 +59,9 @@ module LightReader.view
         public Exit(element: HTMLElement): void
         {
             this.hammer.destroy();
+
+            var $body = document.body;
+            $body.className = '';
         }
 
         public PinchToZoom = (x: number, y: number, scaling: number, image: JQuery): void =>
@@ -168,6 +171,26 @@ module LightReader.view
                 this.pageTo(0, 2);
                 this.swiper.slideTo(0, 0, false); //set first
             }
+        }
+
+        public OnSlideClick = (event: Event, datas: any): void =>
+        {
+            var $body = document.body;
+            $body.className = ($body.className == 'menu-active') ? '' : 'menu-active';
+        }
+
+        public OnBack = (event: Event, datas: any): void =>
+        {
+            this.router.Back();
+        }
+
+        public OnChapterSelected = (event: Event, datas: any): void =>
+        {
+            this.currentChapter = datas.index;
+            this.chapter = this.volume.chapterList[this.currentChapter];
+
+            this.pageTo(0, 2);
+            this.swiper.slideTo(0, 0, false); //set first
         }
     }
 }

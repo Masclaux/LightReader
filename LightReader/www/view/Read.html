@@ -1,30 +1,58 @@
 ﻿<section>
 
-    <div data-tap-disabled="true">
-        <ion-header-bar class="bar bar-header bar-dark">
-            <button class="button button-icon icon ion-navicon"></button>
-            <div class="h1 title">{ chapter.title }</div>
+    <nav id="slide-menu">
 
-            <div class="buttons">
-                <button class="button button-icon icon ion-arrow-left-b" rv-on-touchend="OnPreviousClick" rv-on-click="OnPreviousClick"></button>
-                <button class="button button-icon icon ion-arrow-right-b" rv-on-touchend="OnNextClick" rv-on-click="OnNextClick"></button>
+        <div class="list">
+
+            <a class="item item-icon-left" rv-on-click="OnBack">
+                <i class="icon ion-chevron-left"></i>
+                Back
+            </a>
+
+            <a class="item item-icon-left" href="Options.html">
+                <i class="icon ion-android-settings"></i>
+                Options
+            </a>
+
+            <div class="item item-divider">
+                Chapter list
             </div>
-        </ion-header-bar>
-    </div>
 
-    <ion-scroll-content class="has-header  overflow-scroll" overflow-scroll="true">
-
-        <!-- Slider main container -->
-        <div class="swiper-container">
-
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-
-                <!-- Slides -->
-                <div class="swiper-slide"><swiper-content>1</swiper-content></div>
-                <div class="swiper-slide"><swiper-content>2</swiper-content></div>
-                <div class="swiper-slide"><swiper-content>3</swiper-content></div>
-            </div>
+            <a class="item" rv-each-media="volume.chapterList" rv-on-click="OnChapterSelected">
+                <h2 rv-text="media.title"></h2>
+            </a>
         </div>
-    </ion-scroll-content>
+    </nav>
+
+    <div data-tap-disabled="true">
+
+        <div id="content">
+
+            <ion-header-bar class="bar bar-header bar-dark">
+                <button class="button button-icon icon ion-navicon" rv-on-click="OnSlideClick"></button>
+                <div class="h1 title">{ chapter.title }</div>
+
+                <div class="buttons">
+                    <button class="button button-icon icon ion-arrow-left-b" rv-on-click="OnPreviousClick"></button>
+                    <button class="button button-icon icon ion-arrow-right-b" rv-on-click="OnNextClick"></button>
+                </div>
+            </ion-header-bar>
+
+            <ion-scroll-content class="has-header  overflow-scroll" overflow-scroll="true">
+
+                <!-- Slider main container -->
+                <div class="swiper-container">
+
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+
+                        <!-- Slides -->
+                        <div class="swiper-slide"><swiper-content>1</swiper-content></div>
+                        <div class="swiper-slide"><swiper-content>2</swiper-content></div>
+                        <div class="swiper-slide"><swiper-content>3</swiper-content></div>
+                    </div>
+                </div>
+            </ion-scroll-content>
+        </div>
+    </div>
 </section>

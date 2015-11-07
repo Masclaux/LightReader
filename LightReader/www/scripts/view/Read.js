@@ -48,6 +48,19 @@ var LightReader;
                         _this.swiper.slideTo(0, 0, false); //set first
                     }
                 };
+                this.OnSlideClick = function (event, datas) {
+                    var $body = document.body;
+                    $body.className = ($body.className == 'menu-active') ? '' : 'menu-active';
+                };
+                this.OnBack = function (event, datas) {
+                    _this.router.Back();
+                };
+                this.OnChapterSelected = function (event, datas) {
+                    _this.currentChapter = datas.index;
+                    _this.chapter = _this.volume.chapterList[_this.currentChapter];
+                    _this.pageTo(0, 2);
+                    _this.swiper.slideTo(0, 0, false); //set first
+                };
             }
             Read.prototype.Ready = function (element, options) {
                 this.volume = options;
@@ -69,6 +82,8 @@ var LightReader;
             };
             Read.prototype.Exit = function (element) {
                 this.hammer.destroy();
+                var $body = document.body;
+                $body.className = '';
             };
             Read.prototype.pageTo = function (start, end) {
                 console.info("Show page " + start + " to " + end);

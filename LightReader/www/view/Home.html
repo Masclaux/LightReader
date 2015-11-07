@@ -1,15 +1,15 @@
 ﻿<section>
+
     <div data-tap-disabled="true">
         <ion-header-bar class="bar bar-header bar-dark">
             <h1 class="title">Light Reader</h1>
-            <button class="button icon ion-navicon"></button>
         </ion-header-bar>
     </div>
 
     <ion-scroll-content class="has-header  overflow-scroll" overflow-scroll="true">
         <div class="list ion-content" rv-each-source="model.sources">
 
-            <a class="item item-thumbnail-left item-icon-right" rv-on-touchend="OnSourceSelected" rv-on-click="OnSourceSelected">
+            <a class="item item-thumbnail-left item-icon-right" rv-on-click="OnSourceSelected">
                 <img src="http://33.media.tumblr.com/tumblr_mdjz9u9l8F1qm2pt6.png">
                 <h2 rv-text="source.name"></h2>
                 <p rv-text="source.description"></p>

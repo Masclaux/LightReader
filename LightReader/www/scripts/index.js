@@ -33,7 +33,7 @@ var LightReader;
             Application.router.Add("Detail.html", LightReader.view.Detail);
             Application.router.Add("Read.html", LightReader.view.Read);
             Application.router.Add("Load.html", LightReader.view.Load);
-            // router.Add("debug/Reader.html", LightReader.view.Reader);
+            Application.router.Add("Options.html", LightReader.view.Options);
             Application.model.InitDataBase();
         }
         function OnDataBaseReady() {

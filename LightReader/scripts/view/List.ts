@@ -30,5 +30,10 @@
                 this.router.Navigate("Detail.html", { media: media });
             }
         }
+
+        public OnBack = (event: Event, datas: any): void =>
+        {
+            this.router.Back();
+        }
     }
 }

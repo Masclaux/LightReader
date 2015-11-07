@@ -15,6 +15,9 @@ var LightReader;
                         _this.router.Navigate("Detail.html", { media: media });
                     }
                 };
+                this.OnBack = function (event, datas) {
+                    _this.router.Back();
+                };
             }
             List.prototype.Ready = function (element, options) {
                 this.source = options;

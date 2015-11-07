@@ -35,5 +35,10 @@
                 this.router.Navigate("Read.html", volume);
             }
         }
+
+        public OnBack = (event: Event, datas: any): void =>
+        {
+            this.router.Back();
+        }
     }
 }

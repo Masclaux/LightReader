@@ -2,6 +2,7 @@
 
     <div data-tap-disabled="true">
         <ion-header-bar class="bar bar-header bar-dark">
+            <button class="button button-icon icon ion-arrow-left-c" rv-on-click="OnBack"></button>
             <h1 class="title">Light Reader</h1>
             <button class="button icon ion-navicon"></button>
         </ion-header-bar>
@@ -23,7 +24,7 @@
 
         <div class="list">
 
-            <a class="item item-icon-right" rv-on-click="OnMediaSelected" rv-on-touchend="OnMediaSelected" rv-each-media="source.novelList">
+            <a class="item item-icon-right" rv-on-click="OnMediaSelected" rv-each-media="source.novelList">
                 <h2 rv-text="media.title"></h2>
                 <p>{ media.lastUpdate }</p>
                 <i class="icon ion-ios-arrow-right"></i>

@@ -16,6 +16,9 @@ var LightReader;
                         _this.router.Navigate("Read.html", volume);
                     }
                 };
+                this.OnBack = function (event, datas) {
+                    _this.router.Back();
+                };
             }
             Detail.prototype.Ready = function (element, options) {
                 //restore get method ( lost in database javascript is definitly not Object oriented)
