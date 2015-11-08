@@ -28,9 +28,6 @@
 
         //
         public onDataBaseReady: any;
-
-        //dropdown menu content
-        public static menuContent: string = '<a class="item" href="Options.html" ><i class="icon ion-android-settings"></i> Options</a>';
         
         //return object instance
         public static Inst(): AppModel

@@ -22,10 +22,10 @@ var LightReader;
             List.prototype.Ready = function (element, options) {
                 this.source = options;
                 Rivets.bind(element, this);
-                var menu = $('#menu');
-                menu.webuiPopover({ title: 'Menu', width: '300', content: LightReader.AppModel.menuContent, placement: 'bottom-left' });
+                LightReader.MenuPopOver.Init();
             };
             List.prototype.Exit = function (element) {
+                LightReader.MenuPopOver.Destroy();
             };
             return List;
         })();

@@ -13,12 +13,12 @@
             this.source = options;
             Rivets.bind(element, this);
 
-            var menu: any = $('#menu');
-            menu.webuiPopover({ title: 'Menu', width: '300', content: AppModel.menuContent, placement: 'bottom-left' });
+            MenuPopOver.Init();
         }
 
         public Exit(element: HTMLElement): void
         {
+            MenuPopOver.Destroy();
         }
 
         public OnMediaSelected = (event: Event, datas: any): void =>
