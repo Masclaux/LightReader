@@ -3,8 +3,8 @@ Platform independent Light novel reader - Phonegab and TypeScript.
 
 ## About this project
 
-Just a test to see How cordova and typescript perform.
-
+- First release expected for Toaru Majutsu no Index NT Volume 15 :) 
+ 
 ## Development requirements:
 
 * Visual studio 2015 (cordova app )
