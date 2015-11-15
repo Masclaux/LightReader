@@ -66,8 +66,11 @@ module LightReader.view
 
         public PinchToZoom = (x: number, y: number, scaling: number, image: JQuery): void =>
         {
-            image.css({ 'height': image.innerHeight() * scaling });
-            image.css({ 'width': image.innerWidth() * scaling });
+            //image.css({ 'height': image.innerHeight() * scaling });
+            //image.css({ 'width': image.innerWidth() * scaling });
+            
+            var transform = "scale3d(" + scaling + "," + scaling + ", 0)";
+            image.css('-webkit-transform', transform);
         }
 
         public pageTo(start: number, end: number)
