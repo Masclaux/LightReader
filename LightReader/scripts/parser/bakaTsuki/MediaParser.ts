@@ -10,10 +10,13 @@
         //Download and Parse  all required datas from the source.
         public ParseMedia(): void
         {
-            var listUrl =
-                "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(English)";
+            Http.Get(Constant.LIST_URL, this.OnRequestComplete, this.OnError);
+        }
 
-            Http.Get(listUrl, this.OnRequestComplete, this.OnError);
+        //Download and Parse  all required datas from the source.
+        public UpdateMedia(): void
+        {
+            Http.Get(Constant.LIST_URL, this.OnRequestComplete, this.OnError);
         }
 
         private OnRequestComplete = (data: XMLHttpRequest): void =>

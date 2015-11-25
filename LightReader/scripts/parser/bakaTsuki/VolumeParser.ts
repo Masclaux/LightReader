@@ -13,7 +13,7 @@
 
             console.info("Stating Parsing detail for " + media.title);
 
-            Http.Get("http://baka-tsuki.org" + media.url, this.OnRequestComplete, this.OnError);
+            Http.Get( Constant.MAIN_URL + media.url, this.OnRequestComplete, this.OnError);
         }
 
         private OnRequestComplete = (data: XMLHttpRequest): void =>

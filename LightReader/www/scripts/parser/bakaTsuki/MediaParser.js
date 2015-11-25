@@ -33,8 +33,11 @@ var LightReader;
                 }
                 //Download and Parse  all required datas from the source.
                 MediaParser.prototype.ParseMedia = function () {
-                    var listUrl = "http://baka-tsuki.org/project/index.php?title=Category:Light_novel_(English)";
-                    LightReader.Http.Get(listUrl, this.OnRequestComplete, this.OnError);
+                    LightReader.Http.Get(bakaTsuki.Constant.LIST_URL, this.OnRequestComplete, this.OnError);
+                };
+                //Download and Parse  all required datas from the source.
+                MediaParser.prototype.UpdateMedia = function () {
+                    LightReader.Http.Get(bakaTsuki.Constant.LIST_URL, this.OnRequestComplete, this.OnError);
                 };
                 return MediaParser;
             })();

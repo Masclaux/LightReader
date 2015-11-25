@@ -7,5 +7,8 @@
 
         //Download and Parse the list of medias
         ParseMedia(): void;
+
+        //Update medias list 
+        UpdateMedia(): void;
     }
 } 

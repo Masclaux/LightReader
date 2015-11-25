@@ -3,19 +3,13 @@
     //Image helper
     export class ImageHelper
     {
-        public static IMAGE_QUERY: string =
-        "http://www.baka-tsuki.org/project/api.php?action=query&prop=imageinfo&iiprop=url&format=json&titles=File:";
-
-        public static IMAGE_URL: string =
-        "http://www.baka-tsuki.org/project/images/";
-
         //return url from filename
         public static DownloadImage(datas: ImageContent, onSuccess: any, onError: any): void
         {
             console.info("Download image " + datas.title);
 
             //get file path
-            var path = datas.url.replace(this.IMAGE_URL, "");//remove url
+            var path = datas.url.replace(Constant.IMAGE_URL, "");//remove url
             var dirs: string[] = path.split("/");
             var filename: string = dirs.pop();//get filname
 
@@ -27,7 +21,7 @@
         //return url from filename
         public static GetImageLink(fileName: string, onSuccess: any, onError: any, datas: ImageContent): void
         {
-            var url: string = this.IMAGE_QUERY + fileName + "&";//avoid warning with & at the end ><
+            var url: string = Constant.IMAGE_QUERY + fileName + "&";//avoid warning with & at the end ><
 
             var args: Object = { "callBack": onSuccess, "datas": datas };
             Http.Get(url, this.OnRequestComplete, this.OnError, args);

@@ -52,7 +52,7 @@ var LightReader;
                 VolumeParser.prototype.parseVolume = function (media) {
                     this.media = media;
                     console.info("Stating Parsing detail for " + media.title);
-                    LightReader.Http.Get("http://baka-tsuki.org" + media.url, this.OnRequestComplete, this.OnError);
+                    LightReader.Http.Get(bakaTsuki.Constant.MAIN_URL + media.url, this.OnRequestComplete, this.OnError);
                 };
                 /**
                 * search  synopsis from class #Story_Synopsis

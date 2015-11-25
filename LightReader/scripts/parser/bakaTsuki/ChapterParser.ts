@@ -4,9 +4,7 @@
     {
         //delegate  call when a chapter is completed
         public onChaptersComplete: any;
-
-        private listUrl: String = "http://baka-tsuki.org";
-
+              
         public Volume: Volume;
 
         private chaptersRequest: number = 0;
@@ -33,7 +31,7 @@
         public ParseChapter(chapter: Chapter): void
         {
             this.chaptersRequest++;
-            Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
+            Http.Get(Constant.MAIN_URL + chapter.url, this.OnRequestComplete, this.OnError, chapter);
         }
 
         private OnRequestComplete = (data: XMLHttpRequest, currentChapter: Chapter): void =>

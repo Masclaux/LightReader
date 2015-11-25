@@ -12,7 +12,7 @@ var LightReader;
                 ImageHelper.DownloadImage = function (datas, onSuccess, onError) {
                     console.info("Download image " + datas.title);
                     //get file path
-                    var path = datas.url.replace(this.IMAGE_URL, ""); //remove url
+                    var path = datas.url.replace(bakaTsuki.Constant.IMAGE_URL, ""); //remove url
                     var dirs = path.split("/");
                     var filename = dirs.pop(); //get filname
                     path = dirs.toString().replace(',', '/');
@@ -20,7 +20,7 @@ var LightReader;
                 };
                 //return url from filename
                 ImageHelper.GetImageLink = function (fileName, onSuccess, onError, datas) {
-                    var url = this.IMAGE_QUERY + fileName + "&"; //avoid warning with & at the end ><
+                    var url = bakaTsuki.Constant.IMAGE_QUERY + fileName + "&"; //avoid warning with & at the end ><
                     var args = { "callBack": onSuccess, "datas": datas };
                     LightReader.Http.Get(url, this.OnRequestComplete, this.OnError, args);
                 };
@@ -48,8 +48,6 @@ var LightReader;
                     }
                     return "";
                 };
-                ImageHelper.IMAGE_QUERY = "http://www.baka-tsuki.org/project/api.php?action=query&prop=imageinfo&iiprop=url&format=json&titles=File:";
-                ImageHelper.IMAGE_URL = "http://www.baka-tsuki.org/project/images/";
                 ImageHelper.OnRequestComplete = function (data, args) {
                     var image = args.datas;
                     var res = JSON.parse(data.responseText);

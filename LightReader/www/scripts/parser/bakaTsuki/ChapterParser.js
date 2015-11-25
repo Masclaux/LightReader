@@ -7,7 +7,6 @@ var LightReader;
             var ChapterParser = (function () {
                 function ChapterParser() {
                     var _this = this;
-                    this.listUrl = "http://baka-tsuki.org";
                     this.chaptersRequest = 0;
                     this.imagesRequest = 0;
                     this.OnRequestComplete = function (data, currentChapter) {
@@ -100,7 +99,7 @@ var LightReader;
                 //Download and parse a chapter
                 ChapterParser.prototype.ParseChapter = function (chapter) {
                     this.chaptersRequest++;
-                    LightReader.Http.Get(this.listUrl + chapter.url, this.OnRequestComplete, this.OnError, chapter);
+                    LightReader.Http.Get(bakaTsuki.Constant.MAIN_URL + chapter.url, this.OnRequestComplete, this.OnError, chapter);
                 };
                 ChapterParser.prototype.checkComplete = function () {
                     if (this.chaptersRequest <= 0 && this.imagesRequest <= 0) {
