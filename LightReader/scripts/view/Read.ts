@@ -194,6 +194,9 @@ module LightReader.view
 
             this.pageTo(0, 2);
             this.swiper.slideTo(0, 0, false); //set first
+
+            //hide menu
+            this.OnSlideClick(event, datas);
         }
     }
 }

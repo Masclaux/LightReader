@@ -12,8 +12,10 @@ var LightReader;
                 //curent chapter index
                 this.currentChapter = 0;
                 this.PinchToZoom = function (x, y, scaling, image) {
-                    image.css({ 'height': image.innerHeight() * scaling });
-                    image.css({ 'width': image.innerWidth() * scaling });
+                    //image.css({ 'height': image.innerHeight() * scaling });
+                    //image.css({ 'width': image.innerWidth() * scaling });
+                    var transform = "scale3d(" + scaling + "," + scaling + ", 0)";
+                    image.css('-webkit-transform', transform);
                 };
                 this.OnNewSlide = function (swiper) {
                     if (swiper.activeIndex != swiper.previousIndex
@@ -60,6 +62,8 @@ var LightReader;
                     _this.chapter = _this.volume.chapterList[_this.currentChapter];
                     _this.pageTo(0, 2);
                     _this.swiper.slideTo(0, 0, false); //set first
+                    //hide menu
+                    _this.OnSlideClick(event, datas);
                 };
             }
             Read.prototype.Ready = function (element, options) {
